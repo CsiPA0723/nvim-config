@@ -9,23 +9,22 @@ if not vim.loop.fs_stat(lazypath) then
 		'--branch=stable',
 		lazypath,
 	}
-end
+end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.loader.enable()
 
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Lazy Setup
 
 local lazyOpts = {
 	checker = {
-		enabled = true, -- automatically check for plugin updates
-		notify = false, -- done on my own to with minimum condition for less noise
-		frequency = 60 * 60 * 24, -- = 1 day
+		enabled = true,
+		notify = true,
 	},
-	git = { timeot = 60 }, -- 1min timeout for tasks
+	git = { timeot = 60 }, -- 1 min timeout for tasks
 	ui = {
 		icons = {
 			cmd = '⌘',
@@ -48,9 +47,16 @@ local lazyOpts = {
 require('lazy').setup({
 	{
 		'rcarriga/nvim-notify',
-		config = function()
+		opts = { fps = 60, render = 'compact', stages = 'slide' },
+		config = function(_, opts)
+			require('notify').setup(opts)
 			vim.notify = require('notify')
 		end,
+	},
+	{
+		'akinsho/toggleterm.nvim',
+		version = '*',
+		opts = { shell = 'pwsh', open_mapping = '<C-ö>' },
 	},
 	{ 'tpope/vim-sleuth' },
 	{ 'numToStr/Comment.nvim', config = true },
@@ -71,25 +77,26 @@ require('lazy').setup({
 		dependencies = { 'nvim-lua/plenary.nvim' },
 	},
 	{
-		'nvim-lualine/lualine.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
-		opts = {
-			options = { theme = 'catppuccin' },
-			extensions = { 'lazy', 'neo-tree', 'aerial', 'trouble' },
-		},
-	},
-	{
 		'folke/trouble.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		config = true,
 	},
+	require 'plugins.lualine',
+	require 'plugins.resession',
+	require 'plugins.barbecue',
+	require 'plugins.virt-column',
 	require 'plugins.gitsigns',
 	require 'plugins.which-key',
 	require 'plugins.telescope',
+	require 'plugins.bufferline',
 	require 'plugins.neo-tree',
 	require 'plugins.conform',
 	require 'plugins.mini',
 	require 'plugins.nvim-treesitter',
+	require 'plugins.nvim-lspconfig',
+	require 'plugins.nvim-cmp',
+	require 'plugins.lint',
+	require 'plugins.debug',
 	require 'plugins.indent_line',
 	require 'plugins.lazygit',
 	require 'plugins.ufo',
@@ -98,7 +105,7 @@ require('lazy').setup({
 	require 'plugins.theme',
 }, lazyOpts)
 
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- More Configs
 
 if vim.g.neovide then
@@ -107,18 +114,4 @@ end
 
 require 'config.options'
 require 'config.keymaps'
-
--------------------------------------------------------------------------------
--- 5s after startup, notify if there are more update
-vim.defer_fn(function()
-	if not require('lazy.status').has_updates() then
-		return
-	end
-	local threshold = 10
-	local numberOfUpdates =
-		tonumber(require('lazy.status').updates():match('%d+'))
-	if numberOfUpdates < threshold then
-		return
-	end
-	vim.notify(('󱧕 %s plugin updates'):format(numberOfUpdates))
-end, 5000)
+require 'config.autocmd'
