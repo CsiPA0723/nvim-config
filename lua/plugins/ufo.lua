@@ -1,31 +1,19 @@
 return {
 	{
 		'kevinhwang91/nvim-ufo',
-		dependencies = {
-			'kevinhwang91/promise-async',
-			{
-				'luukvbaal/statuscol.nvim',
-				config = function()
-					local builtin = require('statuscol.builtin')
-					require('statuscol').setup({
-						relculright = true,
-						segments = {
-							{ text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-							{ text = { '%s' }, click = 'v:lua.ScSa' },
-							{ text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
-						},
-					})
-				end,
-			},
-		},
-		event = 'VeryLazy',
+		dependencies = 'kevinhwang91/promise-async',
+		event = 'BufReadPost',
 		opts = {
-			-- INFO: Uncomment to use treeitter as fold provider, otherwise nvim lsp is used
 			provider_selector = function()
-				return { 'treesitter', 'indent' }
+				return { 'lsp', 'indent' }
 			end,
 			open_fold_hl_timeout = 400,
-			close_fold_kinds_for_ft = { 'imports', 'comment' },
+			enable_get_fold_virt_text = true,
+			close_fold_kinds_for_ft = {
+				default = { 'imports', 'comment' },
+				json = { 'array' },
+				c = { 'comment', 'region' },
+			},
 			preview = {
 				win_config = {
 					border = { '', '─', '', '', '', '─', '', '' },
@@ -38,6 +26,15 @@ return {
 					jumpTop = '[',
 					jumpBot = ']',
 				},
+			},
+			filetype_exclude = {
+				'help',
+				'alpha',
+				'dashboard',
+				'neo-tree',
+				'Trouble',
+				'lazy',
+				'mason',
 			},
 		},
 		init = function()
@@ -85,15 +82,30 @@ return {
 				return newVirtText
 			end
 			opts['fold_virt_text_handler'] = handler
+
+			vim.api.nvim_create_autocmd('FileType', {
+				group = vim.api.nvim_create_augroup(
+					'local_detach_ufo',
+					{ clear = true }
+				),
+				pattern = opts.filetype_exclude,
+				callback = function()
+					require('ufo').detach()
+				end,
+			})
+
 			require('ufo').setup(opts)
 
 			local wk = require('which-key')
 
 			wk.register({
-				R = { require('ufo').openAllFolds, 'Open All Folds' },
-				M = { require('ufo').closeAllFolds, 'Close All Folds' },
-				r = { require('ufo').openFoldsExceptKinds, 'Open Folds Except Kinds' },
-				m = { require('ufo').closeFoldsWith, 'Close Folds With' },
+				R = { require('ufo').openAllFolds, 'Ufo: Open All Folds' },
+				M = { require('ufo').closeAllFolds, 'Ufo: Close All Folds' },
+				r = {
+					require('ufo').openFoldsExceptKinds,
+					'Ufo: Open Folds Except Kinds',
+				},
+				m = { require('ufo').closeFoldsWith, 'Ufo: Close Folds With' },
 			}, { prefix = '<z>' })
 
 			wk.register({
@@ -101,14 +113,12 @@ return {
 					function()
 						local winid = require('ufo').peekFoldedLinesUnderCursor()
 						if not winid then
-							-- choose one of coc.nvim and nvim lsp
-							vim.fn.CocActionAsync('definitionHover') -- coc.nvim
 							vim.lsp.buf.hover()
 						end
 					end,
-					'Peel Folded Lines Under Cursor',
+					'Ufo: Peek Folded Lines Under Cursor',
 				},
-			})
+			}, { mode = 'n', noremap = true, prefix = '<space>' })
 		end,
 	},
 }

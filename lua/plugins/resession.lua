@@ -13,7 +13,16 @@ return {
 			-- override default filter
 			buf_filter = function(bufnr)
 				local buftype = vim.bo[bufnr].buftype
-				if buftype == 'help' then
+				local exclude = vim.tbl_contains({
+					'help',
+					'alpha',
+					'dashboard',
+					'neo-tree',
+					'Trouble',
+					'lazy',
+					'mason',
+				}, buftype)
+				if exclude then
 					return true
 				end
 				if buftype ~= '' and buftype ~= 'acwrite' then
@@ -37,44 +46,27 @@ return {
 			local resession = require('resession')
 			resession.setup(opts)
 
-			--local wk = require('which-key')
-			--wk.register({})
+			local wk = require('which-key')
+			wk.register({
+				w = {
+					name = 'Workspace',
+					a = { resession.save, 'Session: Save' },
+					l = { resession.load, 'Session: Load' },
+					d = { resession.delete, 'Session: Delete' },
+				},
+			}, { mode = 'n', noremap = true, prefix = '<leader>' })
+
+			-- TODO: Try to make a better automatic session loader / saver
 
 			vim.api.nvim_create_autocmd('VimLeavePre', {
 				callback = function()
-					-- Always save a special session named "last"
-					resession.save('last')
-				end,
-			})
+					local current = resession.get_current()
 
-			local function get_session_name()
-				local name = vim.fn.getcwd()
-				local branch = vim.trim(vim.fn.system('git branch --show-current'))
-				if vim.v.shell_error == 0 then
-					return name .. branch
-				else
-					return name
-				end
-			end
-
-			vim.api.nvim_create_autocmd('VimEnter', {
-				callback = function()
-					-- Only load the session if nvim was started with no args
-					if vim.fn.argc(-1) == 0 then
-						resession.load(
-							get_session_name(),
-							{ dir = 'dirsession', silence_errors = true }
-						)
+					if current ~= 'last' then
+						resession.save(current, { attach = false, notify = false })
+					else -- Save a special session named "last" if no session is defined
+						resession.save('last', { attach = false, notify = false })
 					end
-				end,
-			})
-
-			vim.api.nvim_create_autocmd('VimLeavePre', {
-				callback = function()
-					resession.save(
-						get_session_name(),
-						{ dir = 'dirsession', notify = false }
-					)
 				end,
 			})
 		end,

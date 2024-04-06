@@ -16,7 +16,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.loader.enable()
 
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- Lazy Setup
 
 local lazyOpts = {
@@ -47,12 +47,13 @@ local lazyOpts = {
 require('lazy').setup({
 	{
 		'rcarriga/nvim-notify',
-		opts = { fps = 60, render = 'compact', stages = 'slide' },
+		opts = { fps = 60, render = 'default', stages = 'slide' },
 		config = function(_, opts)
 			require('notify').setup(opts)
 			vim.notify = require('notify')
 		end,
 	},
+	{ 'folke/which-key.nvim', event = 'VimEnter', config = true },
 	{
 		'akinsho/toggleterm.nvim',
 		version = '*',
@@ -60,7 +61,7 @@ require('lazy').setup({
 	},
 	{ 'tpope/vim-sleuth' },
 	{ 'numToStr/Comment.nvim', config = true },
-	{ 'sindrets/diffview.nvim', lazy = true },
+	{ 'sindrets/diffview.nvim', config = true },
 	{ 'nanotee/zoxide.vim' },
 	{
 		'cuducos/yaml.nvim',
@@ -75,6 +76,7 @@ require('lazy').setup({
 		'folke/todo-comments.nvim',
 		event = 'VimEnter',
 		dependencies = { 'nvim-lua/plenary.nvim' },
+		config = true,
 	},
 	{
 		'folke/trouble.nvim',
@@ -82,11 +84,11 @@ require('lazy').setup({
 		config = true,
 	},
 	require 'plugins.lualine',
+	require 'plugins.statuscol',
 	require 'plugins.resession',
 	require 'plugins.barbecue',
 	require 'plugins.virt-column',
 	require 'plugins.gitsigns',
-	require 'plugins.which-key',
 	require 'plugins.telescope',
 	require 'plugins.bufferline',
 	require 'plugins.neo-tree',
@@ -105,13 +107,12 @@ require('lazy').setup({
 	require 'plugins.theme',
 }, lazyOpts)
 
---------------------------------------------------------------------------------
--- More Configs
+-------------------------------------------------------------------------------
+-- Configs
 
 if vim.g.neovide then
 	require 'config.neovide'
 end
 
-require 'config.options'
-require 'config.keymaps'
-require 'config.autocmd'
+require 'config.options-and-autocmds'
+require 'config.keybindings'

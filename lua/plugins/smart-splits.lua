@@ -27,8 +27,8 @@ return {
 
 			wk.register({
 				-- swapping buffers between windows
-				['b'] = {
-					name = 'Swap [B]uffer',
+				['a'] = {
+					name = 'Sw[a]p Buffer',
 					h = { ss.swap_buf_left, 'Swap to Left Buffer' },
 					j = { ss.swap_buf_down, 'Swap to Down Buffer' },
 					k = { ss.swap_buf_up, 'Swap to Up Buffer' },
