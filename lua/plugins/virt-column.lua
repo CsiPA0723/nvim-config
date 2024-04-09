@@ -1,6 +1,7 @@
 return {
 	{
 		'lukas-reineke/virt-column.nvim',
+		event = 'VeryLazy',
 		opts = {
 			virtcolumn = '+1,80',
 			exclude = {
@@ -19,8 +20,8 @@ return {
 					'terminal',
 					'nofile',
 					'quickfix',
-					'prompt'
-				}
+					'prompt',
+				},
 			},
 		},
 	},

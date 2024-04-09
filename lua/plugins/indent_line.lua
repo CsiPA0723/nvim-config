@@ -3,6 +3,7 @@ return {
 		'lukas-reineke/indent-blankline.nvim',
 		main = 'ibl',
 		dependencies = { 'HiPhish/rainbow-delimiters.nvim' },
+		event = 'VeryLazy',
 		config = function()
 			local rainbow_delimiters = require 'rainbow-delimiters'
 

@@ -7,6 +7,7 @@ return {
 			'SmiteshP/nvim-navic',
 			'nvim-tree/nvim-web-devicons',
 		},
+		event = 'VeryLazy',
 		opts = {
 			create_autocmd = false,
 			show_modified = true,

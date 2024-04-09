@@ -15,10 +15,6 @@ return {
 				local buftype = vim.bo[bufnr].buftype
 				local exclude = vim.tbl_contains({
 					'help',
-					'alpha',
-					'dashboard',
-					'neo-tree',
-					'Trouble',
 					'lazy',
 					'mason',
 				}, buftype)

@@ -64,6 +64,14 @@ require('lazy').setup({
 	{ 'sindrets/diffview.nvim', config = true },
 	{ 'nanotee/zoxide.vim' },
 	{
+		'mistricky/codesnap.nvim',
+		enabled = function()
+			return jit.os ~= 'Windows'
+		end,
+		cmd = { 'CodeSnap', 'CodeSnapSave' },
+		build = 'make build_generator',
+	},
+	{
 		'cuducos/yaml.nvim',
 		lazy = true,
 		ft = { 'yaml' },
@@ -103,6 +111,7 @@ require('lazy').setup({
 	require 'plugins.lazygit',
 	require 'plugins.ufo',
 	require 'plugins.smart-splits',
+	require 'plugins.windows',
 	require 'plugins.dashboard',
 	require 'plugins.theme',
 }, lazyOpts)

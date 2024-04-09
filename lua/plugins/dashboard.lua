@@ -82,10 +82,10 @@ return {
 									end,
 									{ nargs = 1 }
 								)
-								local filterd_list = vim.tbl_filter(function(str)
-									return str ~= 'last'
-								end, list)
-								for i, value in pairs(filterd_list) do
+								-- local filterd_list = vim.tbl_filter(function(str)
+								-- 	return str ~= 'last'
+								-- end, list)
+								for i, value in pairs(list) do
 									sessions[i] = button(
 										tostring(i),
 										value,
@@ -93,6 +93,7 @@ return {
 									)
 									lastSessionIndex = i
 								end
+								lastSessionIndex = lastSessionIndex + 1
 
 								return sessions
 							end,
@@ -112,7 +113,7 @@ return {
 						{
 							type = 'group',
 							val = function()
-								return { mru(lastSessionIndex + 1, vim.fn.getcwd(), 5) }
+								return { mru(lastSessionIndex, vim.fn.getcwd(), 5) }
 							end,
 							opts = { shrink_margin = false },
 						},

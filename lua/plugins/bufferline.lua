@@ -38,7 +38,7 @@ return {
 			local wk = require('which-key')
 
 			wk.register({
-				['<C-x>'] = { '<cmd>Bd<CR>', 'Nav: Close Buffer' },
+				['<C-í>'] = { '<cmd>Bd<CR>', 'Nav: Close Buffer' },
 				['<C-9>'] = { '<cmd>bn<CR>', 'Nav: 󰜴 Cycle To Right' },
 				['<C-8>'] = { '<cmd>bp<CR>', 'Nav: 󰜱 Cycle To Left' },
 			}, { mode = 'n', noremap = true })
