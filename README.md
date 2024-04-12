@@ -1,8 +1,9 @@
-# nvim-config
+# nvim-config/
 
 <a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugins?style=for-the-badge" /></a>
 <a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/leaderkey?style=for-the-badge" /></a>
 <a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugin-manager?style=for-the-badge" /></a>
+
 
 ## Install Instructions
 
@@ -86,6 +87,7 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 + [folke/neodev.nvim](https://dotfyle.com/plugins/folke/neodev.nvim)
 + [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
 + [MunifTanjim/nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim)
++ [anuvyklack/animation.nvim](https://dotfyle.com/plugins/anuvyklack/animation.nvim)
 ### plugin-manager
 
 + [folke/lazy.nvim](https://dotfyle.com/plugins/folke/lazy.nvim)
@@ -95,6 +97,8 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 + [rafamadriz/friendly-snippets](https://dotfyle.com/plugins/rafamadriz/friendly-snippets)
 ### split-and-window
 
++ [anuvyklack/windows.nvim](https://dotfyle.com/plugins/anuvyklack/windows.nvim)
++ [famiu/bufdelete.nvim](https://dotfyle.com/plugins/famiu/bufdelete.nvim)
 + [mrjones2014/smart-splits.nvim](https://dotfyle.com/plugins/mrjones2014/smart-splits.nvim)
 ### startup
 
@@ -114,6 +118,7 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 + [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
 + [kevinhwang91/nvim-ufo](https://dotfyle.com/plugins/kevinhwang91/nvim-ufo)
 + [echasnovski/mini.nvim](https://dotfyle.com/plugins/echasnovski/mini.nvim)
++ [mistricky/codesnap.nvim](https://dotfyle.com/plugins/mistricky/codesnap.nvim)
 ### yaml
 
 + [cuducos/yaml.nvim](https://dotfyle.com/plugins/cuducos/yaml.nvim)
