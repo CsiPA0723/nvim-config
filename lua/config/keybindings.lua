@@ -11,7 +11,7 @@ vim.keymap.set(
 wk.register({
 	c = {
 		name = 'Code',
-		d = { '"+d', 'Clip: Cut' },
+		d = { '"+d', 'Clip: Delete' },
 		y = { '"+y', 'Clip: Copy' },
 		p = { '"+p', 'Clip: Paste' },
 	},
