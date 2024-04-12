@@ -59,6 +59,15 @@ require('lazy').setup({
 		version = '*',
 		opts = { shell = 'pwsh', open_mapping = '<C-ö>' },
 	},
+	{
+		'max397574/better-escape.nvim',
+		opts = {
+			mapping = { 'jk' },
+			timeout = 250,
+			clear_empty_lines = false,
+			keys = '<Esc>',
+		},
+	},
 	{ 'tpope/vim-sleuth' },
 	{ 'numToStr/Comment.nvim', config = true },
 	{ 'sindrets/diffview.nvim', config = true },
