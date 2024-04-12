@@ -51,4 +51,10 @@ return {
 			min_chars = 2,
 		},
 	},
+	config = function(opts)
+		vim.o.conceallevel = 1
+
+		require('obsidian').setup(opts)
+
+	end,
 }
