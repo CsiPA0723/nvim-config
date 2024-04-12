@@ -10,6 +10,7 @@ return {
 				'lua',
 				'luadoc',
 				'markdown',
+				'markdown_inline',
 				'vim',
 				'vimdoc',
 			},

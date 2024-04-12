@@ -5,7 +5,7 @@ return {
 		branch = '0.1.x',
 		event = 'VimEnter',
 		dependencies = {
-			'nvim-lua/plenary.nvim',
+			{ 'nvim-lua/plenary.nvim' },
 			{ -- If encountering errors, see telescope-fzf-native README for installation instructions
 				'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -21,6 +21,7 @@ return {
 			},
 			{ 'nvim-telescope/telescope-ui-select.nvim' },
 			{ 'jvgrootveld/telescope-zoxide', config = true },
+			{ 'nvim-telescope/telescope-file-browser.nvim' },
 			-- Useful for getting pretty icons, but requires a Nerd Font.
 			{ 'nvim-tree/nvim-web-devicons' },
 		},
@@ -69,6 +70,8 @@ return {
 			pcall(require('telescope').load_extension, 'notify')
 			pcall(require('telescope').load_extension, 'zoxide')
 			pcall(require('telescope').load_extension, 'scope')
+			pcall(require('telescope').load_extension, 'file_browser')
+			pcall(require('telescope').load_extension, 'pomodori')
 
 			-- See `:help telescope.builtin`
 			local builtin = require('telescope.builtin')
@@ -86,6 +89,14 @@ return {
 					d = { builtin.diagnostics, '[D]iagnostics' },
 					r = { builtin.resume, '[R]esume' },
 					z = { require('telescope').extensions.zoxide.list, '[Z]oxide list' },
+					b = {
+						require('telescope').extensions.file_browser.file_browser,
+						'[B]rowser',
+					},
+					p = {
+						require('telescope').extensions.pomodori.timers,
+						'[P]omodori Timers',
+					},
 					['<leader>'] = { builtin.oldfiles, 'Search Recent Files' },
 					['/'] = {
 						function()
