@@ -122,6 +122,8 @@ require('lazy').setup({
 	require 'plugins.smart-splits',
 	require 'plugins.windows',
 	require 'plugins.dashboard',
+	require 'plugins.obsidian',
+	require 'plugins.pomo',
 	require 'plugins.theme',
 }, lazyOpts)
 
