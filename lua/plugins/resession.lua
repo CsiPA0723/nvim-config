@@ -44,11 +44,11 @@ return {
 
 			local wk = require('which-key')
 			wk.register({
-				w = {
-					name = 'Workspace',
-					a = { resession.save, 'Session: Save' },
-					l = { resession.load, 'Session: Load' },
-					d = { resession.delete, 'Session: Delete' },
+				n = {
+					name = 'Sessions',
+					s = { resession.save, 'Save' },
+					l = { resession.load, 'Load' },
+					d = { resession.delete, 'Delete' },
 				},
 			}, { mode = 'n', noremap = true, prefix = '<leader>' })
 
@@ -58,11 +58,17 @@ return {
 				callback = function()
 					local current = resession.get_current()
 
-					if current ~= 'last' then
+					if current ~= nil then -- Save current session if in one
 						resession.save(current, { attach = false, notify = false })
-					else -- Save a special session named "last" if no session is defined
-						resession.save('last', { attach = false, notify = false })
+						local file = io.open(vim.fn.stdpath('data') .. '/last.json', 'w')
+						if file ~= nil then
+							file:write(vim.json.encode({ lastSession = current }))
+							file:flush()
+							file:close()
+						end
 					end
+					-- Save a special session named "last"
+					resession.save('last', { attach = false, notify = false })
 				end,
 			})
 		end,

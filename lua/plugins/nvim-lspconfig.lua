@@ -6,6 +6,11 @@ return {
 			'williamboman/mason-lspconfig.nvim',
 			'WhoIsSethDaniel/mason-tool-installer.nvim',
 			{
+				'pmizio/typescript-tools.nvim',
+				dependencies = 'nvim-lua/plenary.nvim',
+				config = true,
+			},
+			{
 				'j-hui/fidget.nvim',
 				opts = { notification = { window = { border = 'rounded' } } },
 			},
@@ -98,6 +103,18 @@ return {
 							callback = vim.lsp.buf.clear_references,
 						})
 					end
+
+					-- refresh codelens on TextChanged and InsertLeave as well
+					vim.api.nvim_create_autocmd(
+						{ 'TextChanged', 'InsertLeave', 'CursorHold', 'LspAttach' },
+						{
+							buffer = event.buf,
+							callback = vim.lsp.codelens.refresh,
+						}
+					)
+
+					-- trigger codelens refresh
+					vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
 				end,
 			})
 
@@ -128,19 +145,14 @@ return {
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
-				-- clangd = {},
-				-- gopls = {},
-				-- pyright = {},
-				-- rust_analyzer = {},
-				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				--
-				-- Some languages (like typescript) have entire language plugins that can be useful:
-				--    https://github.com/pmizio/typescript-tools.nvim
-				--
-				-- But for many setups, the LSP (`tsserver`) will work just fine
-				-- tsserver = {},
-				--
-
+				-- markdown_oxide = {
+				-- 	capabilities = capabilities, -- ensure that capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+				-- 	root_dir = require('lspconfig').util.root_pattern(
+				-- 		'.git',
+				-- 		vim.fn.getcwd()
+				-- 	), -- this is a temp fix for an error in the lspconfig for this LS
+				-- },
+				tsserver = {},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},
@@ -170,6 +182,8 @@ return {
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				'stylua', -- Used to format Lua code
+				'prettierd',
+				'angularls',
 			})
 			require('mason-tool-installer').setup({
 				ensure_installed = ensure_installed,

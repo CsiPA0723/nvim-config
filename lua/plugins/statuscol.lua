@@ -9,7 +9,7 @@ return {
 					'help',
 					'alpha',
 					'dashboard',
-					'neo-tree',
+					-- 'neo-tree',
 					'Trouble',
 					'lazy',
 					'mason',

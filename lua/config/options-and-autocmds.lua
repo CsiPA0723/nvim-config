@@ -24,23 +24,11 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
-vim.opt.termguicolors = true
+vim.o.termguicolors = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.colorcolumn = '80'
-
-if jit.os == 'Windows' then
-	vim.opt.shell = 'pwsh'
-	vim.opt.shellcmdflag =
-		'-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
-	vim.opt.shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait'
-	vim.opt.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-	vim.opt.shellquote = ''
-	vim.opt.shellxquote = ''
-	-- NOTE: It could breake some plugins, handle with care
-	vim.opt.shellslash = true
-end
 
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup

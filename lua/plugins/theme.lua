@@ -43,6 +43,7 @@ return {
 				},
 				neotree = true,
 				notify = true,
+				markdown = true,
 				mason = true,
 				mini = {
 					enabled = true,

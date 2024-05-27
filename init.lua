@@ -1,3 +1,14 @@
+-- NOTE: Fixing unpack sometimes not working correctly
+table.unpack = table.unpack or unpack -- 5.1 compatibility
+
+-- NOTE: Temp fix for a deprecetated function
+---@diagnostic disable-next-line: duplicate-set-field
+vim.tbl_add_reverse_lookup = function(tbl)
+	for k, v in pairs(tbl) do
+		tbl[v] = k
+	end
+end
+
 -- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -44,20 +55,31 @@ local lazyOpts = {
 	},
 }
 
+--[[
+	TODO:
+	- Remove bufferline, maybe scope too
+	- Add marks.nvim and use marks
+  - Redesign lualine
+	- Rework keybinds
+	- Add oil.nvim and try to rework how I access the files
+	- Add telescope add-ons from reddit
+]]
+
 require('lazy').setup({
 	{
 		'rcarriga/nvim-notify',
+		priority = 100,
 		opts = { fps = 60, render = 'default', stages = 'slide' },
 		config = function(_, opts)
 			require('notify').setup(opts)
 			vim.notify = require('notify')
 		end,
 	},
-	{ 'folke/which-key.nvim', event = 'VimEnter', config = true },
+	{ 'folke/which-key.nvim', priority = 90, config = true },
 	{
 		'akinsho/toggleterm.nvim',
 		version = '*',
-		opts = { shell = 'pwsh', open_mapping = '<C-ö>' },
+		opts = { open_mapping = '<C-ö>' },
 	},
 	{
 		'max397574/better-escape.nvim',
@@ -68,15 +90,12 @@ require('lazy').setup({
 			keys = '<Esc>',
 		},
 	},
-	{ 'tpope/vim-sleuth' },
 	{ 'numToStr/Comment.nvim', config = true },
 	{ 'sindrets/diffview.nvim', config = true },
 	{ 'nanotee/zoxide.vim' },
+	{ 'lambdalisue/suda.vim' },
 	{
 		'mistricky/codesnap.nvim',
-		enabled = function()
-			return jit.os ~= 'Windows'
-		end,
 		cmd = { 'CodeSnap', 'CodeSnapSave' },
 		build = 'make build_generator',
 	},
@@ -107,8 +126,6 @@ require('lazy').setup({
 	require 'plugins.virt-column',
 	require 'plugins.gitsigns',
 	require 'plugins.telescope',
-	require 'plugins.bufferline',
-	require 'plugins.neo-tree',
 	require 'plugins.conform',
 	require 'plugins.mini',
 	require 'plugins.nvim-treesitter',

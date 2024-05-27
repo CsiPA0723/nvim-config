@@ -14,7 +14,6 @@ return {
 					'gitcommit',
 					'TelescopePrompt',
 					'TelescopeResults',
-					'neo-tree',
 				},
 				buftypes = {
 					'terminal',
