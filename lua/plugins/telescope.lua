@@ -78,23 +78,24 @@ return {
 
 			wk.register({
 				s = {
-					name = '[S]earch',
-					h = { builtin.help_tags, '[H]elp' },
-					k = { builtin.keymaps, '[K]eymaps' },
-					f = { builtin.find_files, '[F]iles' },
-					s = { builtin.builtin, '[S]elect Telescope' },
-					w = { builtin.grep_string, 'Current [W]ord' },
-					g = { builtin.live_grep, '[G]rep' },
-					d = { builtin.diagnostics, '[D]iagnostics' },
-					r = { builtin.resume, '[R]esume' },
-					z = { require('telescope').extensions.zoxide.list, '[Z]oxide list' },
+					name = 'Search',
+					h = { builtin.help_tags, 'Help' },
+					k = { builtin.keymaps, 'Keymaps' },
+					f = { builtin.find_files, 'Files' },
+					t = { builtin.git_files, 'Git' },
+					s = { builtin.builtin, 'Select Telescope' },
+					w = { builtin.grep_string, 'Current Word' },
+					g = { builtin.live_grep, 'Grep' },
+					d = { builtin.diagnostics, 'Diagnostics' },
+					r = { builtin.resume, 'Resume' },
+					z = { require('telescope').extensions.zoxide.list, 'Zoxide list' },
 					b = {
 						require('telescope').extensions.file_browser.file_browser,
-						'[B]rowser',
+						'Browser',
 					},
 					p = {
 						require('telescope').extensions.pomodori.timers,
-						'[P]omodori Timers',
+						'Pomodori Timers',
 					},
 					['<leader>'] = { builtin.oldfiles, 'Search Recent Files' },
 					['/'] = {
@@ -104,16 +105,16 @@ return {
 								prompt_title = 'Live Grep in Open Files',
 							})
 						end,
-						'[/] in Open Files',
+						'in Open Files',
 					},
 					n = {
 						function()
 							builtin.find_files({ cwd = vim.fn.stdpath('config') })
 						end,
-						'[N]eovim files',
+						'Neovim files',
 					},
 				},
-				['<leader>'] = { builtin.buffers, '[ ] Find existing buffers' },
+				['<leader>'] = { builtin.buffers, 'Find existing buffers' },
 				['/'] = {
 					function()
 						-- You can pass additional configuration to Telescope to change the theme, layout, etc.
@@ -124,7 +125,7 @@ return {
 							})
 						)
 					end,
-					'[/] Fuzzily search in current buffer',
+					'Fuzzily search in current buffer',
 				},
 			}, { mode = 'n', prefix = '<leader>' })
 		end,

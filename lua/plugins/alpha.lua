@@ -194,12 +194,6 @@ return {
 
 			alpha.setup(config)
 
-			local wk = require('which-key')
-
-			wk.register({
-				h = { '<cmd>Alpha<cr>', 'Open Das[h]board' },
-			}, { mode = 'n', prefix = '<leader>' })
-
 			local alpha_on_empty =
 				vim.api.nvim_create_augroup('alpha_on_empty', { clear = true })
 			vim.api.nvim_create_autocmd('User', {

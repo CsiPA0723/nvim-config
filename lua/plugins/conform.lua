@@ -15,27 +15,11 @@ return {
 			end,
 			formatters_by_ft = {
 				lua = { 'stylua' },
-				-- Conform can also run multiple formatters sequentially
-				-- python = { "isort", "black" },
-				--
-				-- You can use a sub-list to tell conform to run *until* a formatter
-				-- is found.
-				javascript = { 'prettier' },
+				shell = { 'shfmt' },
+				bash = { 'shfmt' },
+				javascript = { 'prettierd' },
 			},
 		},
-		config = function(_, opts)
-			require('conform').setup(opts)
-
-			local wk = require('which-key')
-
-			wk.register({
-				F = {
-					function()
-						require('conform').format({ async = true, lsp_fallback = true })
-					end,
-					'[F]ormat buffer',
-				},
-			}, { mode = 'n', prefix = '<leader>' })
-		end,
+		config = true,
 	},
 }
