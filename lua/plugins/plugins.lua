@@ -8,11 +8,7 @@ return {
 		end,
 	},
 	{ 'folke/which-key.nvim' },
-	{
-		'akinsho/toggleterm.nvim',
-		version = '*',
-		opts = { open_mapping = '<C-ö>' },
-	},
+	{ 'akinsho/toggleterm.nvim', version = '*', opts = { open_mapping = nil } },
 	{ 'nanotee/zoxide.vim' },
 	{
 		'mistricky/codesnap.nvim',
@@ -52,5 +48,22 @@ return {
 			startVisible = false,
 			highlightColor = { link = 'Whitespace' },
 		},
+	},
+	{
+		'jiaoshijie/undotree',
+		dependencies = 'nvim-lua/plenary.nvim',
+		config = true,
+		keys = { -- load the plugin only when using it's keybinding:
+			{
+				'<leader>u',
+				'<cmd>lua require("undotree").toggle()<cr>',
+				desc = 'Toggle UndoTree',
+			},
+		},
+	},
+	{
+		'mrjones2014/smart-splits.nvim',
+		build = './kitty/install-kittens.bash',
+		config = true,
 	},
 }

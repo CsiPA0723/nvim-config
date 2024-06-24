@@ -32,13 +32,8 @@ vim.loader.enable()
 -- Lazy Setup
 
 --[[ TODO:-List
-	[x] Remove bufferline, maybe scope too
-	[ ] Add HarpoonV2 ??
-  [ ] Redesign lualine
-	[ ] Put all keybindings in one file
-	[x] Add oil.nvim and try to rework how I access the files
-	[x] Simplify config
-  [x] Add inlay-hints for jumping and resctirons for spamming hjkl, etc.
+   - Redesign lualine
+   - Put all keybindings in one file
 --]]
 
 require('lazy').setup('plugins', {
@@ -75,3 +70,5 @@ end
 
 require 'config.options'
 require 'config.remaps-and-autocmds'
+
+require 'scripts.whereAmI'

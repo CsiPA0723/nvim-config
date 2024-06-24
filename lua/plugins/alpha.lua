@@ -1,4 +1,4 @@
-return {
+return { -- TODO: Redo dashboard
 	{
 		'goolord/alpha-nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -48,7 +48,7 @@ return {
 						{
 							type = 'text',
 							val = my_header,
-							opts = { hl = 'Type', shrink_margin = false },
+							opts = { position = 'center', hl = 'Type' },
 						},
 					},
 				},

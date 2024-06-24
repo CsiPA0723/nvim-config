@@ -7,6 +7,7 @@ return {
 			lint.linters_by_ft = {
 				markdown = { 'markdownlint' },
 			}
+			-- TODO: ??
 
 			-- To allow other plugins to add linters to require('lint').linters_by_ft,
 			-- instead set linters_by_ft like this:

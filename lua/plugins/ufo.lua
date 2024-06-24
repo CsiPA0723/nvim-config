@@ -48,7 +48,7 @@ return {
 				local newVirtText = {}
 				local totalLines = vim.api.nvim_buf_line_count(0)
 				local foldedLines = endLnum - lnum
-				local suffix = (' 󰁂 %d %d%%'):format(
+				local suffix = (' 󰁂 %d ln (%d%%)'):format(
 					foldedLines,
 					foldedLines / totalLines * 100
 				)
@@ -95,30 +95,6 @@ return {
 			})
 
 			require('ufo').setup(opts)
-
-			local wk = require('which-key')
-
-			wk.register({
-				R = { require('ufo').openAllFolds, 'Ufo: Open All Folds' },
-				M = { require('ufo').closeAllFolds, 'Ufo: Close All Folds' },
-				r = {
-					require('ufo').openFoldsExceptKinds,
-					'Ufo: Open Folds Except Kinds',
-				},
-				m = { require('ufo').closeFoldsWith, 'Ufo: Close Folds With' },
-			}, { prefix = '<z>' })
-
-			wk.register({
-				K = {
-					function()
-						local winid = require('ufo').peekFoldedLinesUnderCursor()
-						if not winid then
-							vim.lsp.buf.hover()
-						end
-					end,
-					'Ufo: Peek Folded Lines Under Cursor',
-				},
-			}, { mode = 'n', noremap = true, prefix = '<space>' })
 		end,
 	},
 }

@@ -42,16 +42,6 @@ return {
 			local resession = require('resession')
 			resession.setup(opts)
 
-			local wk = require('which-key')
-			wk.register({
-				n = {
-					name = 'Sessions',
-					s = { resession.save, 'Save' },
-					l = { resession.load, 'Load' },
-					d = { resession.delete, 'Delete' },
-				},
-			}, { mode = 'n', noremap = true, prefix = '<leader>' })
-
 			-- TODO: Try to make a better automatic session loader / saver
 
 			vim.api.nvim_create_autocmd('VimLeavePre', {

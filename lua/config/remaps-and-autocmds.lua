@@ -1,3 +1,5 @@
+local ss = require('smart-splits')
+local tsc_builtin = require('telescope.builtin')
 local wk = require('which-key')
 
 wk.register({
@@ -7,31 +9,120 @@ wk.register({
 
 wk.register({
 	['<leader>'] = {
-		['l'] = { '<cmd>Lazy<cr>', 'Open Lazy Plugin Manager' },
-		['m'] = { '<cmd>Mason<cr>', 'Open Mason' },
-		['h'] = { '<cmd>Alpha<cr>', 'Open Dashboard' },
-		['o'] = { '<cmd>Oil<cr>', 'Open Oil' },
-		['g'] = { '<cmd>LazyGit<cr>', 'Open LazyGit' },
-		['c'] = {
+		['a'] = { -- swapping buffers between windows
+			name = 'Swap Buffer',
+			h = { ss.swap_buf_left, 'Swap to Left Buffer' },
+			j = { ss.swap_buf_down, 'Swap to Down Buffer' },
+			k = { ss.swap_buf_up, 'Swap to Up Buffer' },
+			l = { ss.swap_buf_right, 'Swap to Right Buffer' },
+		},
+		['c'] = { -- Code
 			name = 'Code',
 			p = { '"+p', 'Clip: Paste', mode = { 'n', 'v' } },
 			d = { '"+d', 'Clip: Delete', mode = { 'n', 'v' } },
 			y = { '"+y', 'Clip: Copy', mode = { 'n', 'v' } },
 			Y = { '"+Y', 'Clip: Copy' },
 		},
+		['s'] = { -- Search
+			name = 'Search',
+			h = { tsc_builtin.help_tags, 'Help' },
+			k = { tsc_builtin.keymaps, 'Keymaps' },
+			f = { tsc_builtin.find_files, 'Files' },
+			t = { tsc_builtin.git_files, 'Git' },
+			s = { tsc_builtin.builtin, 'Select Telescope' },
+			w = { tsc_builtin.grep_string, 'Current Word' },
+			g = { tsc_builtin.live_grep, 'Grep' },
+			d = { tsc_builtin.diagnostics, 'Diagnostics' },
+			r = { tsc_builtin.resume, 'Resume' },
+			z = { require('telescope').extensions.zoxide.list, 'Zoxide list' },
+			b = {
+				require('telescope').extensions.file_browser.file_browser,
+				'Browser',
+			},
+			p = {
+				require('telescope').extensions.pomodori.timers,
+				'Pomodori Timers',
+			},
+			['<leader>'] = { tsc_builtin.oldfiles, 'Search Recent Files' },
+			['/'] = {
+				function()
+					tsc_builtin.live_grep({
+						grep_open_files = true,
+						prompt_title = 'Live Grep in Open Files',
+					})
+				end,
+				'in Open Files',
+			},
+			n = {
+				function()
+					tsc_builtin.find_files({ cwd = vim.fn.stdpath('config') })
+				end,
+				'Neovim files',
+			},
+		},
+		['n'] = { -- Sessions
+			name = 'Sessions',
+			s = { require('resession').save, 'Save' },
+			l = { require('resession').load, 'Load' },
+			d = { require('resession').delete, 'Delete' },
+		},
+		['e'] = {
+			vim.diagnostic.open_float,
+			'Show diagnostic Error messages',
+		},
+		['q'] = {
+			vim.diagnostic.setloclist,
+			'Open diagnostic Quickfix list',
+		},
+		['l'] = { '<cmd>Lazy<cr>', 'Open Lazy Plugin Manager' },
+		['m'] = { '<cmd>Mason<cr>', 'Open Mason' },
+		['h'] = { '<cmd>Alpha<cr>', 'Open Dashboard' },
+		['o'] = { '<cmd>Oil<cr>', 'Open Oil' },
+		['g'] = { '<cmd>LazyGit<cr>', 'Open LazyGit' },
 		['F'] = {
 			function()
 				require('conform').format({ async = true, lsp_fallback = true })
 			end,
 			'Format buffer',
 		},
+		['<leader>'] = { tsc_builtin.buffers, 'Find existing buffers' },
+		['/'] = {
+			function()
+				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
+				tsc_builtin.current_buffer_fuzzy_find(
+					require('telescope.themes').get_dropdown({
+						winblend = 10,
+						previewer = false,
+					})
+				)
+			end,
+			'Fuzzily search in current buffer',
+		},
+		['K'] = {
+			function()
+				local winid = require('ufo').peekFoldedLinesUnderCursor()
+				if not winid then
+					vim.lsp.buf.hover()
+				end
+			end,
+			'Ufo: Peek Folded Lines Under Cursor',
+		},
 	},
-	['C-w'] = {
+	['<C-w>'] = {
 		desc = 'window',
 		z = { '<cmd>WindowsMaximize<CR>', 'Maximize' },
 		['_'] = { '<cmd>WindowsMaximizeVertically<CR>', 'Max out the hight' },
 		['|'] = { '<cmd>WindowsMaximizeHorizontall<CR>', 'Max out the width' },
 		['='] = { '<cmd>WindowsEqualize<CR>', 'Equal high and wide' },
+	},
+	['<z>'] = {
+		R = { require('ufo').openAllFolds, 'Ufo: Open All Folds' },
+		M = { require('ufo').closeAllFolds, 'Ufo: Close All Folds' },
+		r = {
+			require('ufo').openFoldsExceptKinds,
+			'Ufo: Open Folds Except Kinds',
+		},
+		m = { require('ufo').closeFoldsWith, 'Ufo: Close Folds With' },
 	},
 	['<Esc>'] = { '<cmd>nohlsearch<cr>', 'Cancel active highlight' },
 	['J'] = { 'mzJ`z', 'Join line' },
@@ -52,8 +143,33 @@ wk.register({
 		end,
 		'Peek Precognition',
 	},
+	['<C-ö>'] = {
+		function()
+			if vim.api.nvim_win_get_width(0) > 95 then
+				require('toggleterm').toggle(1, nil, nil, 'vertical', nil)
+			else
+				require('toggleterm').toggle(1, nil, nil, 'horizontal', nil)
+			end
+		end,
+		'Toggle Terminal',
+	},
+	-- recommended mappings
+	-- resizing splits
+	-- these keymaps will also accept a range,
+	-- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
+	-- moving between splits
+	['<A-h>'] = { ss.resize_left, 'Resize Left' },
+	['<A-j>'] = { ss.resize_down, 'Resize Down' },
+	['<A-k>'] = { ss.resize_up, 'Resize Up' },
+	['<A-l>'] = { ss.resize_right, 'Resize Right' },
+	['<C-h>'] = { ss.move_cursor_left, 'Move to Left Plane' },
+	['<C-j>'] = { ss.move_cursor_down, 'Move to Down Plane' },
+	['<C-k>'] = { ss.move_cursor_up, 'Move to Up Plane' },
+	['<C-l>'] = { ss.move_cursor_right, 'Move to Rigth Plane' },
+	['<C-bs>'] = { ss.move_cursor_previous, 'Move to Previous Plane' },
 }, { mode = 'n', noremap = true })
 
+-- BUG: It does not work, only if typed in
 wk.register({
 	['<leader>p'] = { '"_dP', desc = 'Paste (but keep paste data)' },
 }, { mode = 'x', noremap = true })
@@ -143,7 +259,7 @@ autocmd('LspAttach', {
 		end
 
 		if client and client.supports_method 'textDocument/codeLens' then
-			-- (ss) Added workaround for an issue that showed up in v 0.10 of NeoVim
+			-- NOTE: Added workaround for an issue that showed up in v 0.10 of NeoVim
 			-- where codeLens notifications are constantly being sent.
 			local silent_refresh = function()
 				local _notify = vim.notify
@@ -169,29 +285,6 @@ autocmd('LspAttach', {
 		end
 	end,
 })
-
-wk.register({ -- Diagnostic Keymaps
-	['[d'] = {
-		function()
-			vim.diagnostic.jump({ count = -1 })
-		end,
-		'Go to previous Diagnostic message',
-	},
-	[']d'] = {
-		function()
-			vim.diagnostic.jump({ count = 1 })
-		end,
-		'Go to next Diagnostic message',
-	},
-	['<leader>e'] = {
-		vim.diagnostic.open_float,
-		'Show diagnostic Error messages',
-	},
-	['<leader>q'] = {
-		vim.diagnostic.setloclist,
-		'Open diagnostic Quickfix list',
-	},
-}, { mode = 'n', noremap = true })
 
 autocmd('FileType', {
 	pattern = {
