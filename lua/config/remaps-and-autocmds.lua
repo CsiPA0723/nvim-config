@@ -292,6 +292,14 @@ autocmd('LspAttach', {
 	end,
 })
 
+local lint_augroup = augroup('lint', { clear = true })
+autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+	group = lint_augroup,
+	callback = function()
+		require('lint').try_lint()
+	end,
+})
+
 autocmd('FileType', {
 	pattern = {
 		'checkhealth',

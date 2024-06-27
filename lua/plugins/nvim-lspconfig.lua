@@ -31,25 +31,13 @@ return {
 			)
 
 			local servers = {
-				-- markdown_oxide = {
-				-- 	capabilities = capabilities, -- ensure that capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
-				-- 	root_dir = require('lspconfig').util.root_pattern(
-				-- 		'.git',
-				-- 		vim.fn.getcwd()
-				-- 	), -- this is a temp fix for an error in the lspconfig for this LS
-				-- },
 				tsserver = {},
 				lua_ls = {
-					-- cmd = {...},
-					-- filetypes = { ...},
-					-- capabilities = {},
 					settings = {
 						Lua = {
 							completion = {
 								callSnippet = 'Replace',
 							},
-							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-							-- diagnostics = { disable = { 'missing-fields' } },
 						},
 					},
 				},

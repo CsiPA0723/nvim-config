@@ -32,7 +32,6 @@ vim.loader.enable()
 -- Lazy Setup
 
 --[[ TODO:-List
-   - Redesign lualine
    - Put all keybindings in one file
 --]]
 
