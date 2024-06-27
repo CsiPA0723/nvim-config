@@ -3,7 +3,11 @@ return {
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		opts = {
-			options = { icons_enabled = true, theme = 'catppuccin' },
+			options = {
+				theme = 'catppuccin',
+				icons_enabled = true,
+				globalstatus = true,
+			},
 			sections = {
 				lualine_a = {
 					{
@@ -36,10 +40,11 @@ return {
 				'fzf',
 				'lazy',
 				'mason',
-				-- 'neo-tree',
 				'nvim-dap-ui',
-				'trouble',
+				'oil',
+				'quickfix',
 				'toggleterm',
+				'trouble',
 			},
 		},
 	},
