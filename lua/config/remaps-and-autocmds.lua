@@ -72,6 +72,13 @@ wk.register({
 			l = { require('resession').load, 'Load' },
 			d = { require('resession').delete, 'Delete' },
 		},
+		['b'] = { require('dap').toggle_breakpoint, 'Debug: Toogle Breakpoint' },
+		['B'] = {
+			function()
+				require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+			end,
+			'Debug: Set Breakpoint',
+		},
 		['e'] = {
 			vim.diagnostic.open_float,
 			'Show diagnostic Error messages',
@@ -137,12 +144,18 @@ wk.register({
 	['n'] = 'nzzzv',
 	['N'] = 'Nzzzv',
 	['Q'] = '<nop>',
-	['<F1>'] = {
+	['<F1>'] = { require('dap').step_into, 'Debug: Step Into' },
+	['<F2>'] = { require('dap').step_over, 'Debug: Step Over' },
+	['<F3>'] = { require('dap').step_out, 'Debug: Step Out' },
+	['<F4>'] = {
 		function()
 			require('precognition').toggle()
 		end,
 		'Toggle Precognition',
 	},
+	['<F5>'] = { require('dap').continue, 'Debug: Start/Continue' },
+	-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+	['<F7>'] = { require('dapui').toggle, 'Debug: See last session result.' },
 	['ű'] = {
 		function()
 			require('precognition').peek()
