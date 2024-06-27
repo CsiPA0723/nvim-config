@@ -36,7 +36,13 @@ wk.register({
 			r = { tsc_builtin.resume, 'Resume' },
 			z = { require('telescope').extensions.zoxide.list, 'Zoxide list' },
 			b = {
-				require('telescope').extensions.file_browser.file_browser,
+				function()
+					require('telescope').extensions.file_browser.file_browser(
+						require('telescope.themes').get_dropdown({
+							winblend = 10,
+						})
+					)
+				end,
 				'Browser',
 			},
 			p = {

@@ -95,11 +95,13 @@ return {
 							'  Recently opened files',
 							require('telescope.builtin').oldfiles
 						),
-						button(
-							'b',
-							'󰉋  Browse Files',
-							require('telescope').extensions.file_browser.file_browser
-						),
+						button('b', '󰉋  Browse Files', function()
+							require('telescope').extensions.file_browser.file_browser(
+								require('telescope.themes').get_dropdown({
+									winblend = 10,
+								})
+							)
+						end),
 						button(
 							'g',
 							'󰊄  Live Grep',
