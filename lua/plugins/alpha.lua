@@ -1,7 +1,8 @@
 --- @param sc string
 --- @param txt string
 --- @param command string|function
-local function button(sc, txt, command)
+--- @param options? table
+local function button(sc, txt, command, options)
 	local opts = {
 		position = 'center',
 		shortcut = '[' .. sc .. '] ',
@@ -13,6 +14,7 @@ local function button(sc, txt, command)
 			command,
 			{ noremap = true, silent = true, nowait = true },
 		},
+		hl = { { 'Title', 0, 3 }, { 'Text', 3, 100 } },
 		align_shortcut = 'right',
 		hl_shortcut = {
 			{ 'Operator', 0, 1 },
@@ -21,6 +23,8 @@ local function button(sc, txt, command)
 		},
 		shrink_margin = false,
 	}
+
+	opts = vim.tbl_extend('force', opts, options or {})
 
 	local function on_press()
 		if type(command) == 'string' then
@@ -84,16 +88,16 @@ return {
 					type = 'group',
 					val = {
 						button('e', '  New file', '<cmd>ene <BAR> startinsert <CR>'),
-						button(
-							'f',
-							'󰈞  Find file',
-							require('telescope.builtin').find_files
-						),
 						button('s', '  Sessions', resession.load),
 						button(
 							'o',
 							'  Recently opened files',
 							require('telescope.builtin').oldfiles
+						),
+						button(
+							'f',
+							'󰈞  Find file',
+							require('telescope.builtin').find_files
 						),
 						button('b', '󰉋  Browse Files', function()
 							require('telescope').extensions.file_browser.file_browser(
@@ -107,11 +111,6 @@ return {
 							'󰊄  Live Grep',
 							require('telescope.builtin').live_grep
 						),
-						button(
-							'z',
-							'󰞁  Jump to Zoxide',
-							require('telescope').extensions.zoxide.list
-						),
 						button('c', '  Configuration', function()
 							require('telescope.builtin').find_files({
 								cwd = vim.fn.stdpath('config'),
@@ -122,7 +121,12 @@ return {
 						button('r', '  Restore Last Session', function()
 							resession.load('last', { attach = false })
 						end),
-						button('q', '󰅚  Quit', ':qa<CR>'),
+						button(
+							'q',
+							'󰅚  Quit',
+							':qa<CR>',
+							{ hl = { { 'Error', 0, 3 }, { 'Text', 3, 100 } } }
+						),
 					},
 					opts = { spacing = 1, position = 'center' },
 				},
