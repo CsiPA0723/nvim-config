@@ -8,7 +8,11 @@ return {
 		end,
 	},
 	{ 'folke/which-key.nvim' },
-	{ 'akinsho/toggleterm.nvim', version = '*', opts = { open_mapping = nil } },
+	{
+		'akinsho/toggleterm.nvim',
+		version = '*',
+		opts = { open_mapping = '<C-ö>' },
+	},
 	{ 'nanotee/zoxide.vim' },
 	{
 		'mistricky/codesnap.nvim',
@@ -65,5 +69,11 @@ return {
 		'mrjones2014/smart-splits.nvim',
 		build = './kitty/install-kittens.bash',
 		config = true,
+	},
+	{
+		'norcalli/nvim-colorizer.lua',
+		config = function()
+			require('colorizer').setup({ '*' }, { RRGGBBAA = true })
+		end,
 	},
 }

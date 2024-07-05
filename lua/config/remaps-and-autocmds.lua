@@ -162,16 +162,6 @@ wk.register({
 		end,
 		'Peek Precognition',
 	},
-	['<C-ö>'] = {
-		function()
-			if vim.api.nvim_win_get_width(0) > 95 then
-				require('toggleterm').toggle(1, nil, nil, 'vertical', nil)
-			else
-				require('toggleterm').toggle(1, nil, nil, 'horizontal', nil)
-			end
-		end,
-		'Toggle Terminal',
-	},
 	-- recommended mappings
 	-- resizing splits
 	-- these keymaps will also accept a range,
