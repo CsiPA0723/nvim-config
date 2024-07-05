@@ -32,7 +32,6 @@ vim.loader.enable()
 -- Lazy Setup
 
 --[[ TODO:-List
-   - Put all keybindings in one file
    - Redo resession
 --]]
 
