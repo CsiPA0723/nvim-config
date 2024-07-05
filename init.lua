@@ -33,6 +33,7 @@ vim.loader.enable()
 
 --[[ TODO:-List
    - Put all keybindings in one file
+   - Redo resession
 --]]
 
 require('lazy').setup('plugins', {
