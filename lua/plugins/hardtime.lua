@@ -6,6 +6,7 @@ return {
 			max_count = 5,
 			allow_different_key = true,
 			disabled_filetypes = {
+				'trouble',
 				'qf',
 				'netrw',
 				'NvimTree',
