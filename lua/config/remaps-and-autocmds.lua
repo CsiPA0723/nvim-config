@@ -10,10 +10,10 @@ wk.add({
 	},
 	{ -- Swap Buffer
 		{ '<leader>a', group = 'Swap Buffer' },
-		{ '<leader>ah', ss.swap_buf_left, desc = 'Swap with left buffer' },
-		{ '<leader>aj', ss.swap_buf_down, desc = 'Swap to Down Buffer' },
-		{ '<leader>ak', ss.swap_buf_up, desc = 'Swap to Up Buffer' },
-		{ '<leader>ad', ss.swap_buf_right, desc = 'Swap to Right Buffer' },
+		{ '<leader>ah', ss.swap_buf_left, desc = 'Swap with Left buffer' },
+		{ '<leader>aj', ss.swap_buf_down, desc = 'Swap with Down Buffer' },
+		{ '<leader>ak', ss.swap_buf_up, desc = 'Swap with Up Buffer' },
+		{ '<leader>al', ss.swap_buf_right, desc = 'Swap with Right Buffer' },
 	},
 	{ -- Code
 		{ '<leader>c', group = 'Code' },
@@ -151,7 +151,7 @@ wk.add({
 		end,
 		desc = 'Format buffer',
 	},
-	{ '<leader>.', tsc_builtin.buffers, desc = 'Find existing buffers' },
+	{ '<leader><leader>', tsc_builtin.buffers, desc = 'Find existing buffers' },
 	{
 		'<ledaer>/',
 		function()
