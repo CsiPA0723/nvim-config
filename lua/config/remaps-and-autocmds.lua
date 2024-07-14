@@ -2,190 +2,211 @@ local ss = require('smart-splits')
 local tsc_builtin = require('telescope.builtin')
 local wk = require('which-key')
 
-wk.register({
-	['J'] = { ":m '>+1<cr>gv=gv", 'Move selected down' },
-	['K'] = { ":m '<-2<cr>gv=gv", 'Move selected up' },
-}, { mode = 'v', noremap = true })
-
-wk.register({
-	['<leader>'] = {
-		['a'] = { -- swapping buffers between windows
-			name = 'Swap Buffer',
-			h = { ss.swap_buf_left, 'Swap to Left Buffer' },
-			j = { ss.swap_buf_down, 'Swap to Down Buffer' },
-			k = { ss.swap_buf_up, 'Swap to Up Buffer' },
-			l = { ss.swap_buf_right, 'Swap to Right Buffer' },
+wk.add({
+	{ -- Move lines
+		mode = 'v',
+		{ 'J', ":m '>+1<cr>gv=gv", desc = 'Move selected down' },
+		{ 'K', ":m '<-2<cr>gv=gv", desc = 'Move selected up' },
+	},
+	{ -- Swap Buffer
+		{ '<leader>a', group = 'Swap Buffer' },
+		{ '<leader>ah', ss.swap_buf_left, desc = 'Swap with left buffer' },
+		{ '<leader>aj', ss.swap_buf_down, desc = 'Swap to Down Buffer' },
+		{ '<leader>ak', ss.swap_buf_up, desc = 'Swap to Up Buffer' },
+		{ '<leader>ad', ss.swap_buf_right, desc = 'Swap to Right Buffer' },
+	},
+	{ -- Code
+		{ '<leader>c', group = 'Code' },
+		{ '<leader>cp', '"+p', desc = 'Clip: Paste', mode = { 'n', 'v' } },
+		{ '<leader>cd', '"+d', desc = 'Clip: Delete', mode = { 'n', 'v' } },
+		{ '<leader>cy', '"+y', desc = 'Clip: Copy', mode = { 'n', 'v' } },
+		{ '<leader>cY', '"+Y', desc = 'Clip: Copy' },
+	},
+	{ -- Search
+		{ '<leader>s', group = 'Search' },
+		{ '<leader>sh', tsc_builtin.help_tags, desc = 'Help' },
+		{ '<leader>sk', tsc_builtin.keymaps, desc = 'Keymaps' },
+		{ '<leader>sf', tsc_builtin.find_files, desc = 'Files' },
+		{ '<leader>st', tsc_builtin.git_files, desc = 'Git' },
+		{ '<leader>ss', tsc_builtin.builtin, desc = 'Select Telescope' },
+		{ '<leader>sw', tsc_builtin.grep_string, desc = 'Current Word' },
+		{ '<leader>sg', tsc_builtin.live_grep, desc = 'Grep' },
+		{ '<leader>sd', tsc_builtin.diagnostics, desc = 'Diagnostics' },
+		{ '<leader>sr', tsc_builtin.resume, desc = 'Resume' },
+		{
+			'<leader>sz',
+			require('telescope').extensions.zoxide.list,
+			desc = 'Zoxide list',
 		},
-		['c'] = { -- Code
-			name = 'Code',
-			p = { '"+p', 'Clip: Paste', mode = { 'n', 'v' } },
-			d = { '"+d', 'Clip: Delete', mode = { 'n', 'v' } },
-			y = { '"+y', 'Clip: Copy', mode = { 'n', 'v' } },
-			Y = { '"+Y', 'Clip: Copy' },
-		},
-		['s'] = { -- Search
-			name = 'Search',
-			h = { tsc_builtin.help_tags, 'Help' },
-			k = { tsc_builtin.keymaps, 'Keymaps' },
-			f = { tsc_builtin.find_files, 'Files' },
-			t = { tsc_builtin.git_files, 'Git' },
-			s = { tsc_builtin.builtin, 'Select Telescope' },
-			w = { tsc_builtin.grep_string, 'Current Word' },
-			g = { tsc_builtin.live_grep, 'Grep' },
-			d = { tsc_builtin.diagnostics, 'Diagnostics' },
-			r = { tsc_builtin.resume, 'Resume' },
-			z = { require('telescope').extensions.zoxide.list, 'Zoxide list' },
-			b = {
-				function()
-					require('telescope').extensions.file_browser.file_browser(
-						require('telescope.themes').get_dropdown({
-							winblend = 10,
-						})
-					)
-				end,
-				'Browser',
-			},
-			p = {
-				require('telescope').extensions.pomodori.timers,
-				'Pomodori Timers',
-			},
-			['<leader>'] = { tsc_builtin.oldfiles, 'Search Recent Files' },
-			['/'] = {
-				function()
-					tsc_builtin.live_grep({
-						grep_open_files = true,
-						prompt_title = 'Live Grep in Open Files',
-					})
-				end,
-				'in Open Files',
-			},
-			n = {
-				function()
-					tsc_builtin.find_files({ cwd = vim.fn.stdpath('config') })
-				end,
-				'Neovim files',
-			},
-		},
-		['n'] = { -- Sessions
-			name = 'Sessions',
-			s = { require('resession').save, 'Save' },
-			l = { require('resession').load, 'Load' },
-			d = { require('resession').delete, 'Delete' },
-		},
-		['b'] = { require('dap').toggle_breakpoint, 'Debug: Toogle Breakpoint' },
-		['B'] = {
+		{
+			'<leader>sb',
 			function()
-				require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
-			end,
-			'Debug: Set Breakpoint',
-		},
-		['e'] = {
-			vim.diagnostic.open_float,
-			'Show diagnostic Error messages',
-		},
-		['q'] = {
-			vim.diagnostic.setloclist,
-			'Open diagnostic Quickfix list',
-		},
-		['l'] = { '<cmd>Lazy<cr>', 'Open Lazy Plugin Manager' },
-		['m'] = { '<cmd>Mason<cr>', 'Open Mason' },
-		['h'] = { '<cmd>Alpha<cr>', 'Open Dashboard' },
-		['o'] = { '<cmd>Oil<cr>', 'Open Oil' },
-		['g'] = { '<cmd>LazyGit<cr>', 'Open LazyGit' },
-		['F'] = {
-			function()
-				require('conform').format({ async = true, lsp_fallback = true })
-			end,
-			'Format buffer',
-		},
-		['<leader>'] = { tsc_builtin.buffers, 'Find existing buffers' },
-		['/'] = {
-			function()
-				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-				tsc_builtin.current_buffer_fuzzy_find(
+				require('telescope').extensions.file_browser.file_browser(
 					require('telescope.themes').get_dropdown({
 						winblend = 10,
-						previewer = false,
 					})
 				)
 			end,
-			'Fuzzily search in current buffer',
+			desc = 'Browser',
 		},
-		['K'] = {
+		{
+			'<leader>sp',
+			require('telescope').extensions.pomodori.timers,
+			desc = 'Pomodori Timers',
+		},
+		{ '<leader>s<leader>', tsc_builtin.oldfiles, desc = 'Search Recent Files' },
+		{
+			'<leader>s/',
 			function()
-				local winid = require('ufo').peekFoldedLinesUnderCursor()
-				if not winid then
-					vim.lsp.buf.hover()
-				end
+				tsc_builtin.live_grep({
+					grep_open_files = true,
+					prompt_title = 'Live Grep in Open Files',
+				})
 			end,
-			'Ufo: Peek Folded Lines Under Cursor',
+			desc = 'in Open Files',
+		},
+		{
+			'<leader>sn',
+			function()
+				tsc_builtin.find_files({ cwd = vim.fn.stdpath('config') })
+			end,
+			desc = 'Neovim files',
 		},
 	},
-	['<C-w>'] = {
-		desc = 'window',
-		z = { '<cmd>WindowsMaximize<CR>', 'Maximize' },
-		['_'] = { '<cmd>WindowsMaximizeVertically<CR>', 'Max out the hight' },
-		['|'] = { '<cmd>WindowsMaximizeHorizontall<CR>', 'Max out the width' },
-		['='] = { '<cmd>WindowsEqualize<CR>', 'Equal high and wide' },
+	{ -- Sessions
+		{ '<leader>n', group = 'Sessions' },
+		{ '<leader>ns', require('resession').save, desc = 'Save' },
+		{ '<leader>nl', require('resession').load, desc = 'Load' },
+		{ '<leader>nd', require('resession').delete, desc = 'Delete' },
 	},
-	['<z>'] = {
-		R = { require('ufo').openAllFolds, 'Ufo: Open All Folds' },
-		M = { require('ufo').closeAllFolds, 'Ufo: Close All Folds' },
-		r = {
+	{ -- resizing splits
+		{ '<A-h>', ss.resize_left, desc = 'Resize Left' },
+		{ '<A-j>', ss.resize_down, desc = 'Resize Down' },
+		{ '<A-k>', ss.resize_up, desc = 'Resize Up' },
+		{ '<A-l>', ss.resize_right, desc = 'Resize Right' },
+	},
+	{ -- moving between splits
+		{ '<C-h>', ss.move_cursor_left, desc = 'Move to Left Plane' },
+		{ '<C-j>', ss.move_cursor_down, desc = 'Move to Down Plane' },
+		{ '<C-k>', ss.move_cursor_up, desc = 'Move to Up Plane' },
+		{ '<C-l>', ss.move_cursor_right, desc = 'Move to Rigth Plane' },
+		{ '<C-bs>', ss.move_cursor_previous, desc = 'Move to Previous Plane' },
+	},
+	{ -- Window
+		{ '<C-w>z', '<cmd>WindowsMaximize<CR>', desc = 'Maximize' },
+		{
+			'<C-w>_',
+			'<cmd>WindowsMaximizeVertically<CR>',
+			desc = 'Max out the hight',
+		},
+		{
+			'<C-w>|',
+			'<cmd>WindowsMaximizeHorizontall<CR>',
+			desc = 'Max out the width',
+		},
+		{ '<C-w>=', '<cmd>WindowsEqualize<CR>', desc = 'Equal high and wide' },
+	},
+	{ -- Fold overrides
+		{ 'zR', require('ufo').openAllFolds, desc = 'Ufo: Open All Folds' },
+		{ 'zM', require('ufo').closeAllFolds, desc = 'Ufo: Close All Folds' },
+		{
+			'zr',
 			require('ufo').openFoldsExceptKinds,
-			'Ufo: Open Folds Except Kinds',
+			desc = 'Ufo: Open Folds Except Kinds',
 		},
-		m = { require('ufo').closeFoldsWith, 'Ufo: Close Folds With' },
+		{ 'zm', require('ufo').closeFoldsWith, desc = 'Ufo: Close Folds With' },
 	},
-	['<Esc>'] = { '<cmd>nohlsearch<cr>', 'Cancel active highlight' },
-	['J'] = { 'mzJ`z', 'Join line' },
-	['<C-d>'] = '<C-d>zz',
-	['<C-u>'] = '<C-u>zz',
-	['n'] = 'nzzzv',
-	['N'] = 'Nzzzv',
-	['Q'] = '<nop>',
-	['<F1>'] = { require('dap').step_into, 'Debug: Step Into' },
-	['<F2>'] = { require('dap').step_over, 'Debug: Step Over' },
-	['<F3>'] = { require('dap').step_out, 'Debug: Step Out' },
-	['<F4>'] = {
+	-- Leader prefix
+	{
+		'<leader>b',
+		require('dap').toggle_breakpoint,
+		desc = 'Debug: Toogle Breakpoint',
+	},
+	{
+		'<leader>B',
+		function()
+			require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+		end,
+		desc = 'Debug: Set Breakpoint',
+	},
+	{
+		'<leader>e',
+		vim.diagnostic.open_float,
+		desc = 'Show diagnostic Error messages',
+	},
+	{
+		'<leader>q',
+		vim.diagnostic.setloclist,
+		desc = 'Open diagnostic Quickfix list',
+	},
+	{ '<leader>l', '<cmd>Lazy<cr>', desc = 'Open Lazy Plugin Manager' },
+	{ '<leader>m', '<cmd>Mason<cr>', desc = 'Open Mason' },
+	{ '<leader>h', '<cmd>Alpha<cr>', desc = 'Open Dashboard' },
+	{ '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil' },
+	{ '<leader>g', '<cmd>LazyGit<cr>', desc = 'Open LazyGit' },
+	{
+		'<leader>F',
+		function()
+			require('conform').format({ async = true, lsp_fallback = true })
+		end,
+		desc = 'Format buffer',
+	},
+	{ '<leader>.', tsc_builtin.buffers, desc = 'Find existing buffers' },
+	{
+		'<ledaer>/',
+		function()
+			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
+			tsc_builtin.current_buffer_fuzzy_find(
+				require('telescope.themes').get_dropdown({
+					winblend = 10,
+					previewer = false,
+				})
+			)
+		end,
+		desc = 'Fuzzily search in current buffer',
+	},
+	{
+		'<leader>K',
+		function()
+			local winid = require('ufo').peekFoldedLinesUnderCursor()
+			if not winid then
+				vim.lsp.buf.hover()
+			end
+		end,
+		desc = 'Ufo: Peek Folded Lines Under Cursor',
+	},
+	{ '<Esc>', '<cmd>nohlsearch<cr>', desc = 'Cancel active highlight' },
+	-- Leaves the cursor in the same place
+	{ 'J', 'mzJ`z', desc = 'Join line' },
+	{ '<C-d>', '<C-d>zz' },
+	{ '<C-u>', '<C-u>zz' },
+	{ 'n', 'nzzzv' },
+	{ 'N', 'Nzzzv' },
+	{ '<F1>', require('dap').step_into, desc = 'Debug: Step Into' },
+	{ '<F2>', require('dap').step_over, desc = 'Debug: Step Over' },
+	{ '<F3>', require('dap').step_out, desc = 'Debug: Step Out' },
+	{
+		'<F4>',
 		function()
 			require('precognition').toggle()
 		end,
-		'Toggle Precognition',
+		desc = 'Toggle Precognition',
 	},
-	['<F5>'] = { require('dap').continue, 'Debug: Start/Continue' },
+	{ '<F5>', require('dap').continue, desc = 'Debug: Start/Continue' },
 	-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-	['<F7>'] = { require('dapui').toggle, 'Debug: See last session result.' },
-	['ű'] = {
+	{ '<F7>', require('dapui').toggle, desc = 'Debug: See last session result.' },
+	{
+		'ű',
 		function()
 			require('precognition').peek()
 		end,
-		'Peek Precognition',
+		desc = 'Peek Precognition',
 	},
-	-- recommended mappings
-	-- resizing splits
-	-- these keymaps will also accept a range,
-	-- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-	-- moving between splits
-	['<A-h>'] = { ss.resize_left, 'Resize Left' },
-	['<A-j>'] = { ss.resize_down, 'Resize Down' },
-	['<A-k>'] = { ss.resize_up, 'Resize Up' },
-	['<A-l>'] = { ss.resize_right, 'Resize Right' },
-	['<C-h>'] = { ss.move_cursor_left, 'Move to Left Plane' },
-	['<C-j>'] = { ss.move_cursor_down, 'Move to Down Plane' },
-	['<C-k>'] = { ss.move_cursor_up, 'Move to Up Plane' },
-	['<C-l>'] = { ss.move_cursor_right, 'Move to Rigth Plane' },
-	['<C-bs>'] = { ss.move_cursor_previous, 'Move to Previous Plane' },
-}, { mode = 'n', noremap = true })
-
--- BUG: It does not work, only if typed in
-wk.register({
-	['<leader>p'] = { '"_dP', desc = 'Paste (but keep paste data)' },
-}, { mode = 'x', noremap = true })
-
-wk.register({
-	['<Esc><Esc>'] = { '<C-\\><C-n>', 'Exit terminal mode' },
-}, { mode = 't', noremap = true })
+	-- BUG: It does not work, only if typed in
+	-- NOTE: After whick-key v3 it may work, need to test
+	{ '<leader>p', '"_dP', desc = 'Paste (but keep paste data)', mode = 'x' },
+	{ '<Esc><Esc>', '<C-\\><C-n>', desc = 'Exit terminal mode', mode = 't' },
+})
 
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup

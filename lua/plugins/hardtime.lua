@@ -7,6 +7,7 @@ return {
 			allow_different_key = true,
 			disabled_filetypes = {
 				'trouble',
+				'checkhealth',
 				'qf',
 				'netrw',
 				'NvimTree',
