@@ -17,6 +17,7 @@ return {
 				cmp = true,
 				dap = true,
 				dap_ui = true,
+				diffview = true,
 				gitsigns = true,
 				indent_blankline = {
 					enabled = true,

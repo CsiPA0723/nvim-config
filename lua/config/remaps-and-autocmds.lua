@@ -321,6 +321,7 @@ autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
 
 autocmd('FileType', {
 	pattern = {
+		'fugitive*',
 		'checkhealth',
 		'git',
 		'help',
