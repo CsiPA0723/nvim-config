@@ -1,7 +1,7 @@
 return {
 	{
 		'rcarriga/nvim-notify',
-		opts = { fps = 60, render = 'default', stages = 'slide' },
+		opts = { fps = 60, render = 'compact', stages = 'slide' },
 		config = function(_, opts)
 			require('notify').setup(opts)
 			vim.notify = require('notify')
@@ -75,5 +75,11 @@ return {
 		config = function()
 			require('colorizer').setup({ '*' }, { RRGGBBAA = true })
 		end,
+	},
+	{
+		'sindrets/diffview.nvim',
+		event = 'VeryLazy',
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		config = true,
 	},
 }

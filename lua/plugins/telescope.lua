@@ -1,4 +1,3 @@
--- Fuzzy Finder (files, lsp, etc)
 return {
 	{
 		'nvim-telescope/telescope.nvim',
@@ -24,13 +23,11 @@ return {
 						require('telescope.themes').get_dropdown(),
 					},
 					file_browser = {
-						theme = 'dropdown',
-						hijack_netrw = true,
+						hijack_netrw = false,
 					},
 				},
 			})
 
-			-- Enable Telescope extensions if they are installed
 			pcall(require('telescope').load_extension, 'fzf')
 			pcall(require('telescope').load_extension, 'ui-select')
 			pcall(require('telescope').load_extension, 'notify')

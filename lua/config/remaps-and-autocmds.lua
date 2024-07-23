@@ -42,9 +42,7 @@ wk.add({
 			'<leader>sb',
 			function()
 				require('telescope').extensions.file_browser.file_browser(
-					require('telescope.themes').get_dropdown({
-						winblend = 10,
-					})
+					require('telescope.themes').get_ivy({ winblend = 10 })
 				)
 			end,
 			desc = 'Browser',
@@ -202,8 +200,6 @@ wk.add({
 		end,
 		desc = 'Peek Precognition',
 	},
-	-- BUG: It does not work, only if typed in
-	-- NOTE: After whick-key v3 it may work, need to test
 	{ '<leader>p', '"_dP', desc = 'Paste (but keep paste data)', mode = 'x' },
 	{ '<Esc><Esc>', '<C-\\><C-n>', desc = 'Exit terminal mode', mode = 't' },
 })
@@ -343,5 +339,14 @@ autocmd('FileType', {
 			vim.cmd.close,
 			{ desc = 'Close the current buffer', buffer = true }
 		)
+	end,
+})
+
+autocmd('TermOpen', {
+	desc = 'Remove the numbers and relative numbers from a terminal buffer only',
+	group = augroup('csipa-remove-numbers-term', { clear = true }),
+	callback = function()
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
 	end,
 })

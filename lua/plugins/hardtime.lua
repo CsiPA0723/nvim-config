@@ -8,6 +8,7 @@ return {
 			disabled_filetypes = {
 				'trouble',
 				'checkhealth',
+				'help',
 				'qf',
 				'netrw',
 				'NvimTree',

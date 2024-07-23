@@ -41,6 +41,15 @@ return {
 						},
 					},
 				},
+				angularls = {
+					filetypes = {
+						'typescript',
+						'html',
+						'typescriptreact',
+						'typescript.tsx',
+						'angular.html',
+					},
+				},
 			}
 
 			require('mason').setup()
