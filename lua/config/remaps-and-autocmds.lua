@@ -141,7 +141,6 @@ wk.add({
 	{ '<leader>m', '<cmd>Mason<cr>', desc = 'Open Mason' },
 	{ '<leader>h', '<cmd>Alpha<cr>', desc = 'Open Dashboard' },
 	{ '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil' },
-	{ '<leader>g', '<cmd>LazyGit<cr>', desc = 'Open LazyGit' },
 	{
 		'<leader>F',
 		function()
