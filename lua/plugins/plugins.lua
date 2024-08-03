@@ -1,3 +1,4 @@
+---@type LazyPluginSpec[]
 return {
 	{
 		'rcarriga/nvim-notify',
@@ -7,7 +8,11 @@ return {
 			vim.notify = require('notify')
 		end,
 	},
-	{ 'folke/which-key.nvim' },
+	{
+		'folke/which-key.nvim',
+		---@class wk.Opts
+		opts = { preset = 'modern', win = { no_overlap = false } },
+	},
 	{
 		'akinsho/toggleterm.nvim',
 		version = '*',

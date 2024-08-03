@@ -1,3 +1,4 @@
+---@type LazyPluginSpec[]
 return {
 	{
 		'neovim/nvim-lspconfig',
@@ -31,7 +32,6 @@ return {
 			)
 
 			local servers = {
-				tsserver = {},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -48,6 +48,7 @@ return {
 						'typescriptreact',
 						'typescript.tsx',
 						'angular.html',
+						'htmlangular',
 					},
 				},
 			}
@@ -82,6 +83,26 @@ return {
 						require('lspconfig')[server_name].setup(server)
 					end,
 				},
+			})
+
+			vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+				pattern = {
+					'build.sh',
+					'*.subpackage.sh',
+					'PKGBUILD',
+					'*.install',
+					'makepkg.conf',
+					'*.ebuild',
+					'*.eclass',
+					'color.map',
+					'make.conf',
+				},
+				callback = function()
+					vim.lsp.start({
+						name = 'termux',
+						cmd = { 'termux-language-server' },
+					})
+				end,
 			})
 		end,
 	},

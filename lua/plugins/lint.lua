@@ -1,3 +1,4 @@
+---@type LazyPluginSpec[]
 return {
 	{ -- Linting
 		'mfussenegger/nvim-lint',
@@ -7,6 +8,8 @@ return {
 			lint.linters_by_ft = {
 				markdown = { 'markdownlint' },
 				docker = { 'hadolint' },
+				javascript = { 'eslint_d' },
+				typescript = { 'eslint_d' },
 			}
 		end,
 	},

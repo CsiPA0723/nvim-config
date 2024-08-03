@@ -1,3 +1,4 @@
+---@type LazyPluginSpec[]
 return {
 	{
 		'kevinhwang91/nvim-ufo',
@@ -17,7 +18,7 @@ return {
 			preview = {
 				win_config = {
 					border = { '', '─', '', '', '', '─', '', '' },
-					-- winhighlight = "Normal:Folded",
+					winhighlight = 'Normal:Folded',
 					winblend = 0,
 				},
 				mappings = {

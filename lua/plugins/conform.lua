@@ -1,3 +1,4 @@
+---@type LazyPluginSpec[]
 return {
 	{
 		'stevearc/conform.nvim',
@@ -20,8 +21,8 @@ return {
 				javascript = { 'prettierd' },
 				typescript = { 'prettierd' },
 				css = { 'prettierd' },
-				scss = { 'pretierd' },
-				less = { 'pretierd' },
+				scss = { 'prettierd' },
+				less = { 'prettierd' },
 				html = { 'prettierd' },
 				angular = { 'prettierd' },
 				['angular.html'] = { 'prettierd' },
