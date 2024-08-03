@@ -71,11 +71,32 @@ wk.add({
 			desc = 'Neovim files',
 		},
 	},
-	{ -- Sessions
-		{ '<leader>n', group = 'Sessions' },
-		{ '<leader>ns', require('resession').save, desc = 'Save' },
-		{ '<leader>nl', require('resession').load, desc = 'Load' },
-		{ '<leader>nd', require('resession').delete, desc = 'Delete' },
+	{ -- Workspace
+		{ '<leader>w', group = 'Workspace', icon = '' },
+		{
+			'<leader>ws',
+			'<cmd>SessionManager save_current_session<CR>',
+			desc = 'Save Session',
+			icon = '󰆓',
+		},
+		{
+			'<leader>wl',
+			'<cmd>SessionManager load_session<CR>',
+			desc = 'Load Session',
+			icon = '󰞒',
+		},
+		{
+			'<leader>wd',
+			'<cmd>SessionManager delete_session<CR>',
+			desc = 'Delete Session',
+			icon = '󰆴',
+		},
+		{
+			'<leader>wt',
+			'<cmd>Trouble todo<CR>',
+			desc = 'Open TODO list',
+			icon = '',
+		},
 	},
 	{ -- resizing splits
 		{ '<A-h>', ss.resize_left, desc = 'Resize Left' },
@@ -348,5 +369,14 @@ autocmd('TermOpen', {
 	callback = function()
 		vim.opt_local.number = false
 		vim.opt_local.relativenumber = false
+	end,
+})
+
+autocmd({ 'User' }, {
+	pattern = 'SessionLoadPost',
+	desc = 'Notify user the session is saved',
+	group = augroup('csipa-notify', { clear = true }),
+	callback = function()
+		vim.notify('Session saved', vim.log.levels.INFO)
 	end,
 })

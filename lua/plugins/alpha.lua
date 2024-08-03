@@ -46,13 +46,13 @@ local function button(sc, txt, command, options)
 	}
 end
 
+---@type LazyPluginSpec[]
 return {
 	{
 		'goolord/alpha-nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		config = function()
 			local alpha = require('alpha')
-			local resession = require('resession')
 
 			local header_neovim = {
 				[[ ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ]],
@@ -88,7 +88,16 @@ return {
 					type = 'group',
 					val = {
 						button('e', '  New file', '<cmd>ene <BAR> startinsert <CR>'),
-						button('s', '  Sessions', resession.load),
+						button(
+							'r',
+							'  Restore Last Session',
+							'<cmd>SessionManager load_last_session<CR>'
+						),
+						button(
+							's',
+							'  Sessions',
+							'<cmd>SessionManager load_session<CR>'
+						),
 						button(
 							'o',
 							'  Recently opened files',
@@ -118,9 +127,6 @@ return {
 						end),
 						button('l', '󰒲  Lazy Plugin Manager', '<cmd>Lazy<CR>'),
 						button('m', '󰒍  Mason LSP Manager', '<cmd>Mason<CR>'),
-						button('r', '  Restore Last Session', function()
-							resession.load('last', { attach = false })
-						end),
 						button(
 							'q',
 							'󰅚  Quit',
@@ -166,7 +172,6 @@ return {
 						and vim.o.filetype == ''
 
 					if fallback_on_empty then
-						require('resession').detach()
 						vim.cmd('Alpha')
 						vim.cmd(event.buf .. 'bwipeout!')
 					end

@@ -31,10 +31,6 @@ vim.loader.enable()
 -------------------------------------------------------------------------------
 -- Lazy Setup
 
---[[ TODO:-List
-   - Redo resession
---]]
-
 require('lazy').setup('plugins', {
 	checker = {
 		enabled = true,
