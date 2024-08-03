@@ -18,6 +18,7 @@ wk.add({
 	{ -- Code
 		{ '<leader>c', group = 'Code' },
 		{ '<leader>cp', '"+p', desc = 'Clip: Paste', mode = { 'n', 'v' } },
+		{ '<leader>cP', '"+P', desc = 'Clip: Paste', mode = { 'n', 'v' } },
 		{ '<leader>cd', '"+d', desc = 'Clip: Delete', mode = { 'n', 'v' } },
 		{ '<leader>cy', '"+y', desc = 'Clip: Copy', mode = { 'n', 'v' } },
 		{ '<leader>cY', '"+Y', desc = 'Clip: Copy' },
@@ -135,6 +136,7 @@ wk.add({
 		},
 		{ 'zm', require('ufo').closeFoldsWith, desc = 'Ufo: Close Folds With' },
 	},
+	{ '<leader>d', group = 'Document', hidden = true },
 	-- Leader prefix
 	{
 		'<leader>b',
@@ -155,13 +157,18 @@ wk.add({
 	},
 	{
 		'<leader>q',
-		vim.diagnostic.setloclist,
+		'<cmd>Trouble qflist<CR>',
 		desc = 'Open diagnostic Quickfix list',
 	},
-	{ '<leader>l', '<cmd>Lazy<cr>', desc = 'Open Lazy Plugin Manager' },
-	{ '<leader>m', '<cmd>Mason<cr>', desc = 'Open Mason' },
-	{ '<leader>h', '<cmd>Alpha<cr>', desc = 'Open Dashboard' },
-	{ '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil' },
+	{
+		'<leader>l',
+		'<cmd>Lazy<cr>',
+		desc = 'Open Lazy Plugin Manager',
+		icon = '󰒲',
+	},
+	{ '<leader>m', '<cmd>Mason<cr>', desc = 'Open Mason', icon = '' },
+	{ '<leader>h', '<cmd>Alpha<cr>', desc = 'Open Dashboard', icon = '' },
+	{ '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil', icon = '󱁓' },
 	{
 		'<leader>F',
 		function()
@@ -192,6 +199,7 @@ wk.add({
 			end
 		end,
 		desc = 'Ufo: Peek Folded Lines Under Cursor',
+		icon = '',
 	},
 	{ '<Esc>', '<cmd>nohlsearch<cr>', desc = 'Cancel active highlight' },
 	-- Leaves the cursor in the same place
@@ -221,7 +229,7 @@ wk.add({
 		desc = 'Peek Precognition',
 	},
 	{ '<leader>p', '"_dP', desc = 'Paste (but keep paste data)', mode = 'x' },
-	{ '<Esc><Esc>', '<C-\\><C-n>', desc = 'Exit terminal mode', mode = 't' },
+	{ '<C-space>', '<C-\\><C-n>', desc = 'Exit terminal mode', mode = 't' },
 })
 
 local autocmd = vim.api.nvim_create_autocmd
@@ -250,8 +258,6 @@ autocmd('LspAttach', {
 
 		map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
 
-		map('gr', require('telescope.builtin').lsp_references, 'Goto References')
-
 		map(
 			'gI',
 			require('telescope.builtin').lsp_implementations,
@@ -275,10 +281,6 @@ autocmd('LspAttach', {
 			require('telescope.builtin').lsp_dynamic_workspace_symbols,
 			'Workspace Symbols'
 		)
-
-		map('<leader>rn', vim.lsp.buf.rename, 'Rename')
-
-		map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
 
 		map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
