@@ -74,29 +74,37 @@ wk.add({
 	},
 	{ -- Workspace
 		{ '<leader>w', group = 'Workspace', icon = '' },
-		{
-			'<leader>ws',
-			'<cmd>SessionManager save_current_session<CR>',
-			desc = 'Save Session',
-			icon = '󰆓',
-		},
-		{
-			'<leader>wl',
-			'<cmd>SessionManager load_session<CR>',
-			desc = 'Load Session',
-			icon = '󰞒',
-		},
-		{
-			'<leader>wd',
-			'<cmd>SessionManager delete_session<CR>',
-			desc = 'Delete Session',
-			icon = '󰆴',
+		{ -- Session
+			{ '<leader>ws', group = 'Session', icon = '󰥔' },
+			{
+				'<leader>wss',
+				'<cmd>SessionManager save_current_session<CR>',
+				desc = 'Save Session',
+				icon = '󰆓',
+			},
+			{
+				'<leader>wsl',
+				'<cmd>SessionManager load_session<CR>',
+				desc = 'Load Session',
+				icon = '󰞒',
+			},
+			{
+				'<leader>wsd',
+				'<cmd>SessionManager delete_session<CR>',
+				desc = 'Delete Session',
+				icon = '󰆴',
+			},
 		},
 		{
 			'<leader>wt',
-			'<cmd>Trouble todo<CR>',
+			'<cmd>Trouble todo toggle win.position=left win.relative=editor<CR>',
 			desc = 'Open TODO list',
 			icon = '',
+		},
+		{
+			'<leader>wl',
+			'<cmd>Trouble lsp toggle focus=false win.position=left win.relative=editor<CR>',
+			desc = 'LSP definitions / referencies / ...',
 		},
 	},
 	{ -- resizing splits
@@ -375,7 +383,7 @@ autocmd('TermOpen', {
 })
 
 autocmd({ 'User' }, {
-	pattern = 'SessionLoadPost',
+	pattern = 'SessionSavePost',
 	desc = 'Notify user the session is saved',
 	group = augroup('csipa-notify', { clear = true }),
 	callback = function()
