@@ -11,7 +11,7 @@ return {
 	{
 		'folke/which-key.nvim',
 		---@class wk.Opts
-		opts = { preset = 'modern', win = { no_overlap = false } },
+		opts = { preset = 'modern', win = { no_overlap = false }, delay = 500 },
 	},
 	{
 		'akinsho/toggleterm.nvim',
