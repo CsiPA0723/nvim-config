@@ -68,10 +68,17 @@ return {
 		config = true,
 	},
 	{
-		'sindrets/diffview.nvim',
-		event = 'VeryLazy',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		'NeogitOrg/neogit',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'nvim-telescope/telescope.nvim',
+			{
+				'sindrets/diffview.nvim',
+				event = 'VeryLazy',
+				dependencies = { 'nvim-tree/nvim-web-devicons' },
+				config = true,
+			},
+		},
 		config = true,
 	},
-	{ 'tpope/vim-fugitive' },
 }

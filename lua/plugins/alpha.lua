@@ -90,7 +90,7 @@ return {
 						button('e', '  New file', '<cmd>ene <BAR> startinsert <CR>'),
 						button(
 							'r',
-							'  Restore Last Session',
+							'  Resume Last Session',
 							'<cmd>SessionManager load_last_session<CR>'
 						),
 						button(
