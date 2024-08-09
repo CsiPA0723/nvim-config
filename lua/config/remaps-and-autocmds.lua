@@ -146,9 +146,13 @@ wk.add({
 	},
 	{ -- Git
 		{ '<leader>g', group = 'Git' },
-		{ '<leader>gs', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
+		{ '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
 		{ '<leader>gc', '<cmd>Neogit commit<CR>', desc = 'Commit' },
 		{ '<leader>gd', '<cmd>Neogit diff<CR>', desc = 'Diffview' },
+		{ '<leader>gw', '<cmd>Neogit worktree<CR>', desc = 'Worktree' },
+		{ '<leader>gs', '<cmd>Gitsigns stage_hunk<CR>', desc = 'Stage Hunk' },
+		{ '<leader>ga', '<cmd>Gitsigns stage_buffer<CR>', desc = 'Stage Buffer' },
+		{ '<leader>gb', '<cmd>Gitsigns blame<CR>', desc = 'Open Blame' },
 	},
 	{ '<leader>d', group = 'Document', hidden = true },
 	-- Leader prefix
