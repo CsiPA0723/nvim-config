@@ -13,12 +13,13 @@ return {
 					'Trouble',
 					'lazy',
 					'mason',
+					'Neogit*',
 				},
 				relculright = true,
 				segments = {
-					{ text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-					{ text = { '%s' }, click = 'v:lua.ScSa' },
-					{ text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
+					{ text = { builtin.foldfunc } },
+					{ text = { '%s' } },
+					{ text = { builtin.lnumfunc, ' ' } },
 				},
 			})
 		end,

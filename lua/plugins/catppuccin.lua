@@ -44,6 +44,7 @@ return {
 						background = true,
 					},
 				},
+				neogit = true,
 				notify = true,
 				markdown = true,
 				mason = true,
