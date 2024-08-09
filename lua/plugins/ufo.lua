@@ -35,6 +35,7 @@ return {
 				'Trouble',
 				'lazy',
 				'mason',
+				'Neogit*',
 			},
 		},
 		init = function()
@@ -91,6 +92,7 @@ return {
 				pattern = opts.filetype_exclude,
 				callback = function()
 					require('ufo').detach()
+					vim.opt_local.foldcolumn = '0'
 				end,
 			})
 

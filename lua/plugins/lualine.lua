@@ -38,7 +38,6 @@ return {
 				},
 			},
 			extensions = {
-				'fugitive',
 				'fzf',
 				'lazy',
 				'mason',

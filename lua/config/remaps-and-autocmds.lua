@@ -144,6 +144,12 @@ wk.add({
 		},
 		{ 'zm', require('ufo').closeFoldsWith, desc = 'Ufo: Close Folds With' },
 	},
+	{ -- Git
+		{ '<leader>g', group = 'Git' },
+		{ '<leader>gs', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
+		{ '<leader>gc', '<cmd>Neogit commit<CR>', desc = 'Commit' },
+		{ '<leader>gd', '<cmd>Neogit diff<CR>', desc = 'Diffview' },
+	},
 	{ '<leader>d', group = 'Document', hidden = true },
 	-- Leader prefix
 	{
@@ -338,7 +344,6 @@ autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
 
 autocmd('FileType', {
 	pattern = {
-		'fugitive*',
 		'checkhealth',
 		'git',
 		'help',
