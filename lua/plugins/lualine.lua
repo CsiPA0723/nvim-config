@@ -37,6 +37,9 @@ return {
 					'filetype',
 				},
 			},
+			tabline = {
+				lualine_a = { { 'tabs', mode = 2, max_length = vim.o.columns } },
+			},
 			extensions = {
 				'fzf',
 				'lazy',
@@ -48,5 +51,9 @@ return {
 				'trouble',
 			},
 		},
+		config = function(_, opts)
+			require('lualine').setup(opts)
+			vim.o.showtabline = 1
+		end,
 	},
 }
