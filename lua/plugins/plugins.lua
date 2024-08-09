@@ -51,14 +51,6 @@ return {
 		config = true,
 	},
 	{
-		'tris203/precognition.nvim',
-		event = 'VeryLazy',
-		opts = {
-			startVisible = false,
-			highlightColor = { link = 'Whitespace' },
-		},
-	},
-	{
 		'jiaoshijie/undotree',
 		dependencies = 'nvim-lua/plenary.nvim',
 		config = true,

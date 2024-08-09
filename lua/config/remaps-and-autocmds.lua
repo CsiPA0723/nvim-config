@@ -219,23 +219,9 @@ wk.add({
 	{ '<F1>', require('dap').step_into, desc = 'Debug: Step Into' },
 	{ '<F2>', require('dap').step_over, desc = 'Debug: Step Over' },
 	{ '<F3>', require('dap').step_out, desc = 'Debug: Step Out' },
-	{
-		'<F4>',
-		function()
-			require('precognition').toggle()
-		end,
-		desc = 'Toggle Precognition',
-	},
 	{ '<F5>', require('dap').continue, desc = 'Debug: Start/Continue' },
 	-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
 	{ '<F7>', require('dapui').toggle, desc = 'Debug: See last session result.' },
-	{
-		'ű',
-		function()
-			require('precognition').peek()
-		end,
-		desc = 'Peek Precognition',
-	},
 	{ '<leader>p', '"_dP', desc = 'Paste (but keep paste data)', mode = 'x' },
 	{ '<C-space>', '<C-\\><C-n>', desc = 'Exit terminal mode', mode = 't' },
 })
