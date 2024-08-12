@@ -35,13 +35,14 @@ return {
 	},
 	{
 		'folke/todo-comments.nvim',
-		event = 'VimEnter',
+		event = 'VeryLazy',
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = true,
 	},
 	{
 		'folke/trouble.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		event = 'VeryLazy',
 		config = true,
 	},
 	{
@@ -65,6 +66,7 @@ return {
 	{
 		'mrjones2014/smart-splits.nvim',
 		build = './kitty/install-kittens.bash',
+		event = 'VeryLazy',
 		config = true,
 	},
 	{
@@ -74,11 +76,11 @@ return {
 			'nvim-telescope/telescope.nvim',
 			{
 				'sindrets/diffview.nvim',
-				event = 'VeryLazy',
 				dependencies = { 'nvim-tree/nvim-web-devicons' },
 				config = true,
 			},
 		},
+		event = 'VeryLazy',
 		config = true,
 	},
 }
