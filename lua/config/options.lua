@@ -1,4 +1,4 @@
-local nvimPath = vim.fn.stdpath('config') .. '/nvim'
+local configpath = vim.fn.stdpath('config')
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -53,5 +53,5 @@ vim.opt.fillchars:append {
 
 vim.opt.inccommand = 'split'
 
-vim.g.python3_host_prog = nvimPath .. '/.venv/bin/python'
+vim.g.python3_host_prog = configpath .. '/.venv/bin/python'
 vim.g.loaded_perl_provider = 0

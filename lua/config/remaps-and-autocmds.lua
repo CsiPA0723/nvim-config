@@ -3,7 +3,7 @@ local tsc_builtin = require('telescope.builtin')
 local wk = require('which-key')
 
 wk.add({
-	{ -- Move lines
+	{ --  Move lines
 		mode = 'v',
 		{ 'J', ":m '>+1<cr>gv=gv", desc = 'Move selected down' },
 		{ 'K', ":m '<-2<cr>gv=gv", desc = 'Move selected up' },
@@ -154,7 +154,7 @@ wk.add({
 		{ '<leader>ga', '<cmd>Gitsigns stage_buffer<CR>', desc = 'Stage Buffer' },
 		{ '<leader>gb', '<cmd>Gitsigns blame<CR>', desc = 'Open Blame' },
 	},
-	{ '<leader>d', group = 'Document', hidden = true },
+	{ '<leader>d', group = 'Document', icon = '󰈙 ' },
 	-- Leader prefix
 	{
 		'<leader>b',
@@ -222,6 +222,7 @@ wk.add({
 	{ '<Esc>', '<cmd>nohlsearch<cr>', desc = 'Cancel active highlight' },
 	-- Leaves the cursor in the same place
 	{ 'J', 'mzJ`z', desc = 'Join line' },
+	-- Tries to keep the cursor at the center
 	{ '<C-d>', '<C-d>zz' },
 	{ '<C-u>', '<C-u>zz' },
 	{ 'n', 'nzzzv' },
@@ -262,6 +263,10 @@ autocmd('LspAttach', {
 
 		map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
 
+		-- NOTE: This is not Goto Definition, this is Goto Declaration.
+		--  For example, in C this would take you to the header.
+		map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+
 		map(
 			'gI',
 			require('telescope.builtin').lsp_implementations,
@@ -281,37 +286,34 @@ autocmd('LspAttach', {
 		)
 
 		map(
-			'<leader>ws',
+			'<leader>wS',
 			require('telescope.builtin').lsp_dynamic_workspace_symbols,
 			'Workspace Symbols'
 		)
 
 		map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
-		-- WARN: This is not Goto Definition, this is Goto Declaration.
-		--  For example, in C this would take you to the header.
-		map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
-
-		-- The following two autocommands are used to highlight references of the
+		-- INFO: The following two autocommands are used to highlight references of the
 		-- word under your cursor when your cursor rests there for a little while.
-		--    See `:help CursorHold` for information about when this is executed
-		--
 		-- When you move your cursor, the highlights will be cleared (the second autocommand).
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client and client.server_capabilities.documentHighlightProvider then
+			local group = augroup('highlight-references', { clear = true })
 			autocmd({ 'CursorHold', 'CursorHoldI' }, {
+				group = group,
 				buffer = event.buf,
 				callback = vim.lsp.buf.document_highlight,
 			})
 
 			autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+				group = group,
 				buffer = event.buf,
 				callback = vim.lsp.buf.clear_references,
 			})
 		end
 
 		if client and client.supports_method 'textDocument/codeLens' then
-			-- NOTE: Added workaround for an issue that showed up in v 0.10 of NeoVim
+			-- HACK: Added workaround for an issue that showed up in v 0.10 of NeoVim
 			-- where codeLens notifications are constantly being sent.
 			local silent_refresh = function()
 				local _notify = vim.notify
@@ -338,9 +340,8 @@ autocmd('LspAttach', {
 	end,
 })
 
-local lint_augroup = augroup('lint', { clear = true })
 autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
-	group = lint_augroup,
+	group = augroup('lint', { clear = true }),
 	callback = function()
 		require('lint').try_lint()
 	end,

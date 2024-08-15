@@ -1,8 +1,15 @@
--- NOTE: Fixing unpack sometimes not working correctly
+-- HACK: Fixing unpack sometimes not working correctly
 table.unpack = table.unpack or unpack -- 5.1 compatibility
 
--- NOTE: Temp fix for a deprecetated function
---
+-- HACK: For a deprecetated functions
+
+---@param tbl table
+---@diagnostic disable-next-line: duplicate-set-field
+vim.tbl_flatten = function(tbl)
+	return vim.iter(tbl):flatten():totable()
+end
+
+---@param tbl table
 ---@diagnostic disable-next-line: duplicate-set-field
 vim.tbl_add_reverse_lookup = function(tbl)
 	for k, v in pairs(tbl) do
@@ -67,3 +74,4 @@ require 'config.options'
 require 'config.remaps-and-autocmds'
 
 require 'scripts.whereAmI'
+require 'scripts.license'
