@@ -13,7 +13,6 @@ return {
 					'Trouble',
 					'lazy',
 					'mason',
-					'Neogit*',
 				},
 				relculright = true,
 				segments = {
