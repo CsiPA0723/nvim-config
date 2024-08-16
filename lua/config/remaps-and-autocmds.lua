@@ -378,11 +378,23 @@ autocmd('TermOpen', {
 	end,
 })
 
+local session_group = augroup('csipa-notify', { clear = true })
+
 autocmd({ 'User' }, {
 	pattern = 'SessionSavePost',
 	desc = 'Notify user the session is saved',
-	group = augroup('csipa-notify', { clear = true }),
+	group = session_group,
 	callback = function()
 		vim.notify('Session saved', vim.log.levels.INFO)
+	end,
+})
+
+autocmd({ 'User' }, {
+	pattern = 'SessionLoadPost',
+	desc = 'Notify user the session is loaded',
+	group = session_group,
+	callback = function()
+		local path = vim.fn.getcwd()
+		vim.notify('Session loaded ' .. path, vim.log.levels.INFO)
 	end,
 })
