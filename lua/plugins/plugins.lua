@@ -83,4 +83,8 @@ return {
 		event = 'VeryLazy',
 		config = true,
 	},
+	{
+		'mistweaverco/kulala.nvim',
+		opts = { vscode_rest_client_environmentvars = true },
+	},
 }
