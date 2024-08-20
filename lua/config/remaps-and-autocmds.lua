@@ -154,7 +154,12 @@ wk.add({
 		{ '<leader>ga', '<cmd>Gitsigns stage_buffer<CR>', desc = 'Stage Buffer' },
 		{ '<leader>gb', '<cmd>Gitsigns blame<CR>', desc = 'Open Blame' },
 	},
-	{ '<leader>d', group = 'Document', icon = '󰈙 ' },
+	{ -- Document
+		{ '<leader>d', group = 'Document', icon = '󰈙 ' },
+		{ '<leader>dy', 'G"+ygg', desc = 'Yank all' },
+		{ '<leader>dP', 'vGgg"+p"', desc = 'Paste over' },
+		{ '<leader>dD', 'G"+dgg', desc = 'Delete all' },
+	},
 	-- Leader prefix
 	{
 		'<leader>b',
@@ -175,7 +180,7 @@ wk.add({
 	},
 	{
 		'<leader>q',
-		'<cmd>Trouble qflist<CR>',
+		'<cmd>Trouble quickfix<CR>',
 		desc = 'Open diagnostic Quickfix list',
 	},
 	{
@@ -293,10 +298,11 @@ autocmd('LspAttach', {
 
 		map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+
 		-- INFO: The following two autocommands are used to highlight references of the
 		-- word under your cursor when your cursor rests there for a little while.
 		-- When you move your cursor, the highlights will be cleared (the second autocommand).
-		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client and client.server_capabilities.documentHighlightProvider then
 			local group = augroup('highlight-references', { clear = true })
 			autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -313,24 +319,11 @@ autocmd('LspAttach', {
 		end
 
 		if client and client.supports_method 'textDocument/codeLens' then
-			-- HACK: Added workaround for an issue that showed up in v 0.10 of NeoVim
-			-- where codeLens notifications are constantly being sent.
-			local silent_refresh = function()
-				local _notify = vim.notify
-				---@diagnostic disable-next-line:duplicate-set-field
-				vim.notify = function()
-					-- say nothing
-				end
-				pcall(vim.lsp.codelens.refresh, { bufnr = event.buf })
-				vim.notify = _notify
-			end
-
 			-- refresh codelens on TextChanged and InsertLeave as well
 			autocmd({ 'TextChanged', 'InsertLeave', 'CursorHold', 'LspAttach' }, {
 				buffer = event.buf,
 				callback = function()
-					-- vim.lsp.codelens.refresh({ bufnr = event.buf })
-					silent_refresh()
+					vim.lsp.codelens.refresh({ bufnr = event.buf })
 				end,
 			})
 
@@ -357,15 +350,10 @@ autocmd('FileType', {
 		'notify',
 		'qf',
 		'query',
-		'oil',
 	},
+	group = augroup('csipa-quick-quit', { clear = true }),
 	callback = function()
-		vim.keymap.set(
-			'n',
-			'q',
-			vim.cmd.close,
-			{ desc = 'Close the current buffer', buffer = true }
-		)
+		wk.add({ 'q', vim.cmd.close, desc = 'Close active buffer', buffer = true })
 	end,
 })
 
