@@ -37,7 +37,17 @@ return {
 		'folke/todo-comments.nvim',
 		event = 'VeryLazy',
 		dependencies = { 'nvim-lua/plenary.nvim' },
-		config = true,
+		---@type TodoOptions
+		opts = {
+			highlight = {
+				-- vimgrep regex, supporting the pattern TODO(name)\:
+				pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?)\s*:]],
+			},
+			search = {
+				-- ripgrep regex, supporting the pattern TODO(name)\:
+				pattern = [[(?:\b(KEYWORDS)(?:\(\w*\))*:)]],
+			},
+		},
 	},
 	{
 		'folke/trouble.nvim',
