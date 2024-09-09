@@ -16,6 +16,7 @@ return {
 				opts = { notification = { window = { border = 'rounded' } } },
 			},
 			{ 'folke/neodev.nvim', config = true },
+			{ 'nvim-java/nvim-java', config = true },
 		},
 		config = function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -51,6 +52,7 @@ return {
 						'htmlangular',
 					},
 				},
+				jdtls = {},
 			}
 
 			require('mason').setup()
