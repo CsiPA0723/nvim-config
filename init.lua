@@ -63,6 +63,10 @@ require('lazy').setup('plugins', {
 	},
 })
 
+-- TODO:
+-- Add fancy markdown view
+-- Add java support
+
 -------------------------------------------------------------------------------
 -- Configs
 
@@ -74,4 +78,4 @@ require 'config.options'
 require 'config.remaps-and-autocmds'
 
 require 'scripts.whereAmI'
-require 'scripts.license'
+-- require 'scripts.license'

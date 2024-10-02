@@ -25,10 +25,29 @@ return {
 				-- Makes a best effort to setup the various debuggers with
 				-- reasonable debug configurations
 				automatic_setup = true,
+				automatic_installation = false,
 
 				-- You can provide additional configuration to the handlers,
 				-- see mason-nvim-dap README for more information
-				handlers = {},
+				handlers = {
+					function(config)
+						-- all sources with no handler get passed here
+
+						-- Keep original functionality
+						require('mason-nvim-dap').default_setup(config)
+					end,
+					--[[ python = function(config)
+						config.adapters = {
+							type = 'executable',
+							command = '/usr/bin/python3',
+							args = {
+								'-m',
+								'debugpy.adapter',
+							},
+						}
+						require('mason-nvim-dap').default_setup(config) -- don't forget this!
+					end, ]]
+				},
 
 				-- You'll need to check that you have the required things installed
 				-- online, please don't ask me how to install them :)
@@ -40,11 +59,13 @@ return {
 
 			-- Dap UI setup
 			-- For more information, see |:help nvim-dap-ui|
+			---@diagnostic disable-next-line: missing-fields
 			dapui.setup {
 				-- Set icons to characters that are more likely to work in every terminal.
 				--    Feel free to remove or use ones that you like more! :)
 				--    Don't feel like these are good choices.
 				icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+				---@diagnostic disable-next-line: missing-fields
 				controls = {
 					icons = {
 						pause = '⏸',

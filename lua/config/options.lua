@@ -61,4 +61,7 @@ vim.filetype.add({
 	extension = {
 		['http'] = 'http',
 	},
+	pattern = {
+		['.prettyphp'] = 'json',
+	},
 })

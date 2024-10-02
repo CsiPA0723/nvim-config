@@ -6,6 +6,7 @@ return {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
 			'WhoIsSethDaniel/mason-tool-installer.nvim',
+			'b0o/schemastore.nvim',
 			{
 				'pmizio/typescript-tools.nvim',
 				dependencies = 'nvim-lua/plenary.nvim',
@@ -16,7 +17,6 @@ return {
 				opts = { notification = { window = { border = 'rounded' } } },
 			},
 			{ 'folke/neodev.nvim', config = true },
-			{ 'nvim-java/nvim-java', config = true },
 		},
 		config = function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -52,7 +52,34 @@ return {
 						'htmlangular',
 					},
 				},
-				jdtls = {},
+				jsonls = {
+					settings = {
+						json = {
+							schemas = require('schemastore').json.schemas {
+								extra = {
+									{
+										description = 'Pretty-PHP Schema',
+										fileMatch = { '.prettyphp', 'prettyphp.json' },
+										name = 'prettyphp.json',
+										url = 'https://raw.githubusercontent.com/lkrms/pretty-php/main/resources/prettyphp-schema.json',
+									},
+								},
+							},
+							validate = { enable = true },
+						},
+					},
+				},
+				yamlls = {
+					settings = {
+						yaml = {
+							schemaStore = {
+								enable = false,
+								url = '',
+							},
+							schemas = require('schemastore').yaml.schemas(),
+						},
+					},
+				},
 			}
 
 			require('mason').setup()

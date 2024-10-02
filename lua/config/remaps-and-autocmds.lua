@@ -156,9 +156,9 @@ wk.add({
 	},
 	{ -- Document
 		{ '<leader>d', group = 'Document', icon = '󰈙 ' },
-		{ '<leader>dy', 'G"+ygg', desc = 'Yank all' },
-		{ '<leader>dP', 'vGgg"+p"', desc = 'Paste over' },
-		{ '<leader>dD', 'G"+dgg', desc = 'Delete all' },
+		{ '<leader>dy', 'ggVG"+y', desc = 'Yank all' },
+		{ '<leader>dP', 'ggVG"+p', desc = 'Paste over' },
+		{ '<leader>dD', 'ggVG"+d', desc = 'Delete all' },
 	},
 	-- Leader prefix
 	{

@@ -19,6 +19,12 @@ return {
 			'saadparwaiz1/cmp_luasnip',
 			'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-path',
+			{
+				'supermaven-inc/supermaven-nvim',
+				-- FIX: Temporary fix [https://github.com/supermaven-inc/supermaven-nvim/issues/111]
+				commit = '40bde487fe31723cdd180843b182f70c6a991226',
+				opts = { disable_inline_completion = true },
+			},
 		},
 		config = function()
 			local cmp = require('cmp')
@@ -52,12 +58,13 @@ return {
 				sources = {
 					{
 						name = 'nvim_lsp',
-						option = {
-							markdown_oxide = { keyword_pattern = [[\(\k\| \|\/\|#\)\+]] },
-						},
+						-- option = {
+						-- 	markdown_oxide = { keyword_pattern = [[\(\k\| \|\/\|#\)\+]] },
+						-- },
 					},
 					{ name = 'luasnip' },
 					{ name = 'path' },
+					{ name = 'supermaven' },
 				},
 			})
 		end,
