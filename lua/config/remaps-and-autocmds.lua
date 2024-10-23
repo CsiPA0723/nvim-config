@@ -101,11 +101,6 @@ wk.add({
 			desc = 'Open TODO list',
 			icon = '',
 		},
-		{
-			'<leader>wl',
-			'<cmd>Trouble lsp toggle focus=false win.position=left win.relative=editor<CR>',
-			desc = 'LSP definitions / referencies / ...',
-		},
 	},
 	{ -- resizing splits
 		{ '<A-h>', ss.resize_left, desc = 'Resize Left' },
@@ -266,35 +261,73 @@ autocmd('LspAttach', {
 			)
 		end
 
-		map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
+		-- Actions [[
+		map('grr', function()
+			require('trouble.api').toggle({
+				mode = 'lsp_references',
+				focus = true,
+			})
+		end, 'Reference(s)')
 
-		-- NOTE: This is not Goto Definition, this is Goto Declaration.
-		--  For example, in C this would take you to the header.
-		map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+		map('gri', function()
+			require('trouble.api').toggle({
+				mode = 'lsp_implementations',
+				focus = true,
+			})
+		end, 'Implementation(s)')
 
-		map(
-			'gI',
-			require('telescope.builtin').lsp_implementations,
-			'Goto Implementation'
-		)
+		map('grd', function()
+			require('trouble.api').toggle({
+				mode = 'lsp_definitions',
+				focus = true,
+			})
+		end, 'Definition')
 
-		map(
-			'<leader>D',
-			require('telescope.builtin').lsp_type_definitions,
-			'Type Definition'
-		)
+		map('grD', function()
+			require('trouble.api').toggle({
+				mode = 'lsp_declarations',
+				focus = true,
+			})
+		end, 'Declaration')
 
-		map(
-			'<leader>ds',
-			require('telescope.builtin').lsp_document_symbols,
-			'Document Symbols'
-		)
+		map('grt', function()
+			require('trouble.api').toggle({
+				mode = 'lsp_type_definitions',
+				focus = true,
+			})
+		end, 'Type Definition(s)')
 
+		map('grn', vim.lsp.buf.rename, 'Rename')
+		map('gra', vim.lsp.buf.code_action, 'Code Action')
+		-- ]]
+
+		-- Document [[
+		map('<leader>ds', function()
+			require('trouble.api').toggle({
+				mode = 'lsp_document_symbols',
+				focus = false,
+				open_no_results = true,
+				win = { position = 'right', relative = 'editor', type = 'split' },
+			})
+		end, 'Document Symbols')
+		-- ]]
+
+		-- Workspace [[
 		map(
 			'<leader>wS',
 			require('telescope.builtin').lsp_dynamic_workspace_symbols,
 			'Workspace Symbols'
 		)
+
+		map('<leader>wl', function()
+			require('trouble.api').toggle({
+				mode = 'lsp',
+				focus = false,
+				open_no_results = true,
+				win = { position = 'left', relative = 'editor', type = 'split' },
+			})
+		end, 'Definitions / Referencies / ...')
+		-- ]]
 
 		map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
@@ -357,32 +390,67 @@ autocmd('FileType', {
 	end,
 })
 
-autocmd('TermOpen', {
-	desc = 'Remove the numbers and relative numbers from a terminal buffer only',
-	group = augroup('csipa-remove-numbers-term', { clear = true }),
+autocmd('FileType', {
+	pattern = { 'help' },
+	group = augroup('csipa-help', { clear = true }),
 	callback = function()
-		vim.opt_local.number = false
-		vim.opt_local.relativenumber = false
+		vim.opt_local.colorcolumn = ''
 	end,
 })
 
-local session_group = augroup('csipa-notify', { clear = true })
+autocmd('TermOpen', {
+	desc = 'Disable some featuers in a terminal buffer',
+	group = augroup('csipa-term-open', { clear = true }),
+	callback = function()
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+		vim.opt_local.colorcolumn = ''
+	end,
+})
+
+local session_group = augroup('csipa-session', { clear = true })
 
 autocmd({ 'User' }, {
 	pattern = 'SessionSavePost',
 	desc = 'Notify user the session is saved',
 	group = session_group,
 	callback = function()
-		vim.notify('Session saved', vim.log.levels.INFO)
+		vim.notify(
+			vim.fn.getcwd(),
+			vim.log.levels.INFO,
+			{ group = 'session', annote = 'Saved' }
+		)
+	end,
+})
+
+autocmd({ 'User' }, {
+	pattern = 'SessionLoadPre',
+	desc = 'Clear lsps before loading new session',
+	group = session_group,
+	callback = function()
+		vim.lsp.stop_client(vim.lsp.get_clients(), true)
 	end,
 })
 
 autocmd({ 'User' }, {
 	pattern = 'SessionLoadPost',
-	desc = 'Notify user the session is loaded',
+	desc = 'Notify user the session is loaded and start lsps',
 	group = session_group,
 	callback = function()
-		local path = vim.fn.getcwd()
-		vim.notify('Session loaded ' .. path, vim.log.levels.INFO)
+		vim.fn.timer_start(1000, function()
+			-- HACK: This is a workaround for the lsp not starting
+			-- autmatically when loading another session
+			vim.cmd('edit')
+			vim.notify(
+				vim.fn.getcwd(),
+				vim.log.levels.INFO,
+				{ group = 'session', annote = 'Loaded', key = 'session_load' }
+			)
+		end)
+		vim.notify(
+			vim.fn.getcwd(),
+			vim.log.levels.INFO,
+			{ group = 'session', annote = 'Loading...', key = 'session_load' }
+		)
 	end,
 })

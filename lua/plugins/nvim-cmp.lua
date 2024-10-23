@@ -21,8 +21,6 @@ return {
 			'hrsh7th/cmp-path',
 			{
 				'supermaven-inc/supermaven-nvim',
-				-- FIX: Temporary fix [https://github.com/supermaven-inc/supermaven-nvim/issues/111]
-				commit = '40bde487fe31723cdd180843b182f70c6a991226',
 				opts = { disable_inline_completion = true },
 			},
 		},

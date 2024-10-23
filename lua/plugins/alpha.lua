@@ -162,11 +162,9 @@ return {
 
 			alpha.setup(config)
 
-			local alpha_on_empty =
-				vim.api.nvim_create_augroup('alpha_on_empty', { clear = true })
 			vim.api.nvim_create_autocmd('User', {
 				pattern = 'BDeletePost*',
-				group = alpha_on_empty,
+				group = vim.api.nvim_create_augroup('alpha_on_empty', { clear = true }),
 				callback = function(event)
 					local fallback_on_empty = vim.bo.buftype == ''
 						and vim.o.filetype == ''

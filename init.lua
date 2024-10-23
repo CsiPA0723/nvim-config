@@ -65,7 +65,8 @@ require('lazy').setup('plugins', {
 
 -- TODO:
 -- Add fancy markdown view
--- Add java support
+-- Finish java setup
+--
 
 -------------------------------------------------------------------------------
 -- Configs

@@ -1,14 +1,6 @@
 ---@type LazyPluginSpec[]
 return {
 	{
-		'rcarriga/nvim-notify',
-		opts = { fps = 60, render = 'compact', stages = 'slide' },
-		config = function(_, opts)
-			require('notify').setup(opts)
-			vim.notify = require('notify')
-		end,
-	},
-	{
 		'folke/which-key.nvim',
 		---@class wk.Opts
 		opts = { preset = 'modern', win = { no_overlap = false }, delay = 500 },
@@ -110,4 +102,10 @@ return {
 			})
 		end,
 	},
+	{
+		'OXY2DEV/helpview.nvim',
+		lazy = false,
+		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+	},
+	{ 'neolooong/whichpy.nvim', config = true },
 }

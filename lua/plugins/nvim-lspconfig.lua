@@ -7,16 +7,14 @@ return {
 			'williamboman/mason-lspconfig.nvim',
 			'WhoIsSethDaniel/mason-tool-installer.nvim',
 			'b0o/schemastore.nvim',
+			'j-hui/fidget.nvim',
 			{
 				'pmizio/typescript-tools.nvim',
 				dependencies = 'nvim-lua/plenary.nvim',
 				config = true,
 			},
-			{
-				'j-hui/fidget.nvim',
-				opts = { notification = { window = { border = 'rounded' } } },
-			},
 			{ 'folke/neodev.nvim', config = true },
+			{ 'nvim-java/nvim-java', config = true },
 		},
 		config = function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -34,13 +32,7 @@ return {
 
 			local servers = {
 				lua_ls = {
-					settings = {
-						Lua = {
-							completion = {
-								callSnippet = 'Replace',
-							},
-						},
-					},
+					settings = { Lua = { completion = { callSnippet = 'Replace' } } },
 				},
 				angularls = {
 					filetypes = {
@@ -72,10 +64,7 @@ return {
 				yamlls = {
 					settings = {
 						yaml = {
-							schemaStore = {
-								enable = false,
-								url = '',
-							},
+							schemaStore = { enable = false, url = '' },
 							schemas = require('schemastore').yaml.schemas(),
 						},
 					},
@@ -91,6 +80,26 @@ return {
 				'angularls',
 				'shfmt',
 				'markdownlint',
+				'pretty-php',
+				'clangd',
+				'termux-language-server',
+				'black',
+				'eslint_d',
+				'bash-language-server',
+				'clangd',
+				'codelldb',
+				'cpptools',
+				'delve',
+				'docker-compose-language-service',
+				'glsl_analyzer',
+				'hadolint',
+				'json-lsp',
+				'lua-language-server',
+				'php-debug-adapter',
+				'phpactor',
+				'python-lsp-server',
+				'taplo',
+				'yaml-language-server',
 			})
 			require('mason-tool-installer').setup({
 				ensure_installed = ensure_installed,
