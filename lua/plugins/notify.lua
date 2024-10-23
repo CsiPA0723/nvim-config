@@ -21,15 +21,12 @@ return {
 			},
 		},
 		config = function(_, opts)
-			opts.notification.configs = {
-				default = require('fidget.notification').default_config,
-				session = vim.tbl_extend('keep', {
-					name = 'Session',
-					icon = '❰❰',
-					ttl = 8,
-				}, require('fidget.notification').default_config),
-			}
 			require('fidget').setup(opts)
+			require('fidget.notification').set_config('session', {
+				name = 'Session',
+				icon = '❰❰',
+				ttl = 8,
+			}, false)
 		end,
 	},
 }
