@@ -83,7 +83,8 @@ return {
 			},
 		},
 		event = 'VeryLazy',
-		config = true,
+		---@type NeogitConfig
+		opts = { graph_style = 'kitty' },
 	},
 	{
 		'mistweaverco/kulala.nvim',
