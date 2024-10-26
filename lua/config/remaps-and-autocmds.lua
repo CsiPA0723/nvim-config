@@ -154,6 +154,11 @@ wk.add({
 		{ '<leader>dy', 'ggVG"+y', desc = 'Yank all' },
 		{ '<leader>dP', 'ggVG"+p', desc = 'Paste over' },
 		{ '<leader>dD', 'ggVG"+d', desc = 'Delete all' },
+		{
+			'<leader>dl',
+			require('telescope').extensions.licenses.licenses,
+			desc = 'Instert License',
+		},
 	},
 	-- Leader prefix
 	{
