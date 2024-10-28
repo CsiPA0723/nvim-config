@@ -18,6 +18,7 @@ return {
 						return integNotify.delegate(msg, level, opts)
 					end
 				end,
+				window = { winblend = 0 },
 			},
 		},
 		config = function(_, opts)

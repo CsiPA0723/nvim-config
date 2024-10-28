@@ -382,6 +382,7 @@ autocmd('FileType', {
 	pattern = {
 		'checkhealth',
 		'git',
+		'gitsigns-blame',
 		'help',
 		'lspinfo',
 		'netrw',
