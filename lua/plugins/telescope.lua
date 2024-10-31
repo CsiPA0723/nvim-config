@@ -35,7 +35,6 @@ return {
 			pcall(require('telescope').load_extension, 'zoxide')
 			pcall(require('telescope').load_extension, 'scope')
 			pcall(require('telescope').load_extension, 'file_browser')
-			pcall(require('telescope').load_extension, 'pomodori')
 			pcall(require('telescope').load_extension, 'licenses')
 		end,
 	},

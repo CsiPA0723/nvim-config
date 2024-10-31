@@ -1,6 +1,6 @@
 ---@type LazyPluginSpec[]
 return {
-	{ 'neolooong/whichpy.nvim', config = true },
+	{ 'neolooong/whichpy.nvim', ft = 'python', config = true },
 	{ 'nanotee/zoxide.vim' },
 	{
 		'folke/which-key.nvim',
@@ -45,7 +45,17 @@ return {
 	},
 	{
 		'OXY2DEV/helpview.nvim',
-		lazy = false,
 		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+	},
+	{
+		'CsiPA0723/task-runner.nvim',
+		dir = vim.fn.stdpath('config') .. '/plugins/task-runner.nvim',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'nvim-telescope/telescope.nvim',
+		},
+		lazy = true,
+		cmd = { 'Tasks' },
+		opts = {},
 	},
 }

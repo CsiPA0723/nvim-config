@@ -48,11 +48,6 @@ wk.add({
 			end,
 			desc = 'Browser',
 		},
-		{
-			'<leader>sp',
-			require('telescope').extensions.pomodori.timers,
-			desc = 'Pomodori Timers',
-		},
 		{ '<leader>s<leader>', tsc_builtin.oldfiles, desc = 'Search Recent Files' },
 		{
 			'<leader>s/',
@@ -192,6 +187,7 @@ wk.add({
 	{ '<leader>m', '<cmd>Mason<cr>', desc = 'Open Mason', icon = '' },
 	{ '<leader>h', '<cmd>Alpha<cr>', desc = 'Open Dashboard', icon = '' },
 	{ '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil', icon = '󱁓' },
+	{ '<leader>t', '<cmd>Tasks<CR>', desc = 'Task-Runner', icon = '' },
 	{
 		'<leader>F',
 		function()

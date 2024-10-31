@@ -39,7 +39,7 @@ vim.diagnostic.config({ jump = { float = true } })
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.o.winwidth = 10
+vim.o.winwidth = 20
 vim.o.winminwidth = 10
 vim.o.equalalways = false
 
@@ -56,9 +56,9 @@ vim.opt.inccommand = 'split'
 vim.g.python3_host_prog = configpath .. '/.venv/bin/python'
 vim.g.loaded_perl_provider = 0
 
--- NOTE: Added for kulala.nvim
 vim.filetype.add({
 	extension = {
+		-- NOTE: Added for kulala.nvim
 		['http'] = 'http',
 	},
 	pattern = {

@@ -1,7 +1,7 @@
+-- HACK: For a deprecetated functions [[
+
 -- HACK: Fixing unpack sometimes not working correctly
 table.unpack = table.unpack or unpack -- 5.1 compatibility
-
--- HACK: For a deprecetated functions
 
 ---@param tbl table
 ---@diagnostic disable-next-line: duplicate-set-field
@@ -16,6 +16,8 @@ vim.tbl_add_reverse_lookup = function(tbl)
 		tbl[v] = k
 	end
 end
+
+-- ]]
 
 -- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -64,7 +66,6 @@ require('lazy').setup('plugins', {
 })
 
 -- TODO:
--- Add fancy markdown view
 -- Finish java setup
 --
 
@@ -79,4 +80,3 @@ require 'config.options'
 require 'config.remaps-and-autocmds'
 
 require 'scripts.whereAmI'
--- require 'scripts.license'
