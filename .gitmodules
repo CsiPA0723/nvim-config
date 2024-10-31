@@ -1,0 +1,3 @@
+[submodule "task-runner.nvim"]
+	path = plugins/task-runner.nvim
+	url = git@github.com:CsiPA0723/task-runner.nvim.git
