@@ -49,11 +49,8 @@ return {
 	},
 	{
 		'CsiPA0723/task-runner.nvim',
-		dir = vim.fn.stdpath('config') .. '/plugins/task-runner.nvim',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			'nvim-telescope/telescope.nvim',
-		},
+		dir = '/home/csipa/Personal/task-runner.nvim',
+		dependencies = { 'nvim-lua/plenary.nvim' },
 		lazy = true,
 		cmd = { 'Tasks' },
 		opts = {},

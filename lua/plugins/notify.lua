@@ -23,9 +23,15 @@ return {
 		},
 		config = function(_, opts)
 			require('fidget').setup(opts)
-			require('fidget.notification').set_config('session', {
+			local notif = require('fidget.notification')
+			notif.set_config('session', {
 				name = 'Session',
 				icon = '❰❰',
+				ttl = 8,
+			}, false)
+			notif.set_config('TaskRunner', {
+				name = 'TaskRunner',
+				icon = ' ',
 				ttl = 8,
 			}, false)
 		end,

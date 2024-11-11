@@ -187,7 +187,13 @@ wk.add({
 	{ '<leader>m', '<cmd>Mason<cr>', desc = 'Open Mason', icon = '' },
 	{ '<leader>h', '<cmd>Alpha<cr>', desc = 'Open Dashboard', icon = '' },
 	{ '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil', icon = '󱁓' },
-	{ '<leader>t', '<cmd>Tasks<CR>', desc = 'Task-Runner', icon = '' },
+	{
+		'<leader>t',
+		-- require('telescope').extensions.task_runner.picker,
+		'<cmd>Tasks<CR>',
+		desc = 'Task-Runner',
+		icon = '',
+	},
 	{
 		'<leader>F',
 		function()
