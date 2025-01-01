@@ -74,5 +74,3 @@ end
 
 require 'config.options'
 require 'config.remaps-and-autocmds'
-
-require 'scripts.whereAmI'

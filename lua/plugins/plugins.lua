@@ -47,12 +47,12 @@ return {
 		'OXY2DEV/helpview.nvim',
 		dependencies = { 'nvim-treesitter/nvim-treesitter' },
 	},
-	{
+	--[[ {
 		'CsiPA0723/task-runner.nvim',
 		dir = '/home/csipa/Personal/task-runner.nvim',
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		lazy = true,
 		cmd = { 'Tasks' },
 		opts = {},
-	},
+	}, ]]
 }

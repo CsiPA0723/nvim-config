@@ -16,12 +16,12 @@ return {
 			{ 'nvim-telescope/telescope-ui-select.nvim' },
 			{ 'jvgrootveld/telescope-zoxide', config = true },
 			{ 'nvim-telescope/telescope-file-browser.nvim' },
-			{
+			--[[ {
 				'CsiPA0723/telescope-task-runner.nvim',
 				dir = '/home/csipa/Personal/telescope-task-runner.nvim',
 				dependencies = { 'CsiPA0723/task-runner.nvim' },
 				config = true,
-			},
+			}, ]]
 		},
 		config = function()
 			require('telescope').setup({

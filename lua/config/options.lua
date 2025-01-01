@@ -53,7 +53,7 @@ vim.opt.fillchars:append {
 
 vim.opt.inccommand = 'split'
 
-vim.g.python3_host_prog = configpath .. '/.venv/bin/python'
+vim.g.python3_host_prog = configpath .. '/.venv/bin/python3'
 vim.g.loaded_perl_provider = 0
 
 vim.filetype.add({

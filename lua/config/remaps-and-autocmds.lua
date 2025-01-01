@@ -195,6 +195,13 @@ wk.add({
 		icon = '',
 	},
 	{
+		'<leader>x',
+		function()
+			require('snacks').bufdelete()
+		end,
+		desc = 'Delete buffer',
+	},
+	{
 		'<leader>F',
 		function()
 			require('conform').format({ async = true, lsp_fallback = true })
