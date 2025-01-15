@@ -1,7 +1,7 @@
 ---@type LazyPluginSpec[]
 return {
 	{ 'neolooong/whichpy.nvim', ft = 'python', config = true },
-	{ 'nanotee/zoxide.vim' },
+	{ 'nanotee/zoxide.vim', lazy = true, cmd = 'Z' },
 	{
 		'folke/which-key.nvim',
 		---@class wk.Opts
@@ -16,10 +16,7 @@ return {
 		'cuducos/yaml.nvim',
 		lazy = true,
 		ft = { 'yaml' },
-		dependencies = {
-			'nvim-treesitter/nvim-treesitter',
-			'nvim-telescope/telescope.nvim',
-		},
+		dependencies = 'nvim-treesitter/nvim-treesitter',
 	},
 	{
 		'folke/trouble.nvim',
@@ -41,6 +38,7 @@ return {
 	},
 	{
 		'mistweaverco/kulala.nvim',
+		lazy = true,
 		opts = { vscode_rest_client_environmentvars = true },
 	},
 	{

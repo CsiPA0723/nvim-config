@@ -4,7 +4,9 @@ return {
 		'catppuccin/nvim',
 		name = 'catppuccin',
 		priority = 1000,
+		---@type CatppuccinOptions
 		opts = {
+			kitty = true,
 			flavour = 'macchiato',
 			show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
 			term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
@@ -15,10 +17,11 @@ return {
 			},
 			integrations = {
 				alpha = true,
-				cmp = true,
+				blink_cmp = true,
 				dap = true,
 				dap_ui = true,
 				diffview = true,
+				fidget = true,
 				gitsigns = true,
 				indent_blankline = {
 					enabled = true,
@@ -46,11 +49,11 @@ return {
 				},
 				neogit = true,
 				notify = true,
+				lsp_trouble = true,
 				markdown = true,
 				mason = true,
-				lsp_trouble = true,
+				render_markdown = true,
 				treesitter = true,
-				telescope = { enabled = true },
 				which_key = true,
 			},
 		},

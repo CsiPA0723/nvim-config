@@ -4,7 +4,6 @@ return {
 		'NeogitOrg/neogit',
 		dependencies = {
 			'nvim-lua/plenary.nvim',
-			'nvim-telescope/telescope.nvim',
 			{
 				'sindrets/diffview.nvim',
 				dependencies = { 'nvim-tree/nvim-web-devicons' },

@@ -1,12 +1,15 @@
+local ftMap = { snacks_dashboard = '' }
+
 ---@type LazyPluginSpec[]
 return {
 	{
 		'kevinhwang91/nvim-ufo',
 		dependencies = 'kevinhwang91/promise-async',
-		event = 'BufReadPost',
+		lazy = true,
 		opts = {
-			provider_selector = function()
-				return { 'lsp', 'indent' }
+			provider_selector = function(bufnr, filetype, buftype)
+				--- defaults to { 'lsp', 'indent' }
+				return ftMap[filetype]
 			end,
 			open_fold_hl_timeout = 400,
 			enable_get_fold_virt_text = true,
@@ -30,8 +33,6 @@ return {
 			},
 			filetype_exclude = {
 				'help',
-				'alpha',
-				'dashboard',
 				'Trouble',
 				'lazy',
 				'mason',

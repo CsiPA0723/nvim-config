@@ -1,34 +1,39 @@
 ---@type LazyPluginSpec[]
 return {
+	{ 'nvim-java/nvim-java', ft = 'java', config = true },
+	{
+		'pmizio/typescript-tools.nvim',
+		ft = {
+			'jsx',
+			'javascript',
+			'typescript',
+			'html',
+			'typescriptreact',
+			'typescript.tsx',
+			'angular.html',
+			'htmlangular',
+		},
+		dependencies = 'nvim-lua/plenary.nvim',
+		config = true,
+	},
 	{
 		'neovim/nvim-lspconfig',
+		event = 'BufRead',
 		dependencies = {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
 			'WhoIsSethDaniel/mason-tool-installer.nvim',
 			'b0o/schemastore.nvim',
-			'j-hui/fidget.nvim',
-			{
-				'pmizio/typescript-tools.nvim',
-				dependencies = 'nvim-lua/plenary.nvim',
-				config = true,
-			},
 			{ 'folke/neodev.nvim', config = true },
-			{ 'nvim-java/nvim-java', config = true },
 		},
 		config = function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 
+			-- NOTE: nvim-ufo setup
 			capabilities.textDocument.foldingRange = {
 				dynamicRegistration = false,
 				lineFoldingOnly = true,
 			}
-
-			capabilities = vim.tbl_deep_extend(
-				'force',
-				capabilities,
-				require('cmp_nvim_lsp').default_capabilities()
-			)
 
 			local servers = {
 				lua_ls = {
@@ -101,11 +106,14 @@ return {
 				'taplo',
 				'yaml-language-server',
 			})
+
 			require('mason-tool-installer').setup({
 				ensure_installed = ensure_installed,
 			})
 
 			require('mason-lspconfig').setup({
+				automatic_installation = false,
+				ensure_installed = {},
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}

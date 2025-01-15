@@ -1,5 +1,4 @@
 local ss = require('smart-splits')
-local tsc_builtin = require('telescope.builtin')
 local wk = require('which-key')
 
 wk.add({
@@ -25,44 +24,29 @@ wk.add({
 	},
 	{ -- Search
 		{ '<leader>s', group = 'Search' },
-		{ '<leader>sh', tsc_builtin.help_tags, desc = 'Help' },
-		{ '<leader>sk', tsc_builtin.keymaps, desc = 'Keymaps' },
-		{ '<leader>sf', tsc_builtin.find_files, desc = 'Files' },
-		{ '<leader>st', tsc_builtin.git_files, desc = 'Git' },
-		{ '<leader>ss', tsc_builtin.builtin, desc = 'Select Telescope' },
-		{ '<leader>sw', tsc_builtin.grep_string, desc = 'Current Word' },
-		{ '<leader>sg', tsc_builtin.live_grep, desc = 'Grep' },
-		{ '<leader>sd', tsc_builtin.diagnostics, desc = 'Diagnostics' },
-		{ '<leader>sr', tsc_builtin.resume, desc = 'Resume' },
+		{ '<leader>sh', Snacks.picker.help, desc = 'Help' },
+		{ '<leader>sk', Snacks.picker.keymaps, desc = 'Keymaps' },
+		{ '<leader>sf', Snacks.picker.files, desc = 'Files' },
+		{ '<leader>st', Snacks.picker.git_files, desc = 'Git' },
+		{ '<leader>sw', Snacks.picker.grep_word, desc = 'Current Word' },
+		{ '<leader>sg', Snacks.picker.grep, desc = 'Grep' },
+		{ '<leader>sd', Snacks.picker.diagnostics, desc = 'Diagnostics' },
+		{ '<leader>sr', Snacks.picker.resume, desc = 'Resume' },
 		{
 			'<leader>sz',
-			require('telescope').extensions.zoxide.list,
+			Snacks.picker.zoxide,
 			desc = 'Zoxide list',
 		},
 		{
-			'<leader>sb',
-			function()
-				require('telescope').extensions.file_browser.file_browser(
-					require('telescope.themes').get_ivy({ winblend = 10 })
-				)
-			end,
-			desc = 'Browser',
+			'<leader>s<leader>',
+			Snacks.picker.recent,
+			desc = 'Search Recent Files',
 		},
-		{ '<leader>s<leader>', tsc_builtin.oldfiles, desc = 'Search Recent Files' },
-		{
-			'<leader>s/',
-			function()
-				tsc_builtin.live_grep({
-					grep_open_files = true,
-					prompt_title = 'Live Grep in Open Files',
-				})
-			end,
-			desc = 'in Open Files',
-		},
+		{ '<leader>s/', Snacks.picker.grep_buffers, desc = 'in Open Files' },
 		{
 			'<leader>sn',
 			function()
-				tsc_builtin.find_files({ cwd = vim.fn.stdpath('config') })
+				Snacks.picker.files({ cwd = vim.fn.stdpath('config') })
 			end,
 			desc = 'Neovim files',
 		},
@@ -142,7 +126,12 @@ wk.add({
 		{ '<leader>gw', '<cmd>Neogit worktree<CR>', desc = 'Worktree' },
 		{ '<leader>gs', '<cmd>Gitsigns stage_hunk<CR>', desc = 'Stage Hunk' },
 		{ '<leader>ga', '<cmd>Gitsigns stage_buffer<CR>', desc = 'Stage Buffer' },
-		{ '<leader>gb', '<cmd>Gitsigns blame<CR>', desc = 'Open Blame' },
+		{ '<leader>gB', '<cmd>Gitsigns blame<CR>', desc = 'Blame File' },
+		{
+			'<leader>gb',
+			'<cmd>lua Snacks.git.blame_line({count = 3})<CR>',
+			desc = 'Blame Line',
+		},
 	},
 	{ -- Document
 		{ '<leader>d', group = 'Document', icon = '󰈙 ' },
@@ -151,7 +140,41 @@ wk.add({
 		{ '<leader>dD', 'ggVG"+d', desc = 'Delete all' },
 		{
 			'<leader>dl',
-			require('telescope').extensions.licenses.licenses,
+			function()
+				Snacks.picker.pick({
+					source = 'files',
+					search = 'license(.md|.adoc|.txt)?$',
+					confirm = function(self, item)
+						self:action('close')
+						---@type List
+						local file_lines = vim.fn.readfile(item.file)
+						table.insert(file_lines, '\n')
+						local line_count = vim.tbl_count(file_lines)
+						local cursor_previus_pos = vim.api.nvim_win_get_cursor(0)
+						cursor_previus_pos[1] = line_count + cursor_previus_pos[1]
+						local comment_api = require('Comment.api')
+						local comment_config = require('Comment.config'):get()
+
+						vim.api.nvim_win_set_cursor(0, { 1, 0 })
+						vim.api.nvim_paste(table.concat(file_lines, '\n'), false, -1)
+						vim.api.nvim_buf_set_mark(0, '<', 1, 0, {})
+						vim.api.nvim_buf_set_mark(0, '>', line_count - 1, 0, {})
+						comment_api.comment.blockwise('V', comment_config)
+						vim.api.nvim_win_set_cursor(0, cursor_previus_pos)
+						vim.api.nvim_feedkeys(
+							vim.api.nvim_replace_termcodes(
+								'<cmd>write<CR>',
+								true,
+								false,
+								true
+							),
+							'm',
+							false
+						)
+						return true
+					end,
+				})
+			end,
 			desc = 'Instert License',
 		},
 	},
@@ -185,15 +208,19 @@ wk.add({
 		icon = '󰒲',
 	},
 	{ '<leader>m', '<cmd>Mason<cr>', desc = 'Open Mason', icon = '' },
-	{ '<leader>h', '<cmd>Alpha<cr>', desc = 'Open Dashboard', icon = '' },
-	{ '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil', icon = '󱁓' },
 	{
-		'<leader>t',
-		-- require('telescope').extensions.task_runner.picker,
-		'<cmd>Tasks<CR>',
-		desc = 'Task-Runner',
-		icon = '',
+		'<leader>h',
+		'<cmd>lua Snacks.dashboard.open()<cr>',
+		desc = 'Open Dashboard',
+		icon = '',
 	},
+	{ '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil', icon = '󱁓' },
+	-- {
+	-- 	'<leader>t',
+	-- 	'<cmd>Tasks<CR>',
+	-- 	desc = 'Task-Runner',
+	-- 	icon = '',
+	-- },
 	{
 		'<leader>x',
 		function()
@@ -208,18 +235,14 @@ wk.add({
 		end,
 		desc = 'Format buffer',
 	},
-	{ '<leader><leader>', tsc_builtin.buffers, desc = 'Find existing buffers' },
+	{
+		'<leader><leader>',
+		Snacks.picker.buffers,
+		desc = 'Find existing buffers',
+	},
 	{
 		'<ledaer>/',
-		function()
-			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-			tsc_builtin.current_buffer_fuzzy_find(
-				require('telescope.themes').get_dropdown({
-					winblend = 10,
-					previewer = false,
-				})
-			)
-		end,
+		Snacks.picker.lines,
 		desc = 'Fuzzily search in current buffer',
 	},
 	{
@@ -233,7 +256,11 @@ wk.add({
 		desc = 'Ufo: Peek Folded Lines Under Cursor',
 		icon = '',
 	},
-	{ '<Esc>', '<cmd>nohlsearch<cr>', desc = 'Cancel active highlight' },
+	{
+		'<Esc>',
+		'<cmd>nohlsearch<cr>',
+		desc = 'Cancel active highlight',
+	},
 	-- Leaves the cursor in the same place
 	{ 'J', 'mzJ`z', desc = 'Join line' },
 	-- Tries to keep the cursor at the center
@@ -244,11 +271,29 @@ wk.add({
 	{ '<F1>', require('dap').step_into, desc = 'Debug: Step Into' },
 	{ '<F2>', require('dap').step_over, desc = 'Debug: Step Over' },
 	{ '<F3>', require('dap').step_out, desc = 'Debug: Step Out' },
-	{ '<F5>', require('dap').continue, desc = 'Debug: Start/Continue' },
+	{
+		'<F5>',
+		require('dap').continue,
+		desc = 'Debug: Start/Continue',
+	},
 	-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-	{ '<F7>', require('dapui').toggle, desc = 'Debug: See last session result.' },
-	{ '<leader>p', '"_dP', desc = 'Paste (but keep paste data)', mode = 'x' },
-	{ '<C-space>', '<C-\\><C-n>', desc = 'Exit terminal mode', mode = 't' },
+	{
+		'<F7>',
+		require('dapui').toggle,
+		desc = 'Debug: See last session result.',
+	},
+	{
+		'<leader>p',
+		'"_dP',
+		desc = 'Paste (but keep paste data)',
+		mode = 'x',
+	},
+	{
+		'<C-space>',
+		'<C-\\><C-n>',
+		desc = 'Exit terminal mode',
+		mode = 't',
+	},
 })
 
 local autocmd = vim.api.nvim_create_autocmd
@@ -327,11 +372,7 @@ autocmd('LspAttach', {
 		-- ]]
 
 		-- Workspace [[
-		map(
-			'<leader>wS',
-			require('telescope.builtin').lsp_dynamic_workspace_symbols,
-			'Workspace Symbols'
-		)
+		map('<leader>wS', Snacks.picker.lsp_symbols, 'Workspace Symbols')
 
 		map('<leader>wl', function()
 			require('trouble.api').toggle({
@@ -365,7 +406,9 @@ autocmd('LspAttach', {
 			})
 		end
 
-		if client and client.supports_method 'textDocument/codeLens' then
+		if
+			client and client.supports_method('textDocument/codeLens', event.buf)
+		then
 			-- refresh codelens on TextChanged and InsertLeave as well
 			autocmd({ 'TextChanged', 'InsertLeave', 'CursorHold', 'LspAttach' }, {
 				buffer = event.buf,
@@ -467,5 +510,26 @@ autocmd({ 'User' }, {
 			vim.log.levels.INFO,
 			{ group = 'session', annote = 'Loading...', key = 'session_load' }
 		)
+	end,
+})
+
+autocmd('User', {
+	pattern = 'BDeletePost*',
+	group = augroup('dashboard_on_empty', { clear = true }),
+	callback = function()
+		local fallback_on_empty = vim.bo.buftype == '' and vim.o.filetype == ''
+
+		if fallback_on_empty then
+			Snacks.dashboard.open()
+			Snacks.bufdelete.other()
+		end
+	end,
+})
+
+autocmd('DirChanged', {
+	pattern = '*',
+	group = augroup('dashboard_on_dir_change', { clear = true }),
+	callback = function()
+		Snacks.dashboard.update()
 	end,
 })
