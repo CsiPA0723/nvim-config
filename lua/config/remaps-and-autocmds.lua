@@ -198,16 +198,21 @@ wk.add({
 	},
 	{
 		'<leader>q',
-		'<cmd>Trouble quickfix<CR>',
+		'<cmd>Trouble qflist toggle<CR>',
 		desc = 'Open diagnostic Quickfix list',
 	},
 	{
 		'<leader>l',
+		'<cmd>Trouble loclist toggle<CR>',
+		desc = 'Location list',
+	},
+	{
+		'<leader>L',
 		'<cmd>Lazy<cr>',
 		desc = 'Open Lazy Plugin Manager',
 		icon = '󰒲',
 	},
-	{ '<leader>m', '<cmd>Mason<cr>', desc = 'Open Mason', icon = '' },
+	{ '<leader>M', '<cmd>Mason<cr>', desc = 'Open Mason', icon = '' },
 	{
 		'<leader>h',
 		'<cmd>lua Snacks.dashboard.open()<cr>',
@@ -321,67 +326,57 @@ autocmd('LspAttach', {
 		end
 
 		-- Actions [[
-		map('grr', function()
-			require('trouble.api').toggle({
-				mode = 'lsp_references',
-				focus = true,
-			})
-		end, 'Reference(s)')
+		map(
+			'grr',
+			'<cmd>Trouble lsp_references toggle focus=true<CR>',
+			'Reference(s)'
+		)
 
-		map('gri', function()
-			require('trouble.api').toggle({
-				mode = 'lsp_implementations',
-				focus = true,
-			})
-		end, 'Implementation(s)')
+		map(
+			'gri',
+			'<cmd>Trouble lsp_implementations toggle focus=true<CR>',
+			'Implementation(s)'
+		)
 
-		map('grd', function()
-			require('trouble.api').toggle({
-				mode = 'lsp_definitions',
-				focus = true,
-			})
-		end, 'Definition')
+		map(
+			'grd',
+			'<cmd>Trouble lsp_definitions toggle focus=true<CR>',
+			'Definition'
+		)
 
-		map('grD', function()
-			require('trouble.api').toggle({
-				mode = 'lsp_declarations',
-				focus = true,
-			})
-		end, 'Declaration')
+		map(
+			'grD',
+			'<cmd>Trouble lsp_declarations toggle focus=true<CR>',
+			'Declaration'
+		)
 
-		map('grt', function()
-			require('trouble.api').toggle({
-				mode = 'lsp_type_definitions',
-				focus = true,
-			})
-		end, 'Type Definition(s)')
+		map(
+			'grt',
+			'<cmd>Trouble lsp_type_definitions toggle focus=true<CR>',
+			'Type Definition(s)'
+		)
 
 		map('grn', vim.lsp.buf.rename, 'Rename')
 		map('gra', vim.lsp.buf.code_action, 'Code Action')
 		-- ]]
 
 		-- Document [[
-		map('<leader>ds', function()
-			require('trouble.api').toggle({
-				mode = 'lsp_document_symbols',
-				focus = false,
-				open_no_results = true,
-				win = { position = 'right', relative = 'editor', type = 'split' },
-			})
-		end, 'Document Symbols')
+		map(
+			'<leader>ds',
+			'<cmd>Trouble lsp_document_symbols toggle focus=false win.position=left win.relative=editor win.type=split<CR>',
+			'Document Symbols'
+		)
 		-- ]]
 
 		-- Workspace [[
+		---@diagnostic disable-next-line: undefined-field
 		map('<leader>wS', Snacks.picker.lsp_workspace_symbols, 'Workspace Symbols')
 
-		map('<leader>wl', function()
-			require('trouble.api').toggle({
-				mode = 'lsp',
-				focus = false,
-				open_no_results = true,
-				win = { position = 'left', relative = 'editor', type = 'split' },
-			})
-		end, 'Definitions / Referencies / ...')
+		map(
+			'<leader>wl',
+			'<cmd>Trouble lsp toggle focus=false win.position=left win.relative=editor win.type=split<CR>',
+			'Definitions / Referencies / ...'
+		)
 		-- ]]
 
 		map('K', vim.lsp.buf.hover, 'Hover Documentation')
