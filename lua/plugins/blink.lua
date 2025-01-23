@@ -22,6 +22,8 @@ return {
 			},
 			{
 				'supermaven-inc/supermaven-nvim',
+				event = 'InsertEnter',
+				cmd = { 'SupermavenUseFree', 'SupermavenUsePro' },
 				lazy = true,
 				opts = {
 					keymaps = { accept_suggestion = nil },

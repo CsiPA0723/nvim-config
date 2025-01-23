@@ -372,7 +372,7 @@ autocmd('LspAttach', {
 		-- ]]
 
 		-- Workspace [[
-		map('<leader>wS', Snacks.picker.lsp_symbols, 'Workspace Symbols')
+		map('<leader>wS', Snacks.picker.lsp_workspace_symbols, 'Workspace Symbols')
 
 		map('<leader>wl', function()
 			require('trouble.api').toggle({
