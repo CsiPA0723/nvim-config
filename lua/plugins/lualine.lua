@@ -1,3 +1,12 @@
+local function showFileInWin()
+	local wins = vim.fn.filter(vim.api.nvim_tabpage_list_wins(0), function(_, v)
+		local cfg = vim.api.nvim_win_get_config(v)
+		return cfg.relative == '' or cfg.external
+	end)
+
+	return #wins > 1
+end
+
 ---@type LazyPluginSpec[]
 return {
 	{
@@ -26,6 +35,12 @@ return {
 			},
 			tabline = {
 				lualine_a = { { 'tabs', mode = 2, max_length = vim.o.columns } },
+			},
+			winbar = {
+				lualine_c = { { 'filename', cond = showFileInWin } },
+			},
+			inactive_winbar = {
+				lualine_c = { { 'filename', cond = showFileInWin } },
 			},
 			extensions = {
 				'fzf',
