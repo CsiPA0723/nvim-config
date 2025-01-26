@@ -15,7 +15,7 @@ return {
 	{
 		'cuducos/yaml.nvim',
 		lazy = true,
-		ft = { 'yaml' },
+		ft = 'yaml',
 		dependencies = 'nvim-treesitter/nvim-treesitter',
 	},
 	{
@@ -43,7 +43,20 @@ return {
 	},
 	{
 		'OXY2DEV/helpview.nvim',
+		lazy = true,
+		ft = 'help',
 		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+	},
+	{
+		'fabridamicelli/cronex.nvim',
+		cmd = { 'CronExplainedDisable', 'CronExplainedEnable' },
+		lazy = true,
+		config = true,
+	},
+	{
+		'nvim-zh/colorful-winsep.nvim',
+		config = true,
+		event = 'WinLeave',
 	},
 	--[[ {
 		'CsiPA0723/task-runner.nvim',
