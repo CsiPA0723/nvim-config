@@ -228,9 +228,12 @@ wk.add({
 	-- },
 	{
 		'<leader>x',
-		function()
-			require('snacks').bufdelete()
-		end,
+		Snacks.bufdelete.delete,
+		desc = 'Delete buffer',
+	},
+	{
+		'<leader>X',
+		Snacks.bufdelete.all,
 		desc = 'Delete buffer',
 	},
 	{
