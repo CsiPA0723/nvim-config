@@ -3,9 +3,10 @@ return {
 	{
 		'catppuccin/nvim',
 		name = 'catppuccin',
-		priority = 1000,
+		priority = 500,
 		---@type CatppuccinOptions
 		opts = {
+			compile_path = vim.fn.stdpath 'cache' .. '/catppuccin',
 			kitty = true,
 			flavour = 'macchiato',
 			show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
@@ -16,8 +17,11 @@ return {
 				percentage = 0.15, -- percentage of the shade to apply to the inactive window
 			},
 			integrations = {
-				alpha = true,
 				blink_cmp = true,
+				colorful_winsep = {
+					enabled = true,
+					color = 'red',
+				},
 				dap = true,
 				dap_ui = true,
 				diffview = true,
@@ -28,7 +32,17 @@ return {
 					scope_color = 'lavender',
 					colored_indent_levels = true,
 				},
-				ufo = true,
+				--Lualine.nvim #enabled
+				lsp_trouble = true,
+				markdown = true,
+				mason = true,
+				mini = {
+					enabled = true,
+					indentscope_color = 'lavender',
+				},
+				neogit = true,
+				noice = true,
+				notify = true,
 				native_lsp = {
 					enabled = true,
 					virtual_text = {
@@ -47,13 +61,10 @@ return {
 						background = true,
 					},
 				},
-				neogit = true,
-				notify = true,
-				lsp_trouble = true,
-				markdown = true,
-				mason = true,
 				render_markdown = true,
+				snacks = true,
 				treesitter = true,
+				ufo = true,
 				which_key = true,
 			},
 		},
