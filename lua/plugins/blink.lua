@@ -77,8 +77,20 @@ return {
 			},
 			snippets = { preset = 'luasnip' },
 			sources = {
-				default = { 'lsp', 'snippets', 'path', 'buffer', 'supermaven' },
+				default = {
+					'lsp',
+					'snippets',
+					'path',
+					'buffer',
+					'supermaven',
+					'markdown',
+				},
 				providers = {
+					markdown = {
+						name = 'RenderMarkdown',
+						module = 'render-markdown.integ.blink',
+						fallbacks = { 'lsp' },
+					},
 					supermaven = {
 						name = 'supermaven',
 						module = 'blink.compat.source',
