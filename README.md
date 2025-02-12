@@ -50,7 +50,6 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 
 ### editing-support
 
-+ [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 + [echasnovski/mini.ai](https://github.com/echasnovski/mini.ai)
 + [echasnovski/mini.surround](https://github.com/echasnovski/mini.surround)
 + [folke/snacks.nvim](https://github.com/folke/snacks.nvim)

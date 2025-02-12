@@ -5,11 +5,10 @@ return {
 	{
 		'kevinhwang91/nvim-ufo',
 		dependencies = 'kevinhwang91/promise-async',
-		lazy = true,
+		event = 'BufReadPost',
 		opts = {
 			provider_selector = function(bufnr, filetype, buftype)
-				--- defaults to { 'lsp', 'indent' }
-				return ftMap[filetype]
+				return ftMap[filetype] or { 'lsp', 'indent' }
 			end,
 			open_fold_hl_timeout = 400,
 			enable_get_fold_virt_text = true,
@@ -97,7 +96,20 @@ return {
 				end,
 			})
 
-			require('ufo').setup(opts)
+			local ufo = require('ufo')
+			local wk = require('which-key')
+			ufo.setup(opts)
+			wk.add({ -- Fold overrides
+				icon = ' ',
+				{
+					'zr',
+					ufo.openFoldsExceptKinds,
+					desc = 'Ufo: Open Folds Except Kinds',
+				},
+				{ 'zR', ufo.openAllFolds, desc = 'Ufo: Open All Folds' },
+				{ 'zm', ufo.closeFoldsWith, desc = 'Ufo: Close Folds With' },
+				{ 'zM', ufo.closeAllFolds, desc = 'Ufo: Close All Folds' },
+			})
 		end,
 	},
 }

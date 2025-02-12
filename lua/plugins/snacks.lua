@@ -1,5 +1,3 @@
----@type snacks.dashboard.Config
-
 local header_neovim = [[
 ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
 ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
@@ -26,8 +24,11 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			input = { enabled = true },
+			image = { enabled = true },
 			statuscolumn = { enabled = true },
+			gitbrowse = { enabled = true },
 			picker = { enabled = true },
+			lazygit = { enabled = true },
 			dashboard = {
 				width = 50,
 				preset = {

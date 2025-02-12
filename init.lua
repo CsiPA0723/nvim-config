@@ -1,4 +1,4 @@
--- HACK: For a deprecetated functions [[
+-- HACK: For a deprecetated functions {{{
 
 -- HACK: Fixing unpack sometimes not working correctly
 table.unpack = table.unpack or unpack -- 5.1 compatibility
@@ -17,7 +17,9 @@ vim.tbl_add_reverse_lookup = function(tbl)
 	end
 end
 
--- ]]
+-- }}}
+
+-- Lazy Plugin Manager {{{
 
 -- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -33,6 +35,8 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+-- }}}
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.loader.enable()
@@ -41,12 +45,14 @@ vim.loader.enable()
 -- Lazy Setup
 
 require('lazy').setup('plugins', {
+	defaults = { lazy = true },
 	checker = {
 		enabled = true,
 		notify = true,
 	},
 	git = { timeot = 60 }, -- 1 min timeout for tasks
 	ui = {
+		border = 'rounded',
 		icons = {
 			cmd = '⌘',
 			config = '🛠',
@@ -69,8 +75,8 @@ require('lazy').setup('plugins', {
 -- Configs
 
 if vim.g.neovide then
-	require 'config.neovide'
+	require 'csipa.neovide'
 end
 
-require 'config.options'
-require 'config.remaps-and-autocmds'
+require 'csipa.options'
+require 'csipa.remaps-and-autocmds'

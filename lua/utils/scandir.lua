@@ -1,5 +1,3 @@
-local M = {}
-
 --- Create a flat list of all files in a directory
 --
 --- @reference https://gist.github.com/imliam/7a5ed398531a6338081a7f3c25c934fb
@@ -7,7 +5,7 @@ local M = {}
 --- @param directory string? The directory to scan (default value = './')
 --- @param recursive boolean? Whether or not to scan subdirectories recursively (default value = true)
 --- @param grep string? Regex filtering for the listing with grep
-function M.scandir(directory, recursive, grep)
+local function scandir(directory, recursive, grep)
 	directory = directory or ''
 	recursive = recursive or false
 	local currentDirectory = directory
@@ -39,4 +37,4 @@ function M.scandir(directory, recursive, grep)
 	return fileList
 end
 
-return M
+return scandir

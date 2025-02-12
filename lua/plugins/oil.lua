@@ -2,6 +2,8 @@
 return {
 	{
 		'stevearc/oil.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		lazy = false,
 		---@type oil.SetupOpts
 		opts = {
 			default_file_explorer = true,
@@ -13,6 +15,5 @@ return {
 			constrain_cursor = 'editable',
 			delete_to_trash = true,
 		},
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
 	},
 }

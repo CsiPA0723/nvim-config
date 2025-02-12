@@ -3,7 +3,6 @@ return {
 	{
 		'stevearc/conform.nvim',
 		event = 'BufWritePre',
-		lazy = true,
 		opts = {
 			notify_on_error = true,
 			format_on_save = function(bufnr)
@@ -34,6 +33,5 @@ return {
 				cpp = { 'clang-format' },
 			},
 		},
-		config = true,
 	},
 }

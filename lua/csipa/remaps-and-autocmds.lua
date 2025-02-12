@@ -1,4 +1,3 @@
-local ss = require('smart-splits')
 local wk = require('which-key')
 
 wk.add({
@@ -6,13 +5,6 @@ wk.add({
 		mode = 'v',
 		{ 'J', ":m '>+1<cr>gv=gv", desc = 'Move selected down' },
 		{ 'K', ":m '<-2<cr>gv=gv", desc = 'Move selected up' },
-	},
-	{ -- Swap Buffer
-		{ '<leader>a', group = 'Swap Buffer' },
-		{ '<leader>ah', ss.swap_buf_left, desc = 'Swap with Left buffer' },
-		{ '<leader>aj', ss.swap_buf_down, desc = 'Swap with Down Buffer' },
-		{ '<leader>ak', ss.swap_buf_up, desc = 'Swap with Up Buffer' },
-		{ '<leader>al', ss.swap_buf_right, desc = 'Swap with Right Buffer' },
 	},
 	{ -- Code
 		{ '<leader>c', group = 'Code' },
@@ -76,23 +68,10 @@ wk.add({
 		},
 		{
 			'<leader>wt',
-			'<cmd>Trouble todo toggle win.position=left win.relative=editor<CR>',
+			'<cmd>Trouble todo toggle focus=true win.position=left win.relative=editor<CR>',
 			desc = 'Open TODO list',
 			icon = '',
 		},
-	},
-	{ -- resizing splits
-		{ '<A-h>', ss.resize_left, desc = 'Resize Left' },
-		{ '<A-j>', ss.resize_down, desc = 'Resize Down' },
-		{ '<A-k>', ss.resize_up, desc = 'Resize Up' },
-		{ '<A-l>', ss.resize_right, desc = 'Resize Right' },
-	},
-	{ -- moving between splits
-		{ '<C-h>', ss.move_cursor_left, desc = 'Move to Left Plane' },
-		{ '<C-j>', ss.move_cursor_down, desc = 'Move to Down Plane' },
-		{ '<C-k>', ss.move_cursor_up, desc = 'Move to Up Plane' },
-		{ '<C-l>', ss.move_cursor_right, desc = 'Move to Rigth Plane' },
-		{ '<C-bs>', ss.move_cursor_previous, desc = 'Move to Previous Plane' },
 	},
 	{ -- Window
 		{ '<C-w>z', '<cmd>WindowsMaximize<CR>', desc = 'Maximize' },
@@ -108,16 +87,6 @@ wk.add({
 		},
 		{ '<C-w>=', '<cmd>WindowsEqualize<CR>', desc = 'Equal high and wide' },
 	},
-	{ -- Fold overrides
-		{ 'zR', require('ufo').openAllFolds, desc = 'Ufo: Open All Folds' },
-		{ 'zM', require('ufo').closeAllFolds, desc = 'Ufo: Close All Folds' },
-		{
-			'zr',
-			require('ufo').openFoldsExceptKinds,
-			desc = 'Ufo: Open Folds Except Kinds',
-		},
-		{ 'zm', require('ufo').closeFoldsWith, desc = 'Ufo: Close Folds With' },
-	},
 	{ -- Git
 		{ '<leader>g', group = 'Git' },
 		{ '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
@@ -129,9 +98,12 @@ wk.add({
 		{ '<leader>gB', '<cmd>Gitsigns blame<CR>', desc = 'Blame File' },
 		{
 			'<leader>gb',
-			'<cmd>lua Snacks.git.blame_line({count = 3})<CR>',
+			function()
+				Snacks.git.blame_line({ count = 3 })
+			end,
 			desc = 'Blame Line',
 		},
+		{ '<leader>gl', Snacks.lazygit.open, desc = 'Lazygit' },
 	},
 	{ -- Document
 		{ '<leader>d', group = 'Document', icon = '󰈙 ' },
@@ -179,6 +151,11 @@ wk.add({
 		},
 	},
 	-- Leader prefix
+	{
+		'<leader>i',
+		'<cmd>lua Snacks.picker.icons()<CR>',
+		desc = 'Nerd Icon Search',
+	},
 	{
 		'<leader>b',
 		require('dap').toggle_breakpoint,
@@ -234,7 +211,7 @@ wk.add({
 	{
 		'<leader>X',
 		Snacks.bufdelete.all,
-		desc = 'Delete buffer',
+		desc = 'Delete ALL buffer',
 	},
 	{
 		'<leader>F',

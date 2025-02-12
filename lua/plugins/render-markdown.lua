@@ -6,7 +6,6 @@ return {
 			'nvim-treesitter/nvim-treesitter',
 			'nvim-tree/nvim-web-devicons',
 		},
-		lazy = true,
 		ft = { 'markdown', 'quarto' },
 		---@module 'render-markdown'
 		---@type render.md.UserConfig

@@ -2,13 +2,8 @@
 
 ## Neovim Config
 
-- [ ] Finish java setup
+- [-] Finish java setup
 
 ## Neovim Plugins
-
-- [-] Finish task-runner.nvim
-- [-] Finish telescope-task-runner.nvim
-- [ ] Create a new Discord Rich Presence plugin for supporting private repos
-- [ ] Look into the LazyVim config
 
 ## Other

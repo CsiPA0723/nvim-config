@@ -18,7 +18,7 @@ return {
 	},
 	{
 		'neovim/nvim-lspconfig',
-		event = 'BufRead',
+		event = { 'BufReadPre', 'BufNewFile' },
 		dependencies = {
 			'williamboman/mason.nvim',
 			'williamboman/mason-lspconfig.nvim',
@@ -49,6 +49,8 @@ return {
 						'htmlangular',
 					},
 				},
+				---@type java.Config
+				jdtls = { jdk = { auto_install = false } },
 				jsonls = {
 					settings = {
 						json = {

@@ -6,10 +6,12 @@ return {
 		opts = {
 			ignore_install = { 'yaml' }, -- Already installed by a package
 			ensure_installed = {
+				'angular',
 				'bash',
 				'c',
-				'angular',
 				'html',
+				'http',
+				'java',
 				'lua',
 				'luadoc',
 				'markdown',

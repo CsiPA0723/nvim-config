@@ -10,6 +10,9 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
+vim.opt.diffopt =
+	'internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram'
+
 vim.opt.wrap = false
 
 vim.opt.undofile = true

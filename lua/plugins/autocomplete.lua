@@ -1,9 +1,8 @@
 ---@type LazyPluginSpec[]
 return {
-	{ 'saghen/blink.compat', version = '*', lazy = true, config = true },
-	{ 'xzbdmw/colorful-menu.nvim', lazy = true, config = true },
 	{
 		'saghen/blink.cmp',
+		version = '*',
 		event = 'InsertEnter',
 		build = 'cargo build --release',
 		dependencies = {
@@ -20,11 +19,12 @@ return {
 					},
 				},
 			},
+			{ 'saghen/blink.compat', version = '*', config = true },
+			{ 'xzbdmw/colorful-menu.nvim', config = true },
 			{
 				'supermaven-inc/supermaven-nvim',
 				event = 'InsertEnter',
 				cmd = { 'SupermavenUseFree', 'SupermavenUsePro' },
-				lazy = true,
 				opts = {
 					keymaps = { accept_suggestion = nil },
 					disable_inline_completion = true,
