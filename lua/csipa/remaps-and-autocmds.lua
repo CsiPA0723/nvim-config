@@ -6,6 +6,8 @@ wk.add({
 		{ 'J', ":m '>+1<cr>gv=gv", desc = 'Move selected down' },
 		{ 'K', ":m '<-2<cr>gv=gv", desc = 'Move selected up' },
 	},
+	{ 'gb', group = 'Comment toggle blockwise' },
+	{ 'gc', group = 'Comment toggle linewise' },
 	{ -- Code
 		{ '<leader>c', group = 'Code' },
 		{ '<leader>cp', '"+p', desc = 'Clip: Paste', mode = { 'n', 'v' } },
@@ -45,27 +47,6 @@ wk.add({
 	},
 	{ -- Workspace
 		{ '<leader>w', group = 'Workspace', icon = '' },
-		{ -- Session
-			{ '<leader>ws', group = 'Session', icon = '󰥔' },
-			{
-				'<leader>wss',
-				'<cmd>SessionManager save_current_session<CR>',
-				desc = 'Save Session',
-				icon = '󰆓',
-			},
-			{
-				'<leader>wsl',
-				'<cmd>SessionManager load_session<CR>',
-				desc = 'Load Session',
-				icon = '󰞒',
-			},
-			{
-				'<leader>wsd',
-				'<cmd>SessionManager delete_session<CR>',
-				desc = 'Delete Session',
-				icon = '󰆴',
-			},
-		},
 		{
 			'<leader>wt',
 			'<cmd>Trouble todo toggle focus=true win.position=left win.relative=editor<CR>',
@@ -281,9 +262,6 @@ wk.add({
 	},
 })
 
-local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
-
 autocmd('TextYankPost', {
 	desc = 'Highlight when yanking (copying) text',
 	group = augroup('csipa-highlight-yank', { clear = true }),
@@ -444,7 +422,7 @@ autocmd('TermOpen', {
 local session_group = augroup('csipa-session', { clear = true })
 
 autocmd({ 'User' }, {
-	pattern = 'SessionSavePost',
+	pattern = 'PersistanceSavePost',
 	desc = 'Notify user the session is saved',
 	group = session_group,
 	callback = function()
@@ -457,33 +435,28 @@ autocmd({ 'User' }, {
 })
 
 autocmd({ 'User' }, {
-	pattern = 'SessionLoadPre',
+	pattern = 'PersistanceLoadPre',
 	desc = 'Clear lsps before loading new session',
 	group = session_group,
 	callback = function()
 		vim.lsp.stop_client(vim.lsp.get_clients(), true)
-	end,
-})
-
-autocmd({ 'User' }, {
-	pattern = 'SessionLoadPost',
-	desc = 'Notify user the session is loaded and start lsps',
-	group = session_group,
-	callback = function()
-		vim.fn.timer_start(1000, function()
-			-- HACK: This is a workaround for the lsp not starting
-			-- autmatically when loading another session
-			vim.cmd('edit')
-			vim.notify(
-				vim.fn.getcwd(),
-				vim.log.levels.INFO,
-				{ group = 'session', annote = 'Loaded', key = 'session_load' }
-			)
-		end)
 		vim.notify(
 			vim.fn.getcwd(),
 			vim.log.levels.INFO,
 			{ group = 'session', annote = 'Loading...', key = 'session_load' }
+		)
+	end,
+})
+
+autocmd({ 'User' }, {
+	pattern = 'PersistanceLoadPost',
+	desc = 'Notify user the session is loaded and start lsps',
+	group = session_group,
+	callback = function()
+		vim.notify(
+			vim.fn.getcwd(),
+			vim.log.levels.INFO,
+			{ group = 'session', annote = 'Loaded', key = 'session_load' }
 		)
 	end,
 })

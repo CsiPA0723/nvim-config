@@ -8,6 +8,7 @@ return {
 	{ 'neolooong/whichpy.nvim', ft = 'python', config = true },
 	{ 'nanotee/zoxide.vim', cmd = 'Z' },
 	{ 'fladson/vim-kitty', ft = 'kitty' },
+	{ 'folke/persistence.nvim', event = 'BufReadPre', opts = { need = 2 } },
 	{
 		'folke/which-key.nvim',
 		event = 'VeryLazy',

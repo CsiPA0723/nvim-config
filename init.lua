@@ -41,6 +41,9 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.loader.enable()
 
+_G.autocmd = vim.api.nvim_create_autocmd
+_G.augroup = vim.api.nvim_create_augroup
+
 -------------------------------------------------------------------------------
 -- Lazy Setup
 

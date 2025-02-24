@@ -2,10 +2,7 @@
 return {
 	{
 		'numToStr/Comment.nvim',
-		keys = {
-			{ 'gb', group = 'Comment toggle blockwise' },
-			{ 'gc', group = 'Comment toggle linewise' },
-		},
+		event = 'VeryLazy',
 		config = true,
 	},
 	{
@@ -13,6 +10,7 @@ return {
 		event = 'VeryLazy',
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		---@type TodoOptions
+		---@diagnostic disable-next-line: missing-fields
 		opts = {
 			highlight = {
 				-- vimgrep regex, supporting the pattern TODO(name)\:

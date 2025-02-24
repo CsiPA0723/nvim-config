@@ -13,6 +13,8 @@ vim.opt.smartindent = true
 vim.opt.diffopt =
 	'internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram'
 
+vim.o.ssop = 'buffers,curdir,folds,help,tabpages,winsize,terminal'
+
 vim.opt.wrap = false
 
 vim.opt.undofile = true
