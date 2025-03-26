@@ -6,7 +6,6 @@ return {
 	{ 'nvim-lua/plenary.nvim', optional = true },
 	-- }}}
 	{ 'neolooong/whichpy.nvim', ft = 'python', config = true },
-	{ 'nanotee/zoxide.vim', cmd = 'Z' },
 	{ 'fladson/vim-kitty', ft = 'kitty' },
 	{ 'folke/persistence.nvim', event = 'BufReadPre', opts = { need = 2 } },
 	{
@@ -29,12 +28,6 @@ return {
 		'folke/trouble.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		cmd = 'Trouble',
-		config = true,
-	},
-	{
-		'anuvyklack/windows.nvim',
-		dependencies = { 'anuvyklack/middleclass', 'anuvyklack/animation.nvim' },
-		event = 'VeryLazy',
 		config = true,
 	},
 	{

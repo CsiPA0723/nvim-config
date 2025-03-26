@@ -54,20 +54,6 @@ wk.add({
 			icon = '',
 		},
 	},
-	{ -- Window
-		{ '<C-w>z', '<cmd>WindowsMaximize<CR>', desc = 'Maximize' },
-		{
-			'<C-w>_',
-			'<cmd>WindowsMaximizeVertically<CR>',
-			desc = 'Max out the hight',
-		},
-		{
-			'<C-w>|',
-			'<cmd>WindowsMaximizeHorizontall<CR>',
-			desc = 'Max out the width',
-		},
-		{ '<C-w>=', '<cmd>WindowsEqualize<CR>', desc = 'Equal high and wide' },
-	},
 	{ -- Git
 		{ '<leader>g', group = 'Git' },
 		{ '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
@@ -481,3 +467,7 @@ autocmd('DirChanged', {
 		Snacks.dashboard.update()
 	end,
 })
+
+vim.api.nvim_create_user_command('Z', function()
+	Snacks.picker.zoxide()
+end, {})

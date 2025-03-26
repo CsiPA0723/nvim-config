@@ -44,8 +44,6 @@ vim.diagnostic.config({ jump = { float = true } })
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.o.winwidth = 20
-vim.o.winminwidth = 10
 vim.o.equalalways = false
 
 vim.opt.fillchars:append {
@@ -67,6 +65,7 @@ vim.filetype.add({
 		['http'] = 'http',
 	},
 	pattern = {
+		['zprofile'] = 'zsh',
 		['.prettyphp'] = 'json',
 	},
 })

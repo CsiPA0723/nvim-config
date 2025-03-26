@@ -13,7 +13,7 @@ return {
 			'angular.html',
 			'htmlangular',
 		},
-		dependencies = 'nvim-lua/plenary.nvim',
+		dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
 		config = true,
 	},
 	{
@@ -27,6 +27,8 @@ return {
 			{ 'folke/neodev.nvim', config = true },
 		},
 		config = function()
+			require('mason').setup()
+
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 			-- NOTE: nvim-ufo setup
@@ -45,10 +47,10 @@ return {
 						'html',
 						'typescriptreact',
 						'typescript.tsx',
-						'angular.html',
 						'htmlangular',
 					},
 				},
+				bashls = { settings = { filetypes = { 'sh', 'zsh' } } },
 				---@type java.Config
 				jdtls = { jdk = { auto_install = false } },
 				jsonls = {
@@ -77,8 +79,6 @@ return {
 					},
 				},
 			}
-
-			require('mason').setup()
 
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
