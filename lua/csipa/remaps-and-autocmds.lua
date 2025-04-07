@@ -346,7 +346,7 @@ autocmd('LspAttach', {
 		end
 
 		if
-			client and client.supports_method('textDocument/codeLens', event.buf)
+			client and client:supports_method('textDocument/codeLens', event.buf)
 		then
 			-- refresh codelens on TextChanged and InsertLeave as well
 			autocmd({ 'TextChanged', 'InsertLeave', 'CursorHold', 'LspAttach' }, {
