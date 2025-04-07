@@ -41,12 +41,6 @@ return {
 		dependencies = { 'nvim-treesitter/nvim-treesitter' },
 	},
 	{
-		'fabridamicelli/cronex.nvim',
-		ft = { 'crontab', 'config', 'cfg', 'conf', 'yaml' },
-		cmd = { 'CronExplainedDisable', 'CronExplainedEnable' },
-		config = true,
-	},
-	{
 		'nvim-zh/colorful-winsep.nvim',
 		event = 'WinLeave',
 		config = true,
