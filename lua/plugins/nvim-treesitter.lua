@@ -3,6 +3,7 @@ return {
 	{ -- Highlight, edit, and navigate code
 		'nvim-treesitter/nvim-treesitter',
 		build = ':TSUpdate',
+		event = 'VeryLazy',
 		opts = {
 			ignore_install = { 'yaml' }, -- Already installed by a package
 			ensure_installed = {
@@ -12,12 +13,19 @@ return {
 				'html',
 				'http',
 				'java',
+				-- 'latex',
 				'lua',
 				'luadoc',
 				'markdown',
 				'markdown_inline',
+				'norg',
+				'regex',
+				'svelte',
+				'tsx',
+				'typst',
 				'vim',
 				'vimdoc',
+				'vue',
 			},
 			auto_install = true,
 			highlight = {
