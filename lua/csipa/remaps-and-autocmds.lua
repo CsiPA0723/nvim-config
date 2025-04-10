@@ -26,6 +26,8 @@ wk.add({
 		{ '<leader>sg', Snacks.picker.grep, desc = 'Grep' },
 		{ '<leader>sd', Snacks.picker.diagnostics, desc = 'Diagnostics' },
 		{ '<leader>sr', Snacks.picker.resume, desc = 'Resume' },
+		{ '<leader>se', Snacks.picker.explorer, desc = 'Explorer' },
+		{ '<leader>su', Snacks.picker.undo, desc = 'Undotree' },
 		{
 			'<leader>sz',
 			Snacks.picker.zoxide,
