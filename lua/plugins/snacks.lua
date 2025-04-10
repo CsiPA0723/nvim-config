@@ -23,6 +23,7 @@ return {
 		---@type snacks.Config
 		opts = {
 			bigfile = { enabled = true },
+			explorer = { replace_netrw = false },
 			input = { enabled = true },
 			image = { enabled = true },
 			statuscolumn = { enabled = true },
@@ -53,12 +54,6 @@ return {
 							action = ":lua Snacks.dashboard.pick('live_grep')",
 						},
 						{
-							icon = ' ',
-							key = 'o',
-							desc = 'Recent Files',
-							action = ":lua Snacks.dashboard.pick('oldfiles')",
-						},
-						{
 							icon = ' ',
 							key = 'c',
 							desc = 'Config',
@@ -86,7 +81,7 @@ return {
 						{
 							icon = ' ',
 							key = 'M',
-							desc = 'Mason LSP Manager',
+							desc = 'Mason',
 							action = ':Mason',
 						},
 						{ icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
