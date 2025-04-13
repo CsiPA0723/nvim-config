@@ -3,7 +3,14 @@ return {
 	{
 		'numToStr/Comment.nvim',
 		event = 'VeryLazy',
-		config = true,
+		config = function()
+			local wk = require('which-key')
+			require('Comment').setup()
+			wk.add({
+				{ 'gb', group = 'Comment toggle blockwise' },
+				{ 'gc', group = 'Comment toggle linewise' },
+			})
+		end,
 	},
 	{
 		'folke/todo-comments.nvim',

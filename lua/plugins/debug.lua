@@ -11,6 +11,25 @@ return {
 		config = function()
 			local dap = require 'dap'
 			local dapui = require 'dapui'
+			local wk = require 'which-key'
+
+			wk.add({
+				-- Buffer group
+				{
+					'<leader>bb',
+					require('dap').toggle_breakpoint,
+					desc = 'Debug: Toogle Breakpoint',
+				},
+				{
+					'<leader>bB',
+					function()
+						require('dap').set_breakpoint(
+							vim.fn.input('Breakpoint condition: ')
+						)
+					end,
+					desc = 'Debug: Set Breakpoint',
+				},
+			})
 
 			require('mason-nvim-dap').setup({
 				automatic_setup = true,

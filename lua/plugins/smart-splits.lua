@@ -9,11 +9,11 @@ return {
 			local wk = require('which-key')
 			ss.setup(opts)
 			wk.add({
-				{ -- Buffer
-					{ '<leader>ah', ss.swap_buf_left, desc = 'Swap with Left buffer' },
-					{ '<leader>aj', ss.swap_buf_down, desc = 'Swap with Down Buffer' },
-					{ '<leader>ak', ss.swap_buf_up, desc = 'Swap with Up Buffer' },
-					{ '<leader>al', ss.swap_buf_right, desc = 'Swap with Right Buffer' },
+				{ -- Buffer groub
+					{ '<leader>bh', ss.swap_buf_left, desc = 'Swap with Left buffer' },
+					{ '<leader>bj', ss.swap_buf_down, desc = 'Swap with Down Buffer' },
+					{ '<leader>bk', ss.swap_buf_up, desc = 'Swap with Up Buffer' },
+					{ '<leader>bl', ss.swap_buf_right, desc = 'Swap with Right Buffer' },
 				},
 				{ -- resizing splits
 					{ '<A-h>', ss.resize_left, desc = 'Resize Left' },

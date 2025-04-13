@@ -6,25 +6,23 @@ wk.add({
 		{ 'J', ":m '>+1<cr>gv=gv", desc = 'Move selected down' },
 		{ 'K', ":m '<-2<cr>gv=gv", desc = 'Move selected up' },
 	},
-	{ 'gb', group = 'Comment toggle blockwise' },
-	{ 'gc', group = 'Comment toggle linewise' },
-	{ -- Code
-		{ '<leader>c', group = 'Code' },
-		{ '<leader>cp', '"+p', desc = 'Clip: Paste', mode = { 'n', 'v' } },
-		{ '<leader>cP', '"+P', desc = 'Clip: Paste', mode = { 'n', 'v' } },
-		{ '<leader>cd', '"+d', desc = 'Clip: Delete', mode = { 'n', 'v' } },
-		{ '<leader>cy', '"+y', desc = 'Clip: Copy', mode = { 'n', 'v' } },
-		{ '<leader>cY', '"+Y', desc = 'Clip: Copy' },
+	{ -- Clipboard
+		{ '<leader>c', group = 'Clipboard', icon = '󱓦' },
+		{ '<leader>cp', '"+p', desc = 'Paste down', mode = { 'n', 'v' } },
+		{ '<leader>cP', '"+P', desc = 'Paste up', mode = { 'n', 'v' } },
+		{ '<leader>cd', '"+d', desc = 'Delete', mode = { 'n', 'v' } },
+		{ '<leader>cy', '"+y', desc = 'Copy', mode = { 'n', 'v' } },
+		{ '<leader>cY', '"+Y', desc = 'Copy' },
 	},
 	{ -- Buffer
-		{ '<leader>a', group = 'Buffer' },
+		{ '<leader>b', group = 'Buffer' },
 		{
-			'<leader>ad',
+			'<leader>bd',
 			Snacks.bufdelete.delete,
 			desc = 'Delete buffer',
 		},
 		{
-			'<leader>aD',
+			'<leader>bD',
 			Snacks.bufdelete.all,
 			desc = 'Delete ALL buffer',
 		},
@@ -90,9 +88,9 @@ wk.add({
 	},
 	{ -- Document
 		{ '<leader>d', group = 'Document', icon = '󰈙 ' },
-		{ '<leader>dy', 'ggVG"+y', desc = 'Yank all' },
-		{ '<leader>dP', 'ggVG"+p', desc = 'Paste over' },
-		{ '<leader>dD', 'ggVG"+d', desc = 'Delete all' },
+		{ '<leader>dy', 'ggVG"+y', desc = 'Yank all lines' },
+		{ '<leader>dP', 'ggVG"+p', desc = 'Paste over all lines' },
+		{ '<leader>dD', 'ggVG"+d', desc = 'Delete all lines' },
 		{
 			'<leader>dl',
 			function()
@@ -156,18 +154,7 @@ wk.add({
 			end
 		end,
 		desc = 'Edit TODOs',
-	},
-	{
-		'<leader>b',
-		require('dap').toggle_breakpoint,
-		desc = 'Debug: Toogle Breakpoint',
-	},
-	{
-		'<leader>B',
-		function()
-			require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
-		end,
-		desc = 'Debug: Set Breakpoint',
+		icon = '',
 	},
 	{
 		'<leader>e',
