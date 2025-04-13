@@ -9,8 +9,7 @@ return {
 			local wk = require('which-key')
 			ss.setup(opts)
 			wk.add({
-				{ -- Swap Buffer
-					{ '<leader>a', group = 'Swap Buffer' },
+				{ -- Buffer
 					{ '<leader>ah', ss.swap_buf_left, desc = 'Swap with Left buffer' },
 					{ '<leader>aj', ss.swap_buf_down, desc = 'Swap with Down Buffer' },
 					{ '<leader>ak', ss.swap_buf_up, desc = 'Swap with Up Buffer' },

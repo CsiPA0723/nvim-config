@@ -11,7 +11,7 @@ wk.add({
 	end,
 	buffer = true,
 	{
-		'<leader>t',
+		'<leader>x',
 		function()
 			local newline = vim.api.nvim_get_current_line():gsub('%[([x -])%]', {
 				['x'] = '[-]',
