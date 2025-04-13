@@ -137,19 +137,23 @@ wk.add({
 	{
 		'<leader>t',
 		function()
-			_G.todo_win = Snacks.win.new({
-				file = vim.fn.expand('~/Documents/todos.md'),
-				minimal = false,
-				backdrop = 60,
-				width = 0.9,
-				height = 0.9,
-				zindex = 50,
-				resize = true,
-				fixbuf = true,
-				border = 'rounded',
-				bo = { modifiable = true },
-				keys = { q = 'close' },
-			})
+			if _G.todo_win == nil then
+				_G.todo_win = Snacks.win.new({
+					file = vim.fn.expand('~/Documents/todos.md'),
+					minimal = false,
+					backdrop = 60,
+					width = 0.9,
+					height = 0.9,
+					zindex = 50,
+					resize = true,
+					fixbuf = true,
+					border = 'rounded',
+					bo = { modifiable = true },
+					keys = { q = 'close' },
+				})
+			else
+				_G.todo_win:toggle()
+			end
 		end,
 		desc = 'Edit TODOs',
 	},
