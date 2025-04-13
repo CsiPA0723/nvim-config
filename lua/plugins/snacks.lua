@@ -54,16 +54,16 @@ return {
 							action = ":lua Snacks.dashboard.pick('live_grep')",
 						},
 						{
+							icon = ' ',
+							key = 'z',
+							desc = 'Zoxide',
+							action = ":lua Snacks.dashboard.pick('zoxide')",
+						},
+						{
 							icon = ' ',
 							key = 'c',
 							desc = 'Config',
 							action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-						},
-						{
-							icon = ' ',
-							key = 's',
-							desc = 'Sessions',
-							action = ":lua Snacks.dashboard.pick('projects')",
 						},
 						{
 							icon = ' ',
@@ -83,6 +83,10 @@ return {
 							key = 'M',
 							desc = 'Mason',
 							action = ':Mason',
+							---@param opts snacks.dashboard.Opts
+							enabled = function(opts)
+								return Snacks.dashboard.have_plugin('mason')
+							end,
 						},
 						{ icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
 					},
