@@ -127,7 +127,7 @@ wk.add({
 				_G.todo_win = Snacks.win.new({
 					file = vim.fn.expand('~/Documents/todos.md'),
 					minimal = false,
-					backdrop = 60,
+					backdrop = false,
 					width = 0.9,
 					height = 0.9,
 					zindex = 50,
