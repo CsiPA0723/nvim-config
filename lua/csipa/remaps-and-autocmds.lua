@@ -16,16 +16,8 @@ wk.add({
 	},
 	{ -- Buffer
 		{ '<leader>b', group = 'Buffer' },
-		{
-			'<leader>bd',
-			Snacks.bufdelete.delete,
-			desc = 'Delete buffer',
-		},
-		{
-			'<leader>bD',
-			Snacks.bufdelete.all,
-			desc = 'Delete ALL buffer',
-		},
+		{ '<leader>bd', Snacks.bufdelete.delete, desc = 'Delete buffer' },
+		{ '<leader>bD', Snacks.bufdelete.all, desc = 'Delete ALL buffer' },
 	},
 	{ -- Search
 		{ '<leader>s', group = 'Search' },
@@ -40,11 +32,7 @@ wk.add({
 		{ '<leader>se', Snacks.picker.explorer, desc = 'Explorer' },
 		{ '<leader>su', Snacks.picker.undo, desc = 'Undotree' },
 		{ '<leader>si', Snacks.picker.icons, desc = 'Nerd Icon Search' },
-		{
-			'<leader>sz',
-			Snacks.picker.zoxide,
-			desc = 'Zoxide list',
-		},
+		{ '<leader>sz', Snacks.picker.zoxide, desc = 'Zoxide list' },
 		{
 			'<leader>s<leader>',
 			Snacks.picker.recent,
@@ -178,12 +166,7 @@ wk.add({
 		icon = '󰒲',
 	},
 	{ '<leader>M', '<cmd>Mason<cr>', desc = 'Open Mason', icon = '' },
-	{
-		'<leader>h',
-		'<cmd>lua Snacks.dashboard.open()<cr>',
-		desc = 'Open Dashboard',
-		icon = '',
-	},
+	{ '<leader>h', Snacks.dashboard.open, desc = 'Open Dashboard', icon = '' },
 	{ '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil', icon = '󱁓' },
 	-- {
 	-- 	'<leader>t',
@@ -419,7 +402,7 @@ autocmd('TermOpen', {
 local session_group = augroup('csipa-session', { clear = true })
 
 autocmd({ 'User' }, {
-	pattern = 'PersistanceSavePost',
+	pattern = 'PersistenceSavePost',
 	desc = 'Notify user the session is saved',
 	group = session_group,
 	callback = function()
@@ -432,7 +415,7 @@ autocmd({ 'User' }, {
 })
 
 autocmd({ 'User' }, {
-	pattern = 'PersistanceLoadPre',
+	pattern = 'PersistenceLoadPre',
 	desc = 'Clear lsps before loading new session',
 	group = session_group,
 	callback = function()
@@ -446,7 +429,7 @@ autocmd({ 'User' }, {
 })
 
 autocmd({ 'User' }, {
-	pattern = 'PersistanceLoadPost',
+	pattern = 'PersistenceLoadPost',
 	desc = 'Notify user the session is loaded and start lsps',
 	group = session_group,
 	callback = function()
@@ -458,27 +441,12 @@ autocmd({ 'User' }, {
 	end,
 })
 
-autocmd('User', {
-	pattern = 'BDeletePost*',
-	group = augroup('dashboard_on_empty', { clear = true }),
-	callback = function()
-		local fallback_on_empty = vim.bo.buftype == '' and vim.o.filetype == ''
-
-		if fallback_on_empty then
-			Snacks.dashboard.open()
-			Snacks.bufdelete.other()
-		end
-	end,
-})
-
 autocmd('DirChanged', {
 	pattern = '*',
 	group = augroup('dashboard_on_dir_change', { clear = true }),
 	callback = function()
-		Snacks.dashboard.update()
+		if Snacks.dashboard.status.opened then
+			Snacks.dashboard.update()
+		end
 	end,
 })
-
-vim.api.nvim_create_user_command('Z', function()
-	Snacks.picker.zoxide()
-end, {})
