@@ -22,11 +22,11 @@ return {
 			local palette = require 'catppuccin.palettes'.get_palette('macchiato')
 
 			opts.render = function(props)
-				local filename =
-					vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
-				if filename == '' then
-					filename = ' '
-				end
+				local filetype = vim.bo[props.buf].filetype
+				local names_by_filetypes = { ['oil'] = 'Oil' }
+				local filename = vim.tbl_get(names_by_filetypes, filetype)
+					or vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
+					or ' '
 				local ft_icon, ft_color = devicons.get_icon_color(filename)
 				local modified = vim.bo[props.buf].modified
 				local readonly = vim.bo[props.buf].readonly
