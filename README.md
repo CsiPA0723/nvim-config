@@ -1,8 +1,9 @@
 # CsiPA's Neovim config
+<!-- markdownlint-disable MD033 -->
 
-<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugins?style=for-the-badge" /></a>
-<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/leaderkey?style=for-the-badge" /></a>
-<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugin-manager?style=for-the-badge" /></a>
+<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugins?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
+<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/leaderkey?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
+<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugin-manager?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
 
 ## Needed programs before installing
 
