@@ -16,6 +16,7 @@ return {
 				-- 'latex',
 				'lua',
 				'luadoc',
+				'lua_patterns',
 				'markdown',
 				'markdown_inline',
 				'norg',
@@ -35,6 +36,16 @@ return {
 			indent = { enable = true },
 		},
 		config = function(_, opts)
+			local parser_configs =
+				require('nvim-treesitter.parsers').get_parser_configs()
+			---@diagnostic disable-next-line: inject-field
+			parser_configs.lua_patterns = {
+				install_info = {
+					url = 'https://github.com/OXY2DEV/tree-sitter-lua_patterns',
+					files = { 'src/parser.c' },
+					branch = 'main',
+				},
+			}
 			require('nvim-treesitter.configs').setup(opts)
 			-- There are additional nvim-treesitter modules that you can use to interact
 			-- with nvim-treesitter. You should go explore a few and see what interests you:

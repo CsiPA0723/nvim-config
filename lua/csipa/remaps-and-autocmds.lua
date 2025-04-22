@@ -150,14 +150,28 @@ wk.add({
 		desc = 'Show diagnostic Error messages',
 	},
 	{
+		'<leader>P',
+		'<cmd>Patterns explain<CR>',
+		desc = 'Explain pattern under cursor',
+		icon = { icon = '', color = 'orange' },
+	},
+	{
+		'<leader>p',
+		'<cmd>Patterns hover<CR>',
+		desc = 'See pattern description',
+		icon = { icon = '', color = 'orange' },
+	},
+	{
 		'<leader>q',
 		'<cmd>Trouble qflist toggle<CR>',
 		desc = 'Open diagnostic Quickfix list',
+		icon = { icon = '󱖫', color = 'green' },
 	},
 	{
 		'<leader>l',
 		'<cmd>Trouble loclist toggle<CR>',
 		desc = 'Location list',
+		icon = { icon = '󱖫', color = 'green' },
 	},
 	{
 		'<leader>L',
@@ -168,12 +182,6 @@ wk.add({
 	{ '<leader>M', '<cmd>Mason<cr>', desc = 'Open Mason', icon = '' },
 	{ '<leader>h', Snacks.dashboard.open, desc = 'Open Dashboard', icon = '' },
 	{ '<leader>o', '<cmd>Oil<cr>', desc = 'Open Oil', icon = '󱁓' },
-	-- {
-	-- 	'<leader>t',
-	-- 	'<cmd>Tasks<CR>',
-	-- 	desc = 'Task-Runner',
-	-- 	icon = '',
-	-- },
 	{
 		'<leader>F',
 		function()

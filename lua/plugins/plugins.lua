@@ -8,6 +8,7 @@ return {
 	{ 'neolooong/whichpy.nvim', ft = 'python', config = true },
 	{ 'fladson/vim-kitty', ft = 'kitty' },
 	{ 'folke/persistence.nvim', event = 'BufReadPre', opts = { need = 2 } },
+	{ 'ThePrimeagen/vim-be-good', cmd = 'VimBeGood' },
 	{
 		'folke/which-key.nvim',
 		event = 'VeryLazy',
@@ -26,7 +27,7 @@ return {
 	},
 	{
 		'folke/trouble.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		dependencies = 'nvim-tree/nvim-web-devicons',
 		cmd = 'Trouble',
 		config = true,
 	},
@@ -36,20 +37,28 @@ return {
 		opts = { vscode_rest_client_environmentvars = true },
 	},
 	{
+		'OXY2DEV/patterns.nvim',
+		dependencies = 'nvim-treesitter/nvim-treesitter',
+		cmd = 'Patterns',
+	},
+	{
 		'OXY2DEV/helpview.nvim',
 		ft = 'help',
-		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+		dependencies = 'nvim-treesitter/nvim-treesitter',
 	},
 	{
 		'nvim-zh/colorful-winsep.nvim',
 		event = 'WinLeave',
 		config = true,
 	},
-	--[[ {
+	{
 		'CsiPA0723/task-runner.nvim',
 		dir = '/home/csipa/Personal/task-runner.nvim',
-		dependencies = { 'nvim-lua/plenary.nvim' },
-		cmd = { 'Tasks' },
-		opts = {},
-	}, ]]
+		dependencies = { 'nvim-lua/plenary.nvim', 'folke/snacks.nvim' },
+		event = 'VeryLazy',
+		---@type TaskRunner.config
+		opts = {
+			tasks_dir = '/home/csipa/Personal/task-runner.nvim/examples',
+		},
+	},
 }
