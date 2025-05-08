@@ -53,12 +53,9 @@ return {
 	},
 	{
 		'CsiPA0723/task-runner.nvim',
-		dir = '/home/csipa/Personal/task-runner.nvim',
 		dependencies = { 'nvim-lua/plenary.nvim', 'folke/snacks.nvim' },
 		event = 'VeryLazy',
 		---@type TaskRunner.config
-		opts = {
-			tasks_dir = '/home/csipa/Personal/task-runner.nvim/examples',
-		},
+		opts = {},
 	},
 }
