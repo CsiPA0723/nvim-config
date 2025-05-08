@@ -52,7 +52,35 @@ require('lazy').setup('plugins', {
 	checker = { enabled = true, notify = true },
 	diff = { cmd = 'diffview.nvim' },
 	git = { timeot = 60 }, -- 1 min timeout for tasks
-	ui = { border = 'none', icons = {} },
+	ui = {
+		border = 'none',
+		icons = {
+			cmd = 'Cmd',
+			config = 'Conf',
+			debug = 'D',
+			event = 'Ev',
+			favorite = 'Fv',
+			ft = 'Ft ',
+			init = 'I',
+			import = 'Im',
+			keys = 'K',
+			lazy = 'L',
+			loaded = 'Lo',
+			not_loaded = 'nL',
+			plugin = 'P',
+			runtime = 'R',
+			require = 'Rq',
+			source = 'S',
+			start = 'St',
+			task = 'T',
+			list = {
+				'.',
+				'>',
+				'*',
+				'-',
+			},
+		},
+	},
 })
 
 -------------------------------------------------------------------------------
