@@ -49,29 +49,10 @@ _G.augroup = vim.api.nvim_create_augroup
 
 require('lazy').setup('plugins', {
 	defaults = { lazy = true },
-	checker = {
-		enabled = true,
-		notify = true,
-	},
+	checker = { enabled = true, notify = true },
+	diff = { cmd = 'diffview.nvim' },
 	git = { timeot = 60 }, -- 1 min timeout for tasks
-	ui = {
-		border = 'rounded',
-		icons = {
-			cmd = '⌘',
-			config = '🛠',
-			event = '📅',
-			ft = '📂',
-			init = '⚙',
-			keys = '🗝',
-			plugin = '🔌',
-			runtime = '💻',
-			require = '🌙',
-			source = '📄',
-			start = '🚀',
-			task = '📌',
-			lazy = '💤 ',
-		},
-	},
+	ui = { border = 'none', icons = {} },
 })
 
 -------------------------------------------------------------------------------
