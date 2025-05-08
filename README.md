@@ -38,7 +38,7 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 - [echasnovski/mini.align](https://github.com/echasnovski/mini.align)
 - [echasnovski/mini.surround](https://github.com/echasnovski/mini.surround)
 - [fladson/vim-kitty](https://github.com/fladson/vim-kitty)
-- [folke/neodev.nvim](https://github.com/folke/neodev.nvim)
+- [folke/lazydev.nvim](https://github.com/folke/lazydev.nvim)
 - [folke/persistence.nvim](https://github.com/folke/persistence.nvim)
 - [folke/snacks.nvim](https://github.com/folke/snacks.nvim)
 - [folke/todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
