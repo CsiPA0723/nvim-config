@@ -2,7 +2,6 @@
 return {
 	{
 		'mrjones2014/smart-splits.nvim',
-		build = './kitty/install-kittens.bash',
 		event = 'VeryLazy',
 		config = function(_, opts)
 			local ss = require('smart-splits')
