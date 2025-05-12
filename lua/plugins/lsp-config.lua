@@ -17,12 +17,25 @@ return {
 		config = true,
 	},
 	{
+		'folke/lazydev.nvim',
+		ft = 'lua', -- only load on lua files
+		opts = {
+			---@module "lazydev"
+			---@type lazydev.Library.spec[]
+			library = {
+				'lazy.nvim',
+				{ path = 'snacks.nvim', words = { 'snacks', 'Snacks' } },
+				{ path = 'task-runner.nvim', words = { 'TaskRunner', 'task-runner' } },
+				{ path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+			},
+		},
+	},
+	{
 		'neovim/nvim-lspconfig',
 		event = 'VeryLazy',
 		dependencies = {
-			'williamboman/mason.nvim',
-			'williamboman/mason-lspconfig.nvim',
-			'WhoIsSethDaniel/mason-tool-installer.nvim',
+			'mason-org/mason.nvim',
+			'mason-org/mason-lspconfig.nvim',
 			'b0o/schemastore.nvim',
 		},
 		config = function()
@@ -50,7 +63,6 @@ return {
 					},
 				},
 				bashls = { settings = { filetypes = { 'sh', 'zsh' } } },
-				---@type java.Config
 				jdtls = { jdk = { auto_install = false } },
 				jsonls = {
 					settings = {
@@ -81,40 +93,25 @@ return {
 
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
-				'stylua',
-				'prettierd',
 				'angularls',
-				'shfmt',
-				'markdownlint',
-				'pretty-php',
+				'bashls',
 				'clangd',
-				'termux-language-server',
-				'black',
-				'eslint_d',
-				'bash-language-server',
-				'clangd',
-				'codelldb',
-				'cpptools',
-				'delve',
-				'docker-compose-language-service',
+				'cssls',
+				'docker_compose_language_service',
 				'glsl_analyzer',
-				'hadolint',
-				'json-lsp',
-				'lua-language-server',
-				'php-debug-adapter',
+				'htmx',
+				'jdtls',
+				'jsonls',
+				'lua_ls',
 				'phpactor',
-				'python-lsp-server',
+				'pylsp',
 				'taplo',
-				'yaml-language-server',
-			})
-
-			require('mason-tool-installer').setup({
-				ensure_installed = ensure_installed,
+				'yamlls',
 			})
 
 			require('mason-lspconfig').setup({
-				automatic_installation = false,
-				ensure_installed = {},
+				automatic_enable = { exclude = { 'ts_ls' } },
+				ensure_installed = ensure_installed,
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}

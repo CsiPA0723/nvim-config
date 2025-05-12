@@ -34,7 +34,14 @@ return {
 			require('mason-nvim-dap').setup({
 				automatic_setup = true,
 				automatic_installation = false,
-				ensure_installed = { 'delve' },
+				ensure_installed = {
+					'codelldb',
+					'cpptools',
+					'delve',
+					'java-debug-adapter',
+					'java-test',
+					'php-debug-adapter',
+				},
 				handlers = {
 					function(config)
 						require('mason-nvim-dap').default_setup(config)

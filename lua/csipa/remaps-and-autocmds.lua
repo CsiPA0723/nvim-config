@@ -86,7 +86,7 @@ wk.add({ -- Document
 				search = 'license(.md|.adoc|.txt)?$',
 				confirm = function(self, item)
 					self:action('close')
-					---@type List
+					---@type string[]
 					local file_lines = vim.fn.readfile(item.file)
 					table.insert(file_lines, '\n')
 					local line_count = vim.tbl_count(file_lines)

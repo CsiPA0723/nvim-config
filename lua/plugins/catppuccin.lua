@@ -5,6 +5,7 @@ return {
 		name = 'catppuccin',
 		lazy = false,
 		priority = 500,
+		---@module "catppuccin"
 		---@type CatppuccinOptions
 		opts = {
 			compile_path = vim.fn.stdpath 'cache' .. '/catppuccin',

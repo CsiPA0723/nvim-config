@@ -83,9 +83,8 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 - [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim)
 - [supermaven-inc/supermaven-nvim](https://github.com/supermaven-inc/supermaven-nvim)
 - [ThePrimeagen/vim-be-good](https://github.com/ThePrimeagen/vim-be-good)
-- [WhoIsSethDaniel/mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)
-- [williamboman/mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
-- [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
+- [mason-org/mason-lspconfig.nvim](https://github.com/mason-org/mason-lspconfig.nvim)
+- [mason-org/mason.nvim](https://github.com/mason-org/mason.nvim)
 - [xzbdmw/colorful-menu.nvim](https://github.com/xzbdmw/colorful-menu.nvim)
 
 </details>
