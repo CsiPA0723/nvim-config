@@ -12,7 +12,8 @@ return {
 	{
 		'folke/which-key.nvim',
 		event = 'VeryLazy',
-		---@class wk.Opts
+		---@module "which-key"
+		---@type wk.Opts
 		opts = { preset = 'modern', win = { no_overlap = false }, delay = 500 },
 	},
 	{

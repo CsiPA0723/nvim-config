@@ -34,6 +34,7 @@ return {
 			'sindrets/diffview.nvim',
 		},
 		cmd = 'Neogit',
+		---@module "neogit"
 		---@type NeogitConfig
 		opts = { graph_style = vim.g.neovide and 'unicode' or 'kitty' },
 	},
