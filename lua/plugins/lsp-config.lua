@@ -99,7 +99,7 @@ return {
 				'cssls',
 				'docker_compose_language_service',
 				'glsl_analyzer',
-				'htmx',
+				-- 'htmx',
 				'jdtls',
 				'jsonls',
 				'lua_ls',
