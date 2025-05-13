@@ -1,3 +1,12 @@
+local ensure_installed = {
+	'black',
+	'prettierd',
+	'pretty-php',
+	'shfmt',
+	'stylua',
+	'termux-language-server',
+}
+
 ---@type LazyPluginSpec[]
 return {
 	{
@@ -33,5 +42,18 @@ return {
 				cpp = { 'clang-format' },
 			},
 		},
+		config = function(_, opts)
+			for _, format in ipairs(ensure_installed) do
+				local installed = require('mason-registry').is_installed(format)
+				if not installed then
+					vim.notify(
+						format .. ' not installed! Run ":MasonInstall ' .. format .. '"',
+						vim.log.levels.ERROR,
+						{ group = 'mason' }
+					)
+				end
+			end
+			require('conform').setup(opts)
+		end,
 	},
 }

@@ -32,6 +32,16 @@ return {
 			notif.set_config('TaskRunner', {
 				name = 'TaskRunner',
 				icon = ' ',
+				ttl = 4,
+			}, false)
+			notif.set_config('Observer', {
+				name = 'Observer',
+				icon = ' ',
+				ttl = 4,
+			}, false)
+			notif.set_config('mason', {
+				name = 'Mason',
+				icon = ' ',
 				ttl = 8,
 			}, false)
 		end,
