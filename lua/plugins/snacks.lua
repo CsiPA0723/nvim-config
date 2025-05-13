@@ -85,7 +85,7 @@ return {
 							action = ':Mason',
 							---@param opts snacks.dashboard.Opts
 							enabled = function(opts)
-								return Snacks.dashboard.have_plugin('mason')
+								return Snacks.dashboard.have_plugin('mason.nvim')
 							end,
 						},
 						{ icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
