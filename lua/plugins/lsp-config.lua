@@ -39,6 +39,11 @@ return {
 			'b0o/schemastore.nvim',
 		},
 		config = function()
+			require('fidget.notification').set_config('mason', {
+				name = 'Mason',
+				icon = ' ',
+				ttl = 8,
+			}, true)
 			require('mason').setup()
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()

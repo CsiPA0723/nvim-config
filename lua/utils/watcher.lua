@@ -1,4 +1,10 @@
-local notify_opts = { group = 'Observer' }
+local notify_opts = { group = 'observer' }
+
+require('fidget.notification').set_config(notify_opts.group, {
+	name = 'Observer',
+	icon = ' ',
+	ttl = 4,
+}, true)
 
 ---@class Observer
 ---@field filename string

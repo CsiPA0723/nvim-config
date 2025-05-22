@@ -60,6 +60,15 @@ return {
 		---@type TaskRunner.config
 		opts = {
 			tasks_dir = '/home/csipa/Personal/task-runner.nvim/examples',
+			notify_opts = { group = 'TaskRunner' },
 		},
+		config = function(_, opts)
+			require('fidget.notification').set_config(opts.notify_opts.group, {
+				name = 'TaskRunner',
+				icon = ' ',
+				ttl = 4,
+			}, true)
+			require('task-runner').setup(opts)
+		end,
 	},
 }
