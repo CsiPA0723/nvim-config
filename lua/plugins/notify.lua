@@ -2,22 +2,11 @@
 return {
 	{
 		'j-hui/fidget.nvim',
+		priority = 1000,
 		lazy = false,
-		dependencies = {
-			{
-				'rcarriga/nvim-notify',
-				opts = { fps = 60, render = 'compact', stages = 'slide' },
-			},
-		},
 		opts = {
 			notification = {
 				override_vim_notify = true,
-				redirect = function(msg, level, opts)
-					local integNotify = require('fidget.integration.nvim-notify')
-					if opts and opts.on_open then
-						return integNotify.delegate(msg, level, opts)
-					end
-				end,
 				window = { winblend = 0 },
 			},
 		},
@@ -28,22 +17,7 @@ return {
 				name = 'Session',
 				icon = '❰❰',
 				ttl = 8,
-			}, false)
-			notif.set_config('TaskRunner', {
-				name = 'TaskRunner',
-				icon = ' ',
-				ttl = 4,
-			}, false)
-			notif.set_config('Observer', {
-				name = 'Observer',
-				icon = ' ',
-				ttl = 4,
-			}, false)
-			notif.set_config('mason', {
-				name = 'Mason',
-				icon = ' ',
-				ttl = 8,
-			}, false)
+			}, true)
 		end,
 	},
 }

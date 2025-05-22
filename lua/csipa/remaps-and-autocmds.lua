@@ -42,6 +42,13 @@ wk.add({ -- Search
 		end,
 		desc = 'Neovim files',
 	},
+	{
+		'<leader>sp',
+		function()
+			Snacks.picker.files({ cwd = vim.fn.stdpath('data') })
+		end,
+		desc = 'Neovim plugins',
+	},
 })
 
 wk.add({ -- Workspace
