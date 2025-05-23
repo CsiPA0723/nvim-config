@@ -53,6 +53,10 @@ return {
 		config = true,
 	},
 	{
+		'dundalek/bloat.nvim',
+		cmd = 'Bloat',
+	},
+	{
 		'CsiPA0723/task-runner.nvim',
 		dir = '/home/csipa/Personal/task-runner.nvim',
 		dependencies = { 'nvim-lua/plenary.nvim', 'folke/snacks.nvim' },
