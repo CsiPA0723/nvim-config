@@ -62,12 +62,9 @@ return {
 		dependencies = { 'nvim-lua/plenary.nvim', 'folke/snacks.nvim' },
 		event = 'VeryLazy',
 		---@type TaskRunner.config
-		opts = {
-			tasks_dir = '/home/csipa/Personal/task-runner.nvim/examples',
-			notify_opts = { group = 'TaskRunner' },
-		},
+		opts = { tasks_dir = '/home/csipa/Personal/task-runner.nvim/examples' },
 		config = function(_, opts)
-			require('fidget.notification').set_config(opts.notify_opts.group, {
+			require('fidget.notification').set_config('TaskRunner', {
 				name = 'TaskRunner',
 				icon = ' ',
 				ttl = 4,
