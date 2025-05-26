@@ -20,6 +20,10 @@ return {
 					},
 				},
 				lualine_x = {
+					{
+						require('utils.mpris').lualine,
+						cond = require('utils.mpris').get_status,
+					},
 					'encoding',
 					'fileformat',
 					'filetype',
@@ -40,6 +44,7 @@ return {
 			},
 		},
 		config = function(_, opts)
+			require('utils.mpris').setup()
 			require('lualine').setup(opts)
 			vim.o.showtabline = 1
 		end,

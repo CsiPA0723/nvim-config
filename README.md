@@ -7,6 +7,7 @@
 
 ## Needed programs before installing
 
+- Playerctl
 - Todo ...
 
 ## Install Instructions
