@@ -39,7 +39,7 @@ vim.opt.smartcase = true
 
 vim.o.timeoutlen = 500
 
-vim.diagnostic.config({ jump = { float = true } })
+vim.diagnostic.config({ on_jump = { float = true } })
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
