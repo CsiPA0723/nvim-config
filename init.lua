@@ -63,4 +63,5 @@ if vim.g.neovide then
 end
 
 require 'csipa.options'
-require 'csipa.remaps-and-autocmds'
+require 'csipa.keymaps'
+require 'csipa.autocmds'
