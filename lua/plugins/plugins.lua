@@ -9,6 +9,9 @@ return {
 	{ 'fladson/vim-kitty', ft = 'kitty' },
 	{ 'folke/persistence.nvim', event = 'BufReadPre', opts = { need = 2 } },
 	{ 'ThePrimeagen/vim-be-good', cmd = 'VimBeGood' },
+	{ 'nvim-zh/colorful-winsep.nvim', event = 'WinLeave', config = true },
+	{ 'm-demare/hlargs.nvim', event = 'VeryLazy', config = true },
+	{ 'dundalek/bloat.nvim', cmd = 'Bloat' },
 	{
 		'folke/which-key.nvim',
 		event = 'VeryLazy',
@@ -46,15 +49,6 @@ return {
 		'OXY2DEV/helpview.nvim',
 		ft = 'help',
 		dependencies = 'nvim-treesitter/nvim-treesitter',
-	},
-	{
-		'nvim-zh/colorful-winsep.nvim',
-		event = 'WinLeave',
-		config = true,
-	},
-	{
-		'dundalek/bloat.nvim',
-		cmd = 'Bloat',
 	},
 	{
 		'CsiPA0723/task-runner.nvim',
