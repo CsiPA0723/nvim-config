@@ -138,21 +138,21 @@ return {
             },
          },
       },
-      init = function()
-         vim.api.nvim_create_autocmd('User', {
-            pattern = 'VeryLazy',
-            callback = function()
-               -- Setup some globals for debugging (lazy-loaded)
-               _G.dd = function(...)
-                  Snacks.debug.inspect(...)
-               end
-               _G.bt = function()
-                  Snacks.debug.backtrace()
-               end
-               vim.print = _G.dd -- Override print to use snacks for `:=` command
-               vim.g.snacks_animate = true
-            end,
-         })
+      config = function(_, opts)
+         require('snacks').setup(opts)
+         --- Show a notification with a pretty printed dump of the object(s)
+         --- with lua treesitter highlighting and the location of the caller
+         --- ---
+         --- Override print to use snacks for `:=` command
+         _G.dd = function(...)
+            Snacks.debug.inspect(...)
+         end
+         vim.print = _G.dd
+
+         --- Show a notification with a pretty backtrace
+         _G.bt = function()
+            Snacks.debug.backtrace()
+         end
       end,
    },
 }
