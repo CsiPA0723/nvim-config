@@ -130,8 +130,8 @@ autocmd('FileType', {
 })
 
 autocmd('FileType', {
-   pattern = { 'help' },
-   group = augroup('csipa-help', { clear = true }),
+   pattern = { 'help', 'Neogit*' },
+   group = augroup('csipa-colorcolum', { clear = true }),
    callback = function()
       vim.opt_local.colorcolumn = ''
    end,
