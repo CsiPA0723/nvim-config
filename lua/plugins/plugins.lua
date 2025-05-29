@@ -10,7 +10,7 @@ return {
 	{ 'folke/persistence.nvim', event = 'BufReadPre', opts = { need = 2 } },
 	{ 'ThePrimeagen/vim-be-good', cmd = 'VimBeGood' },
 	{ 'nvim-zh/colorful-winsep.nvim', event = 'WinLeave', config = true },
-	--- TODO: Do I need this?
+	--- NOTE: Do I need this?
 	{ 'm-demare/hlargs.nvim', event = 'VeryLazy', config = true },
 	{ 'dundalek/bloat.nvim', cmd = 'Bloat' },
 	{
@@ -35,11 +35,6 @@ return {
 		dependencies = 'nvim-tree/nvim-web-devicons',
 		cmd = 'Trouble',
 		config = true,
-	},
-	{
-		'mistweaverco/kulala.nvim',
-		ft = { 'http', 'rest' },
-		opts = { vscode_rest_client_environmentvars = true },
 	},
 	{
 		'OXY2DEV/patterns.nvim',

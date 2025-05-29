@@ -60,10 +60,6 @@ vim.g.python3_host_prog = configpath .. '/.venv/bin/python3'
 vim.g.loaded_perl_provider = 0
 
 vim.filetype.add({
-	extension = {
-		-- NOTE: Added for kulala.nvim
-		['http'] = 'http',
-	},
 	pattern = {
 		['zprofile'] = 'zsh',
 		['.prettyphp'] = 'json',

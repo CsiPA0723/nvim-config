@@ -121,16 +121,6 @@ wk.add({ -- Document
 	},
 })
 
-wk.add({ -- Kulala
-	cond = function()
-		return vim.bo.filetype == 'http' or vim.bo.filetype == 'rest'
-	end,
-	buffer = true,
-	{ '[h', require('kulala').jump_prev, desc = 'Jumpt to prev HTTP request' },
-	{ ']h', require('kulala').jump_next, desc = 'Jumpt to next HTTP request' },
-	{ '<leader>r', require('kulala').run, desc = 'Run HTTP request (kulala)' },
-})
-
 wk.add({ -- Debug
 	{ '<F1>', require('dap').step_into, desc = 'Debug: Step Into' },
 	{ '<F2>', require('dap').step_over, desc = 'Debug: Step Over' },
