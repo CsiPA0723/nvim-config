@@ -231,14 +231,28 @@ wk.add({ -- Misc
 		{ 'J', ":m '>+1<cr>gv=gv", desc = 'Move selected down' },
 		{ 'K', ":m '<-2<cr>gv=gv", desc = 'Move selected up' },
 	},
+	{ -- Search within visual selection
+		mode = 'x',
+		{
+			'z/',
+			'<C-\\><C-n>`</\\%V',
+			desc = 'Search forward within visual selection',
+		},
+		{
+			'z?',
+			'<C-\\><C-n>`>?\\%V',
+			desc = 'Search backward within visual selection',
+		},
+	},
 	{ '<Esc>', '<cmd>nohlsearch<cr>', desc = 'Cancel active highlight' },
 	-- Leaves the cursor in the same place
 	{ 'J', 'mzJ`z', desc = 'Join line' },
-	-- Tries to keep the cursor at the center
-	{ '<C-d>', '<C-d>zz' },
-	{ '<C-u>', '<C-u>zz' },
-	{ 'n', 'nzzzv' },
-	{ 'N', 'Nzzzv' },
+	{ -- Tries to keep the cursor at the center
+		{ '<C-d>', '<C-d>zz' },
+		{ '<C-u>', '<C-u>zz' },
+		{ 'n', 'nzzzv' },
+		{ 'N', 'Nzzzv' },
+	},
 	{ '<leader>p', '"_dP', desc = 'Paste (but keep paste data)', mode = 'x' },
 	{ '<C-space>', '<C-\\><C-n>', desc = 'Exit terminal mode', mode = 't' },
 })

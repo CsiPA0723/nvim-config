@@ -20,36 +20,30 @@ autocmd('LspAttach', {
 					'<cmd>Trouble lsp_references toggle focus=true<CR>',
 					desc = 'LSP: Reference(s)',
 				},
-
 				{
 					'gri',
 					'<cmd>Trouble lsp_implementations toggle focus=true<CR>',
 					desc = 'LSP: Implementation(s)',
 				},
-
 				{
 					'grd',
 					'<cmd>Trouble lsp_definitions toggle focus=true<CR>',
 					desc = 'LSP: Definition',
 				},
-
 				{
 					'grD',
 					'<cmd>Trouble lsp_declarations toggle focus=true<CR>',
 					desc = 'LSP: Declaration',
 				},
-
 				{
 					'grt',
 					'<cmd>Trouble lsp_type_definitions toggle focus=true<CR>',
 					desc = 'LSP: Type Definition(s)',
 				},
-
 				{ 'grn', vim.lsp.buf.rename, desc = 'LSP: Rename' },
 				{ 'gra', vim.lsp.buf.code_action, desc = 'LSP: Code Action' },
 			},
 			{ -- Document
-				{ '<leader>d', group = 'Document', icon = '󰈙 ' },
 				{
 					'<leader>ds',
 					'<cmd>Trouble lsp_document_symbols toggle focus=false win.position=left win.relative=editor win.type=split<CR>',
@@ -57,7 +51,6 @@ autocmd('LspAttach', {
 				},
 			},
 			{ -- Workspace
-				{ '<leader>w', group = 'Workspace', icon = '' },
 				{
 					'<leader>wS',
 					Snacks.picker.lsp_workspace_symbols,
@@ -98,7 +91,6 @@ autocmd('LspAttach', {
 		if
 			client and client:supports_method('textDocument/codeLens', event.buf)
 		then
-			-- refresh codelens on TextChanged and InsertLeave as well
 			autocmd({ 'TextChanged', 'InsertLeave', 'CursorHold', 'LspAttach' }, {
 				buffer = event.buf,
 				callback = function()
