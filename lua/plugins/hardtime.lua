@@ -9,6 +9,7 @@ return {
       opts = {
          max_count = 5,
          disable_mouse = false,
+         disabled_filetypes = { 'LuaPatterns', 'RegexPatterns' },
          callback = function(text)
             vim.notify(text, vim.log.levels.WARN, notify_opts)
          end,
