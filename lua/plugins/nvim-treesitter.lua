@@ -1,9 +1,15 @@
 ---@type LazyPluginSpec[]
 return {
+   {
+      'm-demare/hlargs.nvim',
+      dependencies = 'nvim-treesitter',
+      event = 'VeryLazy',
+      opts = { excluded_filetypes = { 'lua' } },
+   },
    { -- Highlight, edit, and navigate code
       'nvim-treesitter/nvim-treesitter',
       build = ':TSUpdate',
-      event = 'VeryLazy',
+      lazy = false,
       opts = {
          ignore_install = { 'yaml' }, -- Already installed by a package
          ensure_installed = {

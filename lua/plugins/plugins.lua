@@ -1,7 +1,12 @@
 ---@type LazyPluginSpec[]
 return {
    -- Shared dependencies {{{
-   { 'nvim-treesitter/nvim-treesitter', optional = true },
+   { 'nvim-treesitter/nvim-treesitter', branch = 'master', optional = true },
+   {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      branch = 'master',
+      optional = true,
+   },
    { 'nvim-tree/nvim-web-devicons', optional = true },
    { 'nvim-lua/plenary.nvim', optional = true },
    -- }}}
@@ -10,8 +15,6 @@ return {
    { 'folke/persistence.nvim', event = 'BufReadPre', opts = { need = 2 } },
    { 'ThePrimeagen/vim-be-good', cmd = 'VimBeGood' },
    { 'nvim-zh/colorful-winsep.nvim', event = 'WinLeave', config = true },
-   --- NOTE: Do I need this?
-   { 'm-demare/hlargs.nvim', event = 'VeryLazy', config = true },
    { 'dundalek/bloat.nvim', cmd = 'Bloat' },
    {
       'folke/which-key.nvim',
