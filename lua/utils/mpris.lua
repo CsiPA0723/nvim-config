@@ -10,6 +10,7 @@ local on_stderr = function(error, data, _)
 end
 
 local M = {
+   enabled = true,
    title = 'Unknown',
    artist = 'Unknown',
    track = 'Unknown - Unknown',
@@ -78,10 +79,17 @@ function M.setup()
 
    local track_index = 1
    local direction = 1
-   local max_size = 30 - 1
    local wait = false
 
    vim.fn.timer_start(500, function(_)
+      local max_size = math.floor(vim.o.columns / 3) - 1
+      if vim.o.columns < 90 and M.enabled then
+         M.enabled = false
+         return
+      elseif vim.o.columns >= 90 then
+         M.enabled = true
+      end
+
       if M.changed_song then
          track_index = 1
          direction = 1
@@ -116,7 +124,7 @@ function M.setup()
 end
 
 function M.get_status()
-   return M.playing
+   return M.playing and M.enabled
 end
 
 function M.lualine()

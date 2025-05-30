@@ -9,6 +9,7 @@ return {
             theme = 'catppuccin',
             icons_enabled = true,
             globalstatus = true,
+            refresh = { statusline = 10 },
          },
          sections = {
             lualine_a = {
@@ -19,14 +20,14 @@ return {
                   end,
                },
             },
-            lualine_x = {
+            lualine_c = {
+               { 'filename', separator = { right = '' } },
+               { '%=', separator = '' },
                {
                   require('utils.mpris').lualine,
                   cond = require('utils.mpris').get_status,
+                  separator = '',
                },
-               'encoding',
-               'fileformat',
-               'filetype',
             },
          },
          tabline = {
