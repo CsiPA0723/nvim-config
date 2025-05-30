@@ -33,7 +33,7 @@ return {
             c = {
                name = 'Comment',
                spec = gen_spec.treesitter({
-                  a = { '@comment.inner' },
+                  a = { '@comment.outer' },
                   i = { '@comment.inner' },
                }),
             },
