@@ -1,9 +1,9 @@
 # CsiPA's Neovim config
 <!-- markdownlint-disable MD033 -->
 
-<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugins?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
-<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/leaderkey?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
-<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugin-manager?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
+<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img alt="Plugins installed: ..." src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugins?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
+<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img alt="Leaderkey: Space" src="https://dotfyle.com/CsiPA0723/nvim-config/badges/leaderkey?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
+<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img alt="Plugin manager: Lazy.nvim" src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugin-manager?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
 
 ## Needed programs before installing
 
