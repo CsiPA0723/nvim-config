@@ -8,6 +8,8 @@ return {
       event = 'InsertEnter',
       build = 'cargo build --release',
       dependencies = {
+         { 'saghen/blink.compat', version = '*', config = true },
+         { 'xzbdmw/colorful-menu.nvim', config = true },
          {
             'L3MON4D3/LuaSnip',
             version = '2.*',
@@ -21,8 +23,6 @@ return {
                },
             },
          },
-         { 'saghen/blink.compat', version = '*', config = true },
-         { 'xzbdmw/colorful-menu.nvim', config = true },
          {
             'supermaven-inc/supermaven-nvim',
             event = 'InsertEnter',
@@ -93,13 +93,13 @@ return {
                   transform_items = function(_, items)
                      for _, item in ipairs(items) do
                         item.kind_icon = ''
-                        item.kind_name = 'render-markdown'
+                        item.kind_name = 'RenderMarkdown'
                      end
                      return items
                   end,
                },
                supermaven = {
-                  name = 'Supermaven',
+                  name = 'supermaven',
                   module = 'blink.compat.source',
                   score_offset = 3,
                   async = true,
@@ -119,7 +119,7 @@ return {
                   transform_items = function(_, items)
                      for _, item in ipairs(items) do
                         item.kind_icon = '󰒲'
-                        item.kind_name = 'lazydev'
+                        item.kind_name = 'LazyDev'
                      end
                      return items
                   end,
