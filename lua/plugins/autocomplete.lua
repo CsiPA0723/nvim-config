@@ -58,15 +58,6 @@ return {
                   -- conbined together in label by colorful-menu.nvim.
                   columns = { { 'kind_icon' }, { 'label', gap = 1 } },
                   components = {
-                     -- HACK: for adding custom icon for supermaven | TEMP
-                     kind_icon = {
-                        text = function(ctx)
-                           if ctx.source_name == 'supermaven' then
-                              return '' .. ctx.icon_gap
-                           end
-                           return ctx.kind_icon .. ctx.icon_gap
-                        end,
-                     },
                      label = {
                         text = function(ctx)
                            return require('colorful-menu').blink_components_text(
@@ -99,18 +90,39 @@ return {
                   name = 'RenderMarkdown',
                   module = 'render-markdown.integ.blink',
                   fallbacks = { 'lsp' },
+                  transform_items = function(_, items)
+                     for _, item in ipairs(items) do
+                        item.kind_icon = ''
+                        item.kind_name = 'render-markdown'
+                     end
+                     return items
+                  end,
                },
                supermaven = {
-                  name = 'supermaven',
+                  name = 'Supermaven',
                   module = 'blink.compat.source',
                   score_offset = 3,
                   async = true,
+                  transform_items = function(_, items)
+                     for _, item in ipairs(items) do
+                        item.kind_icon = ''
+                        item.kind_name = 'supermaven'
+                     end
+                     return items
+                  end,
                },
                lazydev = {
                   name = 'LazyDev',
                   module = 'lazydev.integrations.blink',
-                  -- make lazydev completions top priority (see `:h blink.cmp`)
+                  -- NOTE: make lazydev completions top priority (see `:h blink.cmp`)
                   score_offset = 100,
+                  transform_items = function(_, items)
+                     for _, item in ipairs(items) do
+                        item.kind_icon = '󰒲'
+                        item.kind_name = 'lazydev'
+                     end
+                     return items
+                  end,
                },
             },
          },
