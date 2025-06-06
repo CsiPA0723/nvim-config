@@ -4,9 +4,8 @@ return {
       'numToStr/Comment.nvim',
       event = 'VeryLazy',
       config = function()
-         local wk = require('which-key')
          require('Comment').setup()
-         wk.add({
+         require('which-key').add({
             { 'gb', group = 'Comment toggle blockwise' },
             { 'gc', group = 'Comment toggle linewise' },
          })

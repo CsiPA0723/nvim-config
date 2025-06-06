@@ -1,14 +1,8 @@
 local notify_opts = { group = 'observer' }
 
-require('fidget.notification').set_config(notify_opts.group, {
-   name = 'Observer',
-   icon = ' ',
-   ttl = 4,
-}, true)
-
 ---@class Observer
 ---@field filename string
----@field event uv_fs_event_t
+---@field event uv.uv_fs_event_t
 ---@field callback function
 local Observer = {}
 
@@ -25,6 +19,12 @@ function Observer:new(filename, callback)
    t.event = event
    t.filename = vim.fn.fnamemodify(filename, ':p')
    t.callback = callback
+
+   require('fidget.notification').set_config(notify_opts.group, {
+      name = 'Observer',
+      icon = ' ',
+      ttl = 4,
+   }, true)
 
    return t
 end
