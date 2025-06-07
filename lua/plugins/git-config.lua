@@ -36,6 +36,21 @@ return {
       cmd = 'Neogit',
       ---@module "neogit"
       ---@type NeogitConfig
-      opts = { graph_style = vim.g.neovide and 'unicode' or 'kitty' },
+      opts = {
+         graph_style = vim.g.neovide and 'unicode' or 'kitty',
+         integrations = { diffview = true, snacks = true },
+         mappings = { status = { ['q'] = false } },
+      },
+      init = function(_)
+         autocmd('FileType', {
+            pattern = { 'NeogitStatus' },
+            callback = function(args)
+               require('which-key').add({
+                  { 'q', vim.cmd.quit, desc = 'Quit' },
+                  buffer = args.buf,
+               })
+            end,
+         })
+      end,
    },
 }
