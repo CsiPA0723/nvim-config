@@ -1,12 +1,17 @@
 # CsiPA's Neovim config
 <!-- markdownlint-disable MD033 -->
 
-<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugins?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
-<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/leaderkey?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
-<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugin-manager?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
+<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img alt="Plugins installed: ..." src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugins?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
+<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img alt="Leaderkey: Space" src="https://dotfyle.com/CsiPA0723/nvim-config/badges/leaderkey?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
+<a href="https://dotfyle.com/CsiPA0723/nvim-config"><img alt="Plugin manager: Lazy.nvim" src="https://dotfyle.com/CsiPA0723/nvim-config/badges/plugin-manager?style=for-the-badge" /></a> <!-- markdownlint-disable-line MD013 MD045 -->
 
 ## Needed programs before installing
 
+- [playerctl](https://github.com/altdesktop/playerctl)
+- [rigrep](https://github.com/BurntSushi/ripgrep)
+- [fzf](https://github.com/junegunn/fzf)
+- LaTeX
+- tree-sitter-binary
 - Todo ...
 
 ## Install Instructions
@@ -51,6 +56,8 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 - [kevinhwang91/promise-async](https://github.com/kevinhwang91/promise-async)
 - [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+- [mason-org/mason-lspconfig.nvim](https://github.com/mason-org/mason-lspconfig.nvim)
+- [mason-org/mason.nvim](https://github.com/mason-org/mason.nvim)
 - [MeanderingProgrammer/render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim)
 - [mfussenegger/nvim-dap](https://github.com/mfussenegger/nvim-dap)
 - [mfussenegger/nvim-lint](https://github.com/mfussenegger/nvim-lint)
@@ -83,8 +90,6 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 - [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim)
 - [supermaven-inc/supermaven-nvim](https://github.com/supermaven-inc/supermaven-nvim)
 - [ThePrimeagen/vim-be-good](https://github.com/ThePrimeagen/vim-be-good)
-- [mason-org/mason-lspconfig.nvim](https://github.com/mason-org/mason-lspconfig.nvim)
-- [mason-org/mason.nvim](https://github.com/mason-org/mason.nvim)
 - [xzbdmw/colorful-menu.nvim](https://github.com/xzbdmw/colorful-menu.nvim)
 
 </details>
