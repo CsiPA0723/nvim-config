@@ -38,9 +38,9 @@ require('lazy').setup('plugins', {
 -- Configs
 
 if vim.g.neovide then
-   require 'csipa.neovide'
+   require 'core.neovide'
 end
 
-require 'csipa.options'
-require 'csipa.keymaps'
-require 'csipa.autocmds'
+require 'core.options'
+require 'core.keymaps'
+require 'core.autocmds'
