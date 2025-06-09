@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
       '--branch=stable',
       lazypath,
    }
-end ---@diagnostic disable-next-line: undefined-field
+end
 vim.opt.rtp:prepend(lazypath)
 
 -- }}}
@@ -44,3 +44,4 @@ end
 require 'core.options'
 require 'core.keymaps'
 require 'core.autocmds'
+require 'core.snippets'
