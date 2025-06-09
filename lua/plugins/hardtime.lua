@@ -20,6 +20,22 @@ return {
          ttl = 6,
          skip_history = true,
       }, true)
-      require('hardtime').setup(opts)
+      local hardtime = require('hardtime')
+      hardtime.setup(opts)
+
+      Snacks.toggle
+         .new({
+            name = 'Hardtime',
+            id = 'hardtime',
+            notify = true,
+            which_key = true,
+            get = function()
+               return hardtime.is_plugin_enabled
+            end,
+            set = function()
+               hardtime.toggle()
+            end,
+         })
+         :map('<leader>H')
    end,
 }
