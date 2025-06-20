@@ -53,6 +53,7 @@ return {
          },
          completion = {
             menu = {
+               winhighlight = 'Normal:BlinkCmpMenu,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
                draw = {
                   -- We don't need label_description now because label and label_description are already
                   -- conbined together in label by colorful-menu.nvim.
