@@ -17,7 +17,13 @@ return {
    { 'nvim-zh/colorful-winsep.nvim', event = 'WinLeave', config = true },
    { 'dundalek/bloat.nvim', cmd = 'Bloat' },
    {
-      'CsiPA0723/which-key.nvim',
+      'nvzone/timerly',
+      dependencies = { 'nvzone/volt' },
+      cmd = 'TimerlyToggle',
+      config = true,
+   },
+   {
+      'CsiPA0723/which-key.nvim', -- Temporary fork
       lazy = false,
       ---@module "which-key"
       ---@type wk.Opts
