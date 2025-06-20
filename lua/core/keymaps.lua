@@ -151,7 +151,7 @@ wk.add({
                zindex = 50,
                resize = true,
                fixbuf = true,
-               border = 'rounded',
+               border = vim.o.winborder:lower() or 'rounded',
                bo = { modifiable = true },
                keys = { q = 'close' },
             })

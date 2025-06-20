@@ -20,6 +20,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.loader.enable()
 
+vim.o.winborder = 'rounded'
 _G.autocmd = vim.api.nvim_create_autocmd
 _G.augroup = vim.api.nvim_create_augroup
 
@@ -31,7 +32,7 @@ require('lazy').setup('plugins', {
    checker = { enabled = true },
    diff = { cmd = 'diffview.nvim' },
    git = { timeot = 60 }, -- 1 min timeout for tasks
-   ui = { border = 'rounded' },
+   ui = { border = vim.o.winborder:lower() or 'rounded' },
 })
 
 -------------------------------------------------------------------------------
