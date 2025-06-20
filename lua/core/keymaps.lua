@@ -263,6 +263,5 @@ wk.add({ -- Misc
       { 'n', 'nzzzv' },
       { 'N', 'Nzzzv' },
    },
-   { '<leader>p', '"_dP', desc = 'Paste (but keep paste data)', mode = 'x' },
    { '<C-space>', '<C-\\><C-n>', desc = 'Exit terminal mode', mode = 't' },
 })
