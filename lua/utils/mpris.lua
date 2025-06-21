@@ -42,6 +42,17 @@ function M.setup()
       })
       :map('<leader>m')
 
+   ---@param out vim.SystemCompleted
+   local on_exit = function(out)
+      if out.code ~= 0 then
+         vim.notify(
+            (out.stderr or 'ERROR') .. '\n' .. (out.stdout or 'Unknown'),
+            vim.log.levels.ERROR,
+            { title = 'Playerctl EXIT', group = notif_group }
+         )
+      end
+   end
+
    M.job_metadata = vim.system({
       'playerctl',
       '--all-players',
@@ -70,7 +81,7 @@ function M.setup()
             end
          end
       end,
-   })
+   }, on_exit)
 
    M.job_status = vim.system({
       'playerctl',
@@ -89,13 +100,13 @@ function M.setup()
          local start = string.find(data or '', 'Playing\n', 1, true)
          M.playing = start ~= nil
       end,
-   })
+   }, on_exit)
 
-   autocmd('VimLeavePre', {
-      group = vim.api.nvim_create_augroup('mpris', {}),
+   autocmd('VimLeave', {
+      group = vim.api.nvim_create_augroup('csipa-mpris', { clear = true }),
       callback = function()
-         M.job_metadata:kill(15)
-         M.job_status:kill(15)
+         M.job_metadata:kill(0)
+         M.job_status:kill(0)
       end,
    })
 
