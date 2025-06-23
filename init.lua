@@ -29,7 +29,7 @@ _G.augroup = vim.api.nvim_create_augroup
 
 require('lazy').setup('plugins', {
    defaults = { lazy = true },
-   checker = { enabled = true },
+   checker = { enabled = true, notify = false },
    diff = { cmd = 'diffview.nvim' },
    git = { timeot = 60 }, -- 1 min timeout for tasks
    ui = { border = vim.o.winborder:lower() or 'rounded' },
