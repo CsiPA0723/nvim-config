@@ -31,6 +31,7 @@ return {
    },
    {
       'mistricky/codesnap.nvim',
+      enabled = not vim.env.SERVER_CONFIG,
       cmd = { 'CodeSnap', 'CodeSnapSave' },
       build = 'make build_generator',
    },
