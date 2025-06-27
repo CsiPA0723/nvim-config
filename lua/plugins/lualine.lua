@@ -19,15 +19,6 @@ return {
                end,
             },
          },
-         lualine_c = {
-            { 'filename', separator = { right = '' } },
-            { '%=', separator = '' },
-            {
-               require('utils.mpris').lualine,
-               cond = require('utils.mpris').get_status,
-               separator = '',
-            },
-         },
       },
       tabline = {
          lualine_a = { { 'tabs', mode = 2, max_length = vim.o.columns } },
@@ -44,7 +35,6 @@ return {
       },
    },
    config = function(_, opts)
-      require('utils.mpris').setup()
       require('lualine').setup(opts)
       vim.o.showtabline = 1
    end,
