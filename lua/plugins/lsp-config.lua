@@ -2,21 +2,6 @@
 return {
    { 'nvim-java/nvim-java', ft = 'java', config = true },
    {
-      'pmizio/typescript-tools.nvim',
-      ft = {
-         'jsx',
-         'javascript',
-         'typescript',
-         'html',
-         'typescriptreact',
-         'typescript.tsx',
-         'angular.html',
-         'htmlangular',
-      },
-      dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-      config = true,
-   },
-   {
       'folke/lazydev.nvim',
       ft = 'lua', -- only load on lua files
       opts = {
@@ -61,17 +46,7 @@ return {
             lua_ls = {
                settings = { Lua = { completion = { callSnippet = 'Replace' } } },
             },
-            angularls = {
-               filetypes = {
-                  'typescript',
-                  'html',
-                  'typescriptreact',
-                  'typescript.tsx',
-                  'htmlangular',
-               },
-            },
             bashls = { settings = { filetypes = { 'sh', 'zsh' } } },
-            jdtls = { jdk = { auto_install = false } },
             jsonls = {
                settings = {
                   json = {
@@ -101,14 +76,9 @@ return {
 
          local ensure_installed = vim.tbl_keys(servers or {})
          vim.list_extend(ensure_installed, {
-            'angularls',
             'bashls',
             'clangd',
-            'cssls',
             'docker_compose_language_service',
-            'glsl_analyzer',
-            -- 'htmx',
-            'jdtls',
             'jsonls',
             'lua_ls',
             'phpactor',

@@ -13,13 +13,10 @@ return {
       opts = {
          ignore_install = { 'yaml' }, -- Already installed by a package
          ensure_installed = {
-            'angular',
             'bash',
             'c',
             'html',
             'http',
-            'java',
-            -- 'latex',
             'lua',
             'luadoc',
             'lua_patterns',
@@ -27,12 +24,8 @@ return {
             'markdown_inline',
             'norg',
             'regex',
-            'svelte',
-            'tsx',
-            'typst',
             'vim',
             'vimdoc',
-            'vue',
          },
          auto_install = true,
          highlight = {
