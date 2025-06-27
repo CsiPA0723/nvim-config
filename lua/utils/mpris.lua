@@ -1,9 +1,8 @@
-local Job = require('plenary.job')
 local notif_group = 'mpris'
 
 local notify = vim.schedule_wrap(vim.notify)
 
-local on_stderr = function(error, data, _)
+local on_stderr = function(error, data)
    error = error or 'Error'
    data = data or 'Unknown error'
    notify(error .. '\n' .. data, vim.log.levels.ERROR, { group = notif_group })
@@ -43,55 +42,73 @@ function M.setup()
       })
       :map('<leader>m')
 
-   ---@diagnostic disable-next-line: missing-fields
-   M.job_metadata = Job:new({
-      command = 'playerctl',
-      args = {
-         '--all-players',
-         '--player',
-         table.concat(M.media_players, ','),
-         '--follow',
-         'metadata',
-      },
-      on_stderr = on_stderr,
-      on_stdout = function(error, data, self)
-         if error then
-            on_stderr(error, nil, self)
-         end
-         local artist = string.match(data, '%s+xesam:artist%s+(.*)')
-         local title = string.match(data, '%s+xesam:title%s+(.*)')
+   ---@param out vim.SystemCompleted
+   local on_exit = function(out)
+      if out.code ~= 0 then
+         vim.notify(
+            (out.stderr or 'ERROR') .. '\n' .. (out.stdout or 'Unknown'),
+            vim.log.levels.ERROR,
+            { title = 'Playerctl EXIT', group = notif_group }
+         )
+      end
+   end
 
-         if nil == M.artist or artist ~= M.artist and nil ~= artist then
-            M.artist = artist or M.artist
-            M.changed_song = true
+   M.job_metadata = vim.system({
+      'playerctl',
+      '--all-players',
+      '--player',
+      table.concat(M.media_players, ','),
+      '--follow',
+      'metadata',
+   }, {
+      text = true,
+      stderr = on_stderr,
+      stdout = function(error, data)
+         if error then
+            on_stderr(error, data)
          end
-         if nil == M.title or title ~= M.title and nil ~= title then
-            M.title = title or M.title
-            M.changed_song = true
+         if data then
+            local artist = string.match(data, '%s+xesam:artist%s+(.-)\n')
+            local title = string.match(data, '%s+xesam:title%s+(.-)\n')
+
+            if nil == M.artist or artist ~= M.artist and nil ~= artist then
+               M.artist = artist or M.artist
+               M.changed_song = true
+            end
+            if nil == M.title or title ~= M.title and nil ~= title then
+               M.title = title or M.title
+               M.changed_song = true
+            end
          end
       end,
-   })
-   M.job_metadata:start()
+   }, on_exit)
 
-   ---@diagnostic disable-next-line: missing-fields
-   M.job_status = Job:new({
-      command = 'playerctl',
-      args = {
-         '--all-players',
-         '--player',
-         table.concat(M.media_players, ','),
-         '--follow',
-         'status',
-      },
-      on_stderr = on_stderr,
-      on_stdout = function(error, data, self)
+   M.job_status = vim.system({
+      'playerctl',
+      '--all-players',
+      '--player',
+      table.concat(M.media_players, ','),
+      '--follow',
+      'status',
+   }, {
+      text = true,
+      stderr = on_stderr,
+      stdout = function(error, data)
          if error then
-            on_stderr(error, nil, self)
+            on_stderr(error, data)
          end
-         M.playing = data == 'Playing'
+         local start = string.find(data or '', 'Playing\n', 1, true)
+         M.playing = start ~= nil
+      end,
+   }, on_exit)
+
+   autocmd('VimLeave', {
+      group = vim.api.nvim_create_augroup('csipa-mpris', { clear = true }),
+      callback = function()
+         M.job_metadata:kill(0)
+         M.job_status:kill(0)
       end,
    })
-   M.job_status:start()
 
    local track_index = 1
    local direction = 1

@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
       '--branch=stable',
       lazypath,
    }
-end ---@diagnostic disable-next-line: undefined-field
+end
 vim.opt.rtp:prepend(lazypath)
 
 -- }}}
@@ -20,6 +20,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.loader.enable()
 
+vim.o.winborder = 'square'
 _G.autocmd = vim.api.nvim_create_autocmd
 _G.augroup = vim.api.nvim_create_augroup
 
@@ -28,11 +29,11 @@ _G.augroup = vim.api.nvim_create_augroup
 
 require('lazy').setup('plugins', {
    defaults = { lazy = true },
-   checker = { enabled = true },
+   checker = { enabled = true, notify = false },
    diff = { cmd = 'diffview.nvim' },
    git = { timeot = 60 }, -- 1 min timeout for tasks
    ui = {
-      border = 'none',
+      border = vim.o.winborder:lower() or 'square',
       icons = {
          cmd = 'Φ',
          config = '§',
@@ -72,3 +73,4 @@ end
 require 'core.options'
 require 'core.keymaps'
 require 'core.autocmds'
+require 'core.snippets'

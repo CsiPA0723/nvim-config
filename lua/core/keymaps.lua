@@ -151,7 +151,7 @@ wk.add({
                zindex = 50,
                resize = true,
                fixbuf = true,
-               border = 'rounded',
+               border = vim.o.winborder:lower() or 'rounded',
                bo = { modifiable = true },
                keys = { q = 'close' },
             })
@@ -263,6 +263,5 @@ wk.add({ -- Misc
       { 'n', 'nzzzv' },
       { 'N', 'Nzzzv' },
    },
-   { '<leader>p', '"_dP', desc = 'Paste (but keep paste data)', mode = 'x' },
    { '<C-space>', '<C-\\><C-n>', desc = 'Exit terminal mode', mode = 't' },
 })

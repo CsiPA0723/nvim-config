@@ -17,8 +17,14 @@ return {
    { 'nvim-zh/colorful-winsep.nvim', event = 'WinLeave', config = true },
    { 'dundalek/bloat.nvim', cmd = 'Bloat' },
    {
-      'folke/which-key.nvim',
-      event = 'VeryLazy',
+      'nvzone/timerly',
+      dependencies = { 'nvzone/volt' },
+      cmd = 'TimerlyToggle',
+      config = true,
+   },
+   {
+      'CsiPA0723/which-key.nvim', -- Temporary fork
+      lazy = false,
       ---@module "which-key"
       ---@type wk.Opts
       opts = { preset = 'modern', win = { no_overlap = false }, delay = 500 },
