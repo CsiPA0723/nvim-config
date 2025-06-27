@@ -3,6 +3,7 @@ local notify_opts = { group = 'hardtime' }
 ---@type LazyPluginSpec
 return {
    'm4xshen/hardtime.nvim',
+   enabled = not vim.env.SERVER_CONFIG,
    event = 'VeryLazy',
    dependencies = { 'MunifTanjim/nui.nvim' },
    opts = {
