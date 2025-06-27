@@ -20,7 +20,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.loader.enable()
 
-vim.o.winborder = 'square'
+vim.o.winborder = 'bold'
 _G.autocmd = vim.api.nvim_create_autocmd
 _G.augroup = vim.api.nvim_create_augroup
 
@@ -33,7 +33,7 @@ require('lazy').setup('plugins', {
    diff = { cmd = 'diffview.nvim' },
    git = { timeot = 60 }, -- 1 min timeout for tasks
    ui = {
-      border = vim.o.winborder:lower() or 'square',
+      border = vim.o.winborder:lower() or 'bold',
       icons = {
          cmd = 'Φ',
          config = '§',
