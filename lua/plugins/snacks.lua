@@ -56,23 +56,7 @@ return {
                      Snacks.dashboard.pick('zoxide')
                   end,
                },
-               {
-                  icon = ' ',
-                  key = 'n',
-                  desc = 'Config',
-                  action = function()
-                     Snacks.dashboard.pick(
-                        'files',
-                        { cwd = vim.fn.stdpath('config') }
-                     )
-                  end,
-               },
-               {
-                  icon = ' ',
-                  key = 'r',
-                  desc = 'Restore last session',
-                  section = 'session',
-               },
+
                {
                   icon = '󰒲 ',
                   key = 'L',
