@@ -1,4 +1,4 @@
-local PROJECT_DIR = vim.fn.expand(vim.env.PROJECT_DIR or '~/Projects')
+local PROJECT_DIR = vim.fn.expand(vim.env.PROJECT_DIR or '~/Shortcuts')
 local CMD = 'Project'
 
 ---@param data string
