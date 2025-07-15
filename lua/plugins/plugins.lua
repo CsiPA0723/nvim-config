@@ -58,11 +58,13 @@ return {
    {
       'CsiPA0723/task-runner.nvim',
       dir = '/home/csipa/Projects/Personal/task-runner.nvim',
-      dependencies = { 'nvim-lua/plenary.nvim', 'folke/snacks.nvim' },
       event = 'VeryLazy',
+      dependencies = { 'folke/snacks.nvim' },
       ---@type TaskRunner.config
       opts = {
-         tasks_dir = '/home/csipa/Projects/Personal/task-runner.nvim/examples',
+         options = {
+            tasks_dir = '/home/csipa/Projects/Personal/task-runner.nvim/examples',
+         },
       },
       config = function(_, opts)
          require('fidget.notification').set_config('TaskRunner', {

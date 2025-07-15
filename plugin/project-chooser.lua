@@ -6,8 +6,8 @@ local CMD = 'Project'
 ---@return string path
 local function parse(data)
    local fragments = vim.split(data, ' ', { plain = true, trimempty = true })
-   local project = fragments[1]
-   local path = PROJECT_DIR .. '/' .. (project or '')
+   local project = fragments[1] or ''
+   local path = PROJECT_DIR .. '/' .. project
    return project, path
 end
 
@@ -15,11 +15,14 @@ end
 local function execute(input)
    local project, path = parse(input.args)
    if vim.fn.isdirectory(path) then
-      require('persistence').stop()
+      local p = require('persistence')
+      p.save()
+      p.stop()
       vim.uv.chdir(path)
-      require('persistence').load()
+      p.load()
+      p.start()
    else
-      error('Project not found: ' .. path, vim.log.levels.ERROR)
+      error('`' .. project .. '` not found: ' .. path, vim.log.levels.ERROR)
    end
 end
 
