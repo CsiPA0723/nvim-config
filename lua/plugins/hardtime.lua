@@ -1,4 +1,4 @@
-local notify_opts = { group = 'hardtime' }
+local notify_group = 'hardtime'
 
 ---@type LazyPluginSpec
 return {
@@ -10,11 +10,11 @@ return {
       disable_mouse = false,
       disabled_filetypes = { 'LuaPatterns', 'RegexPatterns' },
       callback = function(text)
-         vim.notify(text, vim.log.levels.WARN, notify_opts)
+         vim.notify(text, vim.log.levels.WARN, { group = notify_group })
       end,
    },
    config = function(_, opts)
-      require('fidget.notification').set_config(notify_opts.group, {
+      require('fidget.notification').set_config(notify_group, {
          name = 'Hardtime',
          icon = ' ',
          ttl = 6,
@@ -27,13 +27,20 @@ return {
          .new({
             name = 'Hardtime',
             id = 'hardtime',
-            notify = true,
+            notify = false,
             which_key = true,
             get = function()
                return hardtime.is_plugin_enabled
             end,
             set = function()
                hardtime.toggle()
+               vim.notify(
+                  (hardtime.is_plugin_enabled and 'Enabled' or 'Disabled')
+                     .. ' plugin!',
+                  hardtime.is_plugin_enabled and vim.log.levels.INFO
+                     or vim.log.levels.WARN,
+                  { group = notify_group, history = false }
+               )
             end,
          })
          :map('<leader>H')
