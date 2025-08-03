@@ -3,12 +3,7 @@ return {
    'j-hui/fidget.nvim',
    priority = 1000,
    lazy = false,
-   opts = {
-      notification = {
-         override_vim_notify = true,
-         window = { winblend = 0 },
-      },
-   },
+   opts = { notification = { override_vim_notify = true } },
    config = function(_, opts)
       require('fidget').setup(opts)
       local notif = require('fidget.notification')
