@@ -1,9 +1,14 @@
 ---@type LazyPluginSpec
 return {
    'j-hui/fidget.nvim',
-   priority = 1000,
+   priority = 999,
    lazy = false,
-   opts = { notification = { override_vim_notify = true } },
+   opts = {
+      notification = {
+         filter = vim.log.levels.INFO,
+         override_vim_notify = true,
+      },
+   },
    config = function(_, opts)
       require('fidget').setup(opts)
       local notif = require('fidget.notification')
