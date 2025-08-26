@@ -75,4 +75,21 @@ return {
          require('task-runner').setup(opts)
       end,
    },
+   {
+      'CsiPA0723/i18n.nvim',
+      dev = true,
+      dir = '/home/csipa/Projects/Personal/i18n.nvim',
+      event = 'VeryLazy',
+      dependencies = { 'nvim-treesitter/nvim-treesitter' },
+      ---@type i18n.config
+      opts = {},
+      config = function(_, opts)
+         require('fidget.notification').set_config('i18n', {
+            name = 'i18n',
+            icon = ' ',
+            ttl = 4,
+         }, true)
+         require('i18n').setup(opts)
+      end,
+   },
 }
