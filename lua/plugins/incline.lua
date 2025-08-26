@@ -57,5 +57,16 @@ return {
          return template
       end
       require('incline').setup(opts)
+
+      Snacks.toggle
+         .new({
+            name = 'Incline',
+            id = 'incline',
+            notify = false,
+            which_key = true,
+            get = require('incline').is_enabled,
+            set = require('incline').toggle,
+         })
+         :map('<leader>I')
    end,
 }
