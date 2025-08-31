@@ -69,10 +69,10 @@ autocmd('LspAttach', {
       local client = vim.lsp.get_client_by_id(event.data.client_id)
 
       --[[ INFO: 
-    --  The following two autocommands are used to highlight references of the
-    --  word under your cursor when your cursor rests there for a little while.
-    --  When you move your cursor, the highlights will be cleared (the second autocommand).
-    --]]
+      --   The following two autocommands are used to highlight references of the
+      --   word under your cursor when your cursor rests there for a little while.
+      --   When you move your cursor, the highlights will be cleared (the second autocommand).
+      --]]
       if client and client.server_capabilities.documentHighlightProvider then
          local group = augroup('highlight-references', { clear = true })
          autocmd({ 'CursorHold', 'CursorHoldI' }, {
