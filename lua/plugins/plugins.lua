@@ -57,6 +57,7 @@ return {
    },
    {
       'CsiPA0723/task-runner.nvim',
+      dev = true,
       dir = '/home/csipa/Projects/Personal/task-runner.nvim',
       event = 'VeryLazy',
       dependencies = { 'folke/snacks.nvim' },
