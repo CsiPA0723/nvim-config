@@ -1,6 +1,9 @@
 local wk = require('which-key')
 
-wk.add({ -- Clipboard
+-------------------------------------------------------------------------------
+-- Clipboard
+
+wk.add({
    { '<leader>c', group = 'Clipboard', icon = '󱓦' },
    { '<leader>cp', '"+p', desc = 'Paste down', mode = { 'n', 'v' } },
    { '<leader>cP', '"+P', desc = 'Paste up', mode = { 'n', 'v' } },
@@ -9,13 +12,19 @@ wk.add({ -- Clipboard
    { '<leader>cY', '"+Y', desc = 'Copy' },
 })
 
-wk.add({ -- Buffer
+-------------------------------------------------------------------------------
+-- Buffer
+
+wk.add({
    { '<leader>b', group = 'Buffer' },
    { '<leader>bd', Snacks.bufdelete.delete, desc = 'Delete buffer' },
    { '<leader>bD', Snacks.bufdelete.all, desc = 'Delete ALL buffer' },
 })
 
-wk.add({ -- Search
+-------------------------------------------------------------------------------
+-- Search
+
+wk.add({
    { '<leader>s', group = 'Search' },
    { '<leader>sh', Snacks.picker.help, desc = 'Help' },
    { '<leader>sk', Snacks.picker.keymaps, desc = 'Keymaps' },
@@ -51,7 +60,10 @@ wk.add({ -- Search
    },
 })
 
-wk.add({ -- Workspace
+-------------------------------------------------------------------------------
+-- Workspace
+
+wk.add({
    { '<leader>w', group = 'Workspace', icon = '' },
    {
       '<leader>wt',
@@ -61,7 +73,10 @@ wk.add({ -- Workspace
    },
 })
 
-wk.add({ -- Git
+-------------------------------------------------------------------------------
+-- Git
+
+wk.add({
    { '<leader>g', group = 'Git' },
    { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
    { '<leader>gc', '<cmd>Neogit commit<CR>', desc = 'Commit' },
@@ -80,7 +95,10 @@ wk.add({ -- Git
    { '<leader>gl', Snacks.lazygit.open, desc = 'Lazygit' },
 })
 
-wk.add({ -- Document
+-------------------------------------------------------------------------------
+-- Document
+
+wk.add({
    { '<leader>d', group = 'Document', icon = '󰈙 ' },
    { '<leader>dy', 'ggVG"+y', desc = 'Yank all lines' },
    { '<leader>dP', 'ggVG"+p', desc = 'Paste over all lines' },
@@ -126,7 +144,10 @@ wk.add({ -- Document
    },
 })
 
-wk.add({ -- Debug
+-------------------------------------------------------------------------------
+-- Debug
+
+wk.add({
    { '<F1>', require('dap').step_into, desc = 'Debug: Step Into' },
    { '<F2>', require('dap').step_over, desc = 'Debug: Step Over' },
    { '<F3>', require('dap').step_out, desc = 'Debug: Step Out' },
@@ -136,7 +157,9 @@ wk.add({ -- Debug
    { '<F7>', require('dapui').toggle, desc = 'Debug: See last session result' },
 })
 
+-------------------------------------------------------------------------------
 -- Leader prefix
+
 wk.add({
    {
       '<leader>t',
@@ -234,6 +257,9 @@ wk.add({
       icon = '',
    },
 })
+
+-------------------------------------------------------------------------------
+-- Misc
 
 wk.add({ -- Misc
    { --  Move lines
