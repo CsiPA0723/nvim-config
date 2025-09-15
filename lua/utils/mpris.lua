@@ -20,7 +20,7 @@ local M = {
    lualine_component = 'Unknown - Unknown',
    playing = false,
    changed_song = false,
-   media_players = { 'tidal-hifi', 'strawberry', 'spotify' },
+   media_players = { 'mpd', 'tidal-hifi', 'strawberry', 'spotify' },
 }
 
 function M.setup()
@@ -66,6 +66,7 @@ function M.setup()
       stdout = function(error, data)
          if error then
             on_stderr(error, data)
+            return
          end
          if data then
             local artist = string.match(data, '%s+xesam:artist%s+(.-)\n')
@@ -96,17 +97,25 @@ function M.setup()
       stdout = function(error, data)
          if error then
             on_stderr(error, data)
+            return
          end
          local start = string.find(data or '', 'Playing\n', 1, true)
          M.playing = start ~= nil
       end,
    }, on_exit)
 
-   autocmd('VimLeave', {
-      group = vim.api.nvim_create_augroup('csipa-mpris', { clear = true }),
+   autocmd('VimLeavePre', {
+      group = augroup('csipa-mpris', { clear = true }),
       callback = function()
-         M.job_metadata:kill(0)
-         M.job_status:kill(0)
+         if not M.job_metadata:is_closing() then
+            -- M.job_metadata:kill('TERM')
+            vim.cmd('!kill ' .. M.job_metadata.pid)
+         end
+         if not M.job_status:is_closing() then
+            -- M.job_status:kill('TERM')
+            vim.cmd('!kill ' .. M.job_status.pid)
+         end
+         vim.fn.timer_stop(M.timer)
       end,
    })
 
@@ -114,7 +123,7 @@ function M.setup()
    local direction = 1
    local wait = false
 
-   vim.fn.timer_start(500, function(_)
+   M.timer = vim.fn.timer_start(500, function(_)
       local max_size = math.floor(vim.o.columns / 3) - 1
       if vim.o.columns < 90 and M.can_fit then
          M.can_fit = false
