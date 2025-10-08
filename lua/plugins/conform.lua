@@ -39,6 +39,8 @@ return {
          php = { 'pretty-php' },
          c = { 'clang-format' },
          cpp = { 'clang-format' },
+         python = { 'isort', 'black' },
+         rust = { 'rustfmt', lsp_format = 'fallback' },
       },
    },
    config = function(_, opts)

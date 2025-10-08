@@ -3,8 +3,8 @@ local notif_group = 'mpris'
 local notify = vim.schedule_wrap(vim.notify)
 
 local on_stderr = function(error, data)
-   error = error or 'Error'
-   data = data or 'Unknown error'
+   error = error or 'Playerctl Error'
+   data = data or 'Something went wrong'
    notify(error .. '\n' .. data, vim.log.levels.ERROR, { group = notif_group })
 end
 
@@ -46,7 +46,12 @@ function M.setup()
    local on_exit = function(out)
       if out.code ~= 0 then
          vim.notify(
-            (out.stderr or 'ERROR') .. '\n' .. (out.stdout or 'Unknown'),
+            'Exited with code: '
+               .. out.code
+               .. '\n'
+               .. (out.stderr or 'ERROR')
+               .. '\n'
+               .. (out.stdout or 'Unknown'),
             vim.log.levels.ERROR,
             { title = 'Playerctl EXIT', group = notif_group }
          )
@@ -62,7 +67,6 @@ function M.setup()
       'metadata',
    }, {
       text = true,
-      stderr = on_stderr,
       stdout = function(error, data)
          if error then
             on_stderr(error, data)
@@ -93,7 +97,6 @@ function M.setup()
       'status',
    }, {
       text = true,
-      stderr = on_stderr,
       stdout = function(error, data)
          if error then
             on_stderr(error, data)
@@ -107,13 +110,14 @@ function M.setup()
    autocmd('VimLeavePre', {
       group = augroup('csipa-mpris', { clear = true }),
       callback = function()
+         -- BUG: systemObj:kill() does not work
          if not M.job_metadata:is_closing() then
-            -- M.job_metadata:kill('TERM')
-            vim.cmd('!kill ' .. M.job_metadata.pid)
+            -- M.job_metadata:kill('KILL')
+            vim.uv.kill(M.job_metadata.pid, 9)
          end
          if not M.job_status:is_closing() then
-            -- M.job_status:kill('TERM')
-            vim.cmd('!kill ' .. M.job_status.pid)
+            -- M.job_status:kill('KILL')
+            vim.uv.kill(M.job_status.pid, 9)
          end
          vim.fn.timer_stop(M.timer)
       end,

@@ -147,48 +147,6 @@ autocmd('TermOpen', {
    end,
 })
 
-local session_group = augroup('csipa-session', { clear = true })
-
-autocmd({ 'User' }, {
-   pattern = 'PersistenceSavePost',
-   desc = 'Notify user the session is saved',
-   group = session_group,
-   callback = function()
-      vim.notify(
-         vim.fn.getcwd(),
-         vim.log.levels.INFO,
-         { group = 'session', annote = 'Saved' }
-      )
-   end,
-})
-
-autocmd({ 'User' }, {
-   pattern = 'PersistenceLoadPre',
-   desc = 'Clear lsps before loading new session',
-   group = session_group,
-   callback = function()
-      vim.lsp.stop_client(vim.lsp.get_clients(), true)
-      vim.notify(
-         vim.fn.getcwd(),
-         vim.log.levels.INFO,
-         { group = 'session', annote = 'Loading...', key = 'session_load' }
-      )
-   end,
-})
-
-autocmd({ 'User' }, {
-   pattern = 'PersistenceLoadPost',
-   desc = 'Notify user the session is loaded and start lsps',
-   group = session_group,
-   callback = function()
-      vim.notify(
-         vim.fn.getcwd(),
-         vim.log.levels.INFO,
-         { group = 'session', annote = 'Loaded', key = 'session_load' }
-      )
-   end,
-})
-
 autocmd('DirChanged', {
    pattern = '*',
    group = augroup('dashboard_on_dir_change', { clear = true }),

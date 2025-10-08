@@ -9,13 +9,4 @@ return {
          override_vim_notify = true,
       },
    },
-   config = function(_, opts)
-      require('fidget').setup(opts)
-      local notif = require('fidget.notification')
-      notif.set_config('session', {
-         name = 'Session',
-         icon = '❰❰',
-         ttl = 8,
-      }, true)
-   end,
 }

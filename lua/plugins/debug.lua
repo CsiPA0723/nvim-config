@@ -8,9 +8,9 @@ return {
       'jay-babu/mason-nvim-dap.nvim',
    },
    config = function()
-      local dap = require 'dap'
-      local dapui = require 'dapui'
-      local wk = require 'which-key'
+      local dap = require('dap')
+      local dapui = require('dapui')
+      local wk = require('which-key')
 
       wk.add({
          -- Buffer group

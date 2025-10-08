@@ -40,6 +40,12 @@ return {
          'mason-org/mason.nvim',
          'mason-org/mason-lspconfig.nvim',
          'b0o/schemastore.nvim',
+         {
+            'seblyng/roslyn.nvim',
+            ---@module 'roslyn.config'
+            ---@type RoslynNvimConfig
+            opts = { broad_search = false },
+         },
       },
       config = function()
          require('fidget.notification').set_config('mason', {
@@ -47,7 +53,12 @@ return {
             icon = ' ',
             ttl = 8,
          }, true)
-         require('mason').setup()
+         require('mason').setup({
+            registries = {
+               'github:mason-org/mason-registry',
+               'github:Crashdummyy/mason-registry',
+            },
+         })
 
          local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -75,7 +86,7 @@ return {
             jsonls = {
                settings = {
                   json = {
-                     schemas = require('schemastore').json.schemas {
+                     schemas = require('schemastore').json.schemas({
                         extra = {
                            {
                               description = 'Pretty-PHP Schema',
@@ -84,7 +95,7 @@ return {
                               url = 'https://raw.githubusercontent.com/lkrms/pretty-php/main/resources/prettyphp-schema.json',
                            },
                         },
-                     },
+                     }),
                      validate = { enable = true },
                   },
                },

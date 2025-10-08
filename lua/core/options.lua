@@ -13,7 +13,8 @@ vim.opt.smartindent = true
 vim.opt.diffopt =
    'internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram'
 
-vim.o.ssop = 'buffers,curdir,folds,help,tabpages,winsize,terminal'
+vim.o.ssop =
+   'buffers,curdir,folds,help,globals,tabpages,winpos,winsize,terminal'
 
 vim.opt.wrap = false
 
@@ -46,13 +47,13 @@ vim.opt.splitbelow = true
 
 vim.o.equalalways = false
 
-vim.opt.fillchars:append {
+vim.opt.fillchars:append({
    eob = '~',
    fold = ' ',
    foldopen = '',
    foldsep = ' ',
    foldclose = '',
-}
+})
 
 vim.opt.inccommand = 'split'
 

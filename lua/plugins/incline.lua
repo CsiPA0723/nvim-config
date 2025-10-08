@@ -17,8 +17,9 @@ return {
       },
    },
    config = function(_, opts)
-      local devicons = require 'nvim-web-devicons'
-      local palette = require 'catppuccin.palettes'.get_palette('macchiato')
+      local devicons = require('nvim-web-devicons')
+      local flavour = require('catppuccin').options.flavour
+      local palette = require('catppuccin.palettes').get_palette(flavour)
 
       opts.render = function(props)
          local filetype = vim.bo[props.buf].filetype

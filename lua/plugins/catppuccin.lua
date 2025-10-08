@@ -7,9 +7,10 @@ return {
    ---@module "catppuccin"
    ---@type CatppuccinOptions
    opts = {
-      compile_path = vim.fn.stdpath 'cache' .. '/catppuccin',
+      compile_path = vim.fn.stdpath('cache') .. '/catppuccin',
       kitty = true,
       flavour = 'macchiato',
+      float = { transparent = true, solid = false },
       show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
       term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
       integrations = {

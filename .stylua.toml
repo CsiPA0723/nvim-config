@@ -3,7 +3,7 @@ line_endings = "Unix"
 indent_type = "Spaces"
 indent_width = 3
 quote_style = "AutoPreferSingle"
-call_parentheses = "Input"
+call_parentheses = "Always"
 collapse_simple_statement = "Never"
 
 [sort_requires]

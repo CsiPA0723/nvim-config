@@ -12,7 +12,6 @@ return {
    -- }}}
    { 'neolooong/whichpy.nvim', ft = 'python', config = true },
    { 'fladson/vim-kitty', ft = 'kitty' },
-   { 'folke/persistence.nvim', event = 'BufReadPre', opts = { need = 2 } },
    { 'ThePrimeagen/vim-be-good', cmd = 'VimBeGood' },
    { 'nvim-zh/colorful-winsep.nvim', event = 'WinLeave', config = true },
    { 'dundalek/bloat.nvim', cmd = 'Bloat' },

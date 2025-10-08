@@ -30,6 +30,7 @@ return {
       picker = { enabled = true },
       lazygit = { enabled = true },
       dashboard = {
+         enabled = false,
          width = 50,
          preset = {
             header = vim.g.neovide and header_neovide or header_neovim,
@@ -48,15 +49,6 @@ return {
                      Snacks.dashboard.pick('files')
                   end,
                },
-               {
-                  icon = ' ',
-                  key = 'z',
-                  desc = 'Zoxide',
-                  action = function()
-                     Snacks.dashboard.pick('zoxide')
-                  end,
-               },
-
                {
                   icon = '󰒲 ',
                   key = 'L',
