@@ -8,7 +8,7 @@ local on_stderr = function(error, data)
    notify(error .. '\n' .. data, vim.log.levels.ERROR, { group = notif_group })
 end
 
----@class CsiPA.mpris
+---@class protocols.mpris
 ---@field private _set_enable fun(state: boolean): nil
 ---@field private _get_enable fun(): boolean
 local M = {
