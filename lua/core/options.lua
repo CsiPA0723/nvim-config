@@ -1,4 +1,6 @@
-local configpath = vim.fn.stdpath('config')
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
+vim.o.winborder = 'rounded'
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -57,7 +59,7 @@ vim.opt.fillchars:append({
 
 vim.opt.inccommand = 'split'
 
-vim.g.python3_host_prog = configpath .. '/.venv/bin/python3'
+vim.g.python3_host_prog = vim.fn.stdpath('config') .. '/.venv/bin/python3'
 vim.g.loaded_perl_provider = 0
 
 vim.filetype.add({

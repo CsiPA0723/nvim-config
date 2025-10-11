@@ -1,25 +1,36 @@
 -------------------------------------------------------------------------------
 -- Lazy Plugin Manager
 
--- Bootstrap Lazy.nvim plugin manager https://github.com/folke/lazy.nvim#-installation
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-   vim.fn.system({
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+   local out = vim.fn.system({
       'git',
       'clone',
       '--filter=blob:none',
-      'https://github.com/folke/lazy.nvim.git',
       '--branch=stable',
+      lazyrepo,
       lazypath,
    })
+   if vim.v.shell_error ~= 0 then
+      vim.api.nvim_echo({
+         { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
+         { out, 'WarningMsg' },
+         { '\nPress any key to exit...' },
+      }, true, {})
+      vim.fn.getchar()
+      os.exit(1)
+   end
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
-vim.loader.enable()
+require('core.options')
 
-vim.o.winborder = 'rounded'
+if vim.g.neovide then
+   require('core.neovide')
+end
+
 _G.autocmd = vim.api.nvim_create_autocmd
 _G.augroup = vim.api.nvim_create_augroup
 
@@ -30,6 +41,7 @@ require('lazy').setup('plugins', {
    defaults = { lazy = true },
    checker = { enabled = true, notify = false },
    diff = { cmd = 'diffview.nvim' },
+   install = { colorscheme = { 'catppuccin' } },
    git = { timeot = 60 }, -- 1 min timeout for tasks
    ui = { border = vim.o.winborder:lower() or 'rounded' },
 })
@@ -37,11 +49,6 @@ require('lazy').setup('plugins', {
 -------------------------------------------------------------------------------
 -- Configs
 
-if vim.g.neovide then
-   require('core.neovide')
-end
-
-require('core.options')
 require('core.keymaps')
 require('core.autocmds')
 require('core.snippets')
