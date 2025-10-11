@@ -1,28 +1,10 @@
 ---@type LazyPluginSpec[]
 return {
-   -- Shared dependencies {{{
-   { 'nvim-treesitter/nvim-treesitter', branch = 'master', optional = true },
-   {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      branch = 'master',
-      optional = true,
-   },
-   { 'nvim-tree/nvim-web-devicons', optional = true },
-   { 'nvim-lua/plenary.nvim', optional = true },
-   -- }}}
    { 'neolooong/whichpy.nvim', ft = 'python', config = true },
-   { 'fladson/vim-kitty', ft = 'kitty' },
-   { 'ThePrimeagen/vim-be-good', cmd = 'VimBeGood' },
    { 'nvim-zh/colorful-winsep.nvim', event = 'WinLeave', config = true },
    { 'dundalek/bloat.nvim', cmd = 'Bloat' },
    {
-      'nvzone/timerly',
-      dependencies = { 'nvzone/volt' },
-      cmd = 'TimerlyToggle',
-      config = true,
-   },
-   {
-      'CsiPA0723/which-key.nvim', -- Temporary fork
+      'folke/which-key.nvim',
       lazy = false,
       ---@module "which-key"
       ---@type wk.Opts
