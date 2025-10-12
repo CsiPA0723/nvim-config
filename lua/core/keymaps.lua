@@ -58,6 +58,11 @@ wk.add({
       end,
       desc = 'Neovim plugins',
    },
+   {
+      '<leader>sm',
+      '<cmd>NeovimTips<CR>',
+      desc = 'Neovim tips',
+   },
 })
 
 -------------------------------------------------------------------------------

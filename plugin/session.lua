@@ -59,7 +59,7 @@ autocmd('VimEnter', {
          not vim.g.session.load_local
          or vim.fn.filereadable(session_file) == 0
       then
-         Snacks.dashboard.open()
+         -- Snacks.dashboard.open()
          return
       end
       load_session(session_file)

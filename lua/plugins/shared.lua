@@ -8,4 +8,5 @@ return {
    },
    { 'nvim-tree/nvim-web-devicons', optional = true },
    { 'nvim-lua/plenary.nvim', optional = true },
+   { 'MunifTanjim/nui.nvim', optional = true },
 }

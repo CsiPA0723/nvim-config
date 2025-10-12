@@ -36,6 +36,9 @@ return {
       ---@type blink.cmp.Config
       opts = {
          appearance = { nerd_font_variant = 'normal' },
+         enabled = function()
+            return vim.bo.filetype ~= 'neovim-tips-search'
+         end,
          keymap = {
             preset = 'none',
             ['<C-n>'] = { 'select_next', 'fallback' },
