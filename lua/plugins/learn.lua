@@ -12,7 +12,7 @@ return {
       },
       opts = {
          -- OPTIONAL: Location of user defined tips (default value shown below)
-         user_file = vim.fn.stdpath('data') .. '/neovim_tips/user_tips.md',
+         user_file = vim.fn.stdpath('config') .. '/neovim_tips/user_tips.md',
          -- OPTIONAL: Prefix for user tips to avoid conflicts (default: "[User] ")
          user_tip_prefix = '[User] ',
          -- OPTIONAL: Show warnings when user tips conflict with builtin (default: true)
