@@ -36,9 +36,11 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 
 - [b0o/incline.nvim](https://github.com/b0o/incline.nvim)
 - [b0o/schemastore.nvim](https://github.com/b0o/schemastore.nvim)
+- [bngarren/checkmate.nvim](https://github.com/bngarren/checkmate.nvim)
 - [catppuccin/nvim](https://github.com/catppuccin/nvim)
 - [CsiPA0723/task-runner.nvim](https://github.com/CsiPA0723/task-runner.nvim)
 - [cuducos/yaml.nvim](https://github.com/cuducos/yaml.nvim)
+- [duqcyxwd/stringbreaker.nvim](https://github.com/duqcyxwd/stringbreaker.nvim)
 - [echasnovski/mini.ai](https://github.com/echasnovski/mini.ai)
 - [echasnovski/mini.align](https://github.com/echasnovski/mini.align)
 - [echasnovski/mini.surround](https://github.com/echasnovski/mini.surround)
@@ -88,7 +90,6 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 - [sindrets/diffview.nvim](https://github.com/sindrets/diffview.nvim)
 - [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim)
 - [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim)
-- [supermaven-inc/supermaven-nvim](https://github.com/supermaven-inc/supermaven-nvim)
 - [ThePrimeagen/vim-be-good](https://github.com/ThePrimeagen/vim-be-good)
 - [xzbdmw/colorful-menu.nvim](https://github.com/xzbdmw/colorful-menu.nvim)
 

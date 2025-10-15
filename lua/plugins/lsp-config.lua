@@ -123,7 +123,7 @@ return {
             'jsonls',
             'lua_ls',
             'phpactor',
-            'pylsp',
+            'pyright',
             'taplo',
             'yamlls',
          })

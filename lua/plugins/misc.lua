@@ -37,6 +37,33 @@ return {
       dependencies = 'nvim-treesitter/nvim-treesitter',
    },
    {
+      'duqcyxwd/stringbreaker.nvim',
+      name = 'string-breaker',
+      dependencies = { 'nvim-treesitter/nvim-treesitter' },
+      cmd = {
+         'BreakString',
+         'BreakStringCancel',
+         'PreviewString',
+         'SaveString',
+         'SyncString',
+      },
+      opts = {
+         preview = {
+            max_length = 1000, -- Maximum preview content length
+            use_float = true, -- Use floating window for preview
+            width = 100, -- Floating window width
+            height = 4, -- Floating window height
+         },
+      },
+   },
+   {
+      'bngarren/checkmate.nvim',
+      ft = 'markdown', -- Lazy loads for Markdown files matching patterns in 'files'
+      opts = {
+         -- files = { "*.md" }, -- any .md file (instead of defaults)
+      },
+   },
+   {
       'CsiPA0723/task-runner.nvim',
       dev = true,
       dir = '/home/csipa/Projects/Personal/task-runner.nvim',
