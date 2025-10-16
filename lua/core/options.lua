@@ -1,6 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.o.winborder = 'rounded'
+vim.o.pumborder = 'rounded'
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -40,9 +41,35 @@ vim.opt.showmode = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+vim.o.virtualedit = 'block'
+
 vim.o.timeoutlen = 500
 
-vim.diagnostic.config({ on_jump = { float = true } })
+vim.diagnostic.config({
+   on_jump = { float = true },
+   signs = {
+      priority = 9999,
+      severity = {
+         min = vim.diagnostic.severity.WARN,
+         max = vim.diagnostic.severity.ERROR,
+      },
+   },
+   underline = {
+      severity = {
+         min = vim.diagnostic.severity.HINT,
+         max = vim.diagnostic.severity.ERROR,
+      },
+   },
+   update_in_insert = false,
+   virtual_lines = false,
+   virtual_text = {
+      current_line = true,
+      severity = {
+         min = vim.diagnostic.severity.ERROR,
+         max = vim.diagnostic.severity.ERROR,
+      },
+   },
+})
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
