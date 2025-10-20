@@ -10,9 +10,9 @@ end
 ---@type LazyPluginSpec[]
 return {
    {
-      'echasnovski/mini.ai',
+      'nvim-mini/mini.ai',
       dependencies = {
-         'echasnovski/mini.extra',
+         'nvim-mini/mini.extra',
          'nvim-treesitter/nvim-treesitter-textobjects',
       },
       event = 'BufRead',
@@ -216,6 +216,6 @@ return {
          end
       end,
    },
-   { 'echasnovski/mini.align', event = 'BufRead', config = true },
-   { 'echasnovski/mini.surround', event = 'BufRead', config = true },
+   { 'nvim-mini/mini.align', event = 'BufRead', config = true },
+   { 'nvim-mini/mini.surround', event = 'BufRead', config = true },
 }

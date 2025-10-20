@@ -30,6 +30,7 @@ return {
       picker = { enabled = true },
       lazygit = { enabled = true },
       dashboard = {
+         enabled = true,
          width = 50,
          preset = {
             header = vim.g.neovide and header_neovide or header_neovim,
@@ -47,31 +48,6 @@ return {
                   action = function()
                      Snacks.dashboard.pick('files')
                   end,
-               },
-               {
-                  icon = ' ',
-                  key = 'z',
-                  desc = 'Zoxide',
-                  action = function()
-                     Snacks.dashboard.pick('zoxide')
-                  end,
-               },
-               {
-                  icon = ' ',
-                  key = 'n',
-                  desc = 'Config',
-                  action = function()
-                     Snacks.dashboard.pick(
-                        'files',
-                        { cwd = vim.fn.stdpath('config') }
-                     )
-                  end,
-               },
-               {
-                  icon = ' ',
-                  key = 'r',
-                  desc = 'Restore last session',
-                  section = 'session',
                },
                {
                   icon = '󰒲 ',

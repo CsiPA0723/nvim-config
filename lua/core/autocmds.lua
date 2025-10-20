@@ -69,10 +69,10 @@ autocmd('LspAttach', {
       local client = vim.lsp.get_client_by_id(event.data.client_id)
 
       --[[ INFO: 
-    --  The following two autocommands are used to highlight references of the
-    --  word under your cursor when your cursor rests there for a little while.
-    --  When you move your cursor, the highlights will be cleared (the second autocommand).
-    --]]
+      --   The following two autocommands are used to highlight references of the
+      --   word under your cursor when your cursor rests there for a little while.
+      --   When you move your cursor, the highlights will be cleared (the second autocommand).
+      --]]
       if client and client.server_capabilities.documentHighlightProvider then
          local group = augroup('highlight-references', { clear = true })
          autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -144,48 +144,6 @@ autocmd('TermOpen', {
       vim.opt_local.number = false
       vim.opt_local.relativenumber = false
       vim.opt_local.colorcolumn = ''
-   end,
-})
-
-local session_group = augroup('csipa-session', { clear = true })
-
-autocmd({ 'User' }, {
-   pattern = 'PersistenceSavePost',
-   desc = 'Notify user the session is saved',
-   group = session_group,
-   callback = function()
-      vim.notify(
-         vim.fn.getcwd(),
-         vim.log.levels.INFO,
-         { group = 'session', annote = 'Saved' }
-      )
-   end,
-})
-
-autocmd({ 'User' }, {
-   pattern = 'PersistenceLoadPre',
-   desc = 'Clear lsps before loading new session',
-   group = session_group,
-   callback = function()
-      vim.lsp.stop_client(vim.lsp.get_clients(), true)
-      vim.notify(
-         vim.fn.getcwd(),
-         vim.log.levels.INFO,
-         { group = 'session', annote = 'Loading...', key = 'session_load' }
-      )
-   end,
-})
-
-autocmd({ 'User' }, {
-   pattern = 'PersistenceLoadPost',
-   desc = 'Notify user the session is loaded and start lsps',
-   group = session_group,
-   callback = function()
-      vim.notify(
-         vim.fn.getcwd(),
-         vim.log.levels.INFO,
-         { group = 'session', annote = 'Loaded', key = 'session_load' }
-      )
    end,
 })
 

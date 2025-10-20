@@ -3,12 +3,12 @@ local notif_group = 'mpris'
 local notify = vim.schedule_wrap(vim.notify)
 
 local on_stderr = function(error, data)
-   error = error or 'Error'
-   data = data or 'Unknown error'
+   error = error or 'Playerctl Error'
+   data = data or 'Something went wrong'
    notify(error .. '\n' .. data, vim.log.levels.ERROR, { group = notif_group })
 end
 
----@class CsiPA.mpris
+---@class protocols.mpris
 ---@field private _set_enable fun(state: boolean): nil
 ---@field private _get_enable fun(): boolean
 local M = {
@@ -20,7 +20,7 @@ local M = {
    lualine_component = 'Unknown - Unknown',
    playing = false,
    changed_song = false,
-   media_players = { 'tidal-hifi', 'strawberry', 'spotify' },
+   media_players = { 'mpd', 'tidal-hifi', 'strawberry', 'spotify' },
 }
 
 function M.setup()
@@ -46,7 +46,12 @@ function M.setup()
    local on_exit = function(out)
       if out.code ~= 0 then
          vim.notify(
-            (out.stderr or 'ERROR') .. '\n' .. (out.stdout or 'Unknown'),
+            'Exited with code: '
+               .. out.code
+               .. '\n'
+               .. (out.stderr or 'ERROR')
+               .. '\n'
+               .. (out.stdout or 'Unknown'),
             vim.log.levels.ERROR,
             { title = 'Playerctl EXIT', group = notif_group }
          )
@@ -62,10 +67,10 @@ function M.setup()
       'metadata',
    }, {
       text = true,
-      stderr = on_stderr,
       stdout = function(error, data)
          if error then
             on_stderr(error, data)
+            return
          end
          if data then
             local artist = string.match(data, '%s+xesam:artist%s+(.-)\n')
@@ -92,21 +97,29 @@ function M.setup()
       'status',
    }, {
       text = true,
-      stderr = on_stderr,
       stdout = function(error, data)
          if error then
             on_stderr(error, data)
+            return
          end
          local start = string.find(data or '', 'Playing\n', 1, true)
          M.playing = start ~= nil
       end,
    }, on_exit)
 
-   autocmd('VimLeave', {
-      group = vim.api.nvim_create_augroup('csipa-mpris', { clear = true }),
+   autocmd('VimLeavePre', {
+      group = augroup('csipa-mpris', { clear = true }),
       callback = function()
-         M.job_metadata:kill(0)
-         M.job_status:kill(0)
+         -- BUG: systemObj:kill() does not work
+         if not M.job_metadata:is_closing() then
+            -- M.job_metadata:kill('KILL')
+            vim.uv.kill(M.job_metadata.pid, 9)
+         end
+         if not M.job_status:is_closing() then
+            -- M.job_status:kill('KILL')
+            vim.uv.kill(M.job_status.pid, 9)
+         end
+         vim.fn.timer_stop(M.timer)
       end,
    })
 
@@ -114,7 +127,7 @@ function M.setup()
    local direction = 1
    local wait = false
 
-   vim.fn.timer_start(500, function(_)
+   M.timer = vim.fn.timer_start(500, function(_)
       local max_size = math.floor(vim.o.columns / 3) - 1
       if vim.o.columns < 90 and M.can_fit then
          M.can_fit = false

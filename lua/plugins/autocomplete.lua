@@ -23,19 +23,13 @@ return {
                },
             },
          },
-         {
-            'supermaven-inc/supermaven-nvim',
-            event = 'InsertEnter',
-            cmd = { 'SupermavenUseFree', 'SupermavenUsePro' },
-            opts = {
-               keymaps = { accept_suggestion = nil },
-               disable_inline_completion = true,
-            },
-         },
       },
       ---@type blink.cmp.Config
       opts = {
          appearance = { nerd_font_variant = 'normal' },
+         enabled = function()
+            return vim.bo.filetype ~= 'neovim-tips-search'
+         end,
          keymap = {
             preset = 'none',
             ['<C-n>'] = { 'select_next', 'fallback' },
@@ -83,7 +77,6 @@ return {
                'path',
                'snippets',
                'buffer',
-               'supermaven',
                'markdown',
             },
             providers = {
@@ -95,19 +88,6 @@ return {
                      for _, item in ipairs(items) do
                         item.kind_icon = ''
                         item.kind_name = 'RenderMarkdown'
-                     end
-                     return items
-                  end,
-               },
-               supermaven = {
-                  name = 'supermaven',
-                  module = 'blink.compat.source',
-                  score_offset = 3,
-                  async = true,
-                  transform_items = function(_, items)
-                     for _, item in ipairs(items) do
-                        item.kind_icon = ''
-                        item.kind_name = 'supermaven'
                      end
                      return items
                   end,
