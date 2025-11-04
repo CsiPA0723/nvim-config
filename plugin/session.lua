@@ -52,7 +52,10 @@ autocmd('VimEnter', {
    group = session_group,
    callback = function()
       local session_file = vim.fn.expand(vim.fn.getcwd() .. '/.session.vim')
-      if vim.fn.argc() > 0 then
+      local command_start = vim.tbl_contains(vim.v.argv, function(v)
+         return vim.startswith(v, '+')
+      end, { predicate = true })
+      if command_start or vim.fn.argc() > 0 then
          return
       end
       if

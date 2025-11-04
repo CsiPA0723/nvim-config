@@ -146,13 +146,3 @@ autocmd('TermOpen', {
       vim.opt_local.colorcolumn = ''
    end,
 })
-
-autocmd('DirChanged', {
-   pattern = '*',
-   group = augroup('dashboard_on_dir_change', { clear = true }),
-   callback = function()
-      if Snacks.dashboard.status.opened then
-         Snacks.dashboard.update()
-      end
-   end,
-})
