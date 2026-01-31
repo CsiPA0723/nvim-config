@@ -23,12 +23,12 @@ return {
    opts = {
       bigfile = { enabled = true },
       explorer = { replace_netrw = false },
-      input = { enabled = true },
-      image = { enabled = true },
-      statuscolumn = { enabled = true },
       gitbrowse = { enabled = true },
-      picker = { enabled = true },
+      image = { enabled = true },
+      input = { enabled = true },
       lazygit = { enabled = true },
+      picker = { enabled = true },
+      statuscolumn = { enabled = true },
       dashboard = {
          enabled = true,
          width = 50,
