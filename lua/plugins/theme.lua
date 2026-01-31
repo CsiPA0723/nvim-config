@@ -196,8 +196,76 @@ return {
       ---@module 'render-markdown'
       ---@type render.md.UserConfig
       opts = {
+         checkbox = { enabled = false },
          completions = { blink = { enabled = true } },
          file_types = { 'markdown', 'quarto' },
+      },
+   },
+   {
+      'bngarren/checkmate.nvim',
+      dependencies = {
+         'nvim-treesitter/nvim-treesitter',
+         'nvim-tree/nvim-web-devicons',
+      },
+      ft = 'markdown',
+      ---@module 'checkmate'
+      ---@type checkmate.Config
+      ---@diagnostic disable-next-line: missing-fields
+      opts = {
+         -- files = { '*.md' },
+         files = {
+            'todo',
+            'TODO',
+            'todos',
+            'TODOS',
+            'todo.md',
+            'TODO.md',
+            'todos.md',
+            'TODOS.md',
+            '*.todo',
+            '*.TODO',
+            '*.todos',
+            '*.TODOS',
+            '*.todo.md',
+            '*.TODO.md',
+            '*.todos.md',
+            '*.TODOS.md',
+         },
+         ---@type table<string,vim.api.keyset.highlight>
+         style = {
+            CheckmateCancelledMarker = { link = 'Error' },
+            CheckmateCancelledMainContent = {
+               link = 'CheckmateCheckedMainContent',
+            },
+            CheckmateInProgressMarker = { link = 'Function' },
+            CheckmateInProgressMainContent = { link = 'Normal' },
+            CheckmateOnHoldMarker = { link = 'Error' },
+            CheckmateOnHoldMainContent = { link = 'Comment' },
+         },
+         todo_states = {
+            ---@diagnostic disable-next-line: missing-fields
+            unchecked = { marker = '󰄱 ' },
+            ---@diagnostic disable-next-line: missing-fields
+            checked = { marker = '󰸞 ' },
+            in_progress = {
+               marker = '󱎖 ',
+               markdown = '.', -- Saved as `- [.]`
+               type = 'incomplete', -- Counts as "not done"
+               order = 50,
+            },
+            cancelled = {
+               marker = '󰜺 ',
+               markdown = 'c', -- Saved as `- [c]`
+               type = 'complete', -- Counts as "done"
+               order = 2,
+            },
+            on_hold = {
+               marker = '󰏤 ',
+               markdown = '/', -- Saved as `- [/]`
+               type = 'inactive', -- Ignored in counts
+               order = 100,
+            },
+         },
       },
    },
 }
