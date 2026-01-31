@@ -4,8 +4,6 @@ return {
    dependencies = {
       'rcarriga/nvim-dap-ui',
       'nvim-neotest/nvim-nio',
-      'mason-org/mason.nvim',
-      'jay-babu/mason-nvim-dap.nvim',
    },
    config = function()
       local dap = require('dap')
@@ -27,35 +25,6 @@ return {
                )
             end,
             desc = 'Debug: Set Breakpoint',
-         },
-      })
-
-      require('mason-nvim-dap').setup({
-         automatic_setup = true,
-         automatic_installation = false,
-         ensure_installed = {
-            'codelldb',
-            'cpptools',
-            'delve',
-            'java-debug-adapter',
-            'java-test',
-            'php-debug-adapter',
-         },
-         handlers = {
-            function(config)
-               require('mason-nvim-dap').default_setup(config)
-            end,
-            --[[ python = function(config)
-						config.adapters = {
-							type = 'executable',
-							command = '/usr/bin/python3',
-							args = {
-								'-m',
-								'debugpy.adapter',
-							},
-						}
-						require('mason-nvim-dap').default_setup(config) -- don't forget this!
-					end, ]]
          },
       })
 
