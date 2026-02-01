@@ -9,16 +9,7 @@ wk.add({
       return vim.bo.filetype == 'markdown'
    end,
    buffer = true,
-   {
-      '<leader>x',
-      function()
-         local newline = vim.api.nvim_get_current_line():gsub('%[([x -])%]', {
-            ['x'] = '[-]',
-            ['-'] = '[ ]',
-            [' '] = '[x]',
-         })
-         vim.api.nvim_set_current_line(newline)
-      end,
-      desc = 'Toggle checkmark',
-   },
+   mode = { 'n', 'v' },
+   { '<leader>t', group = 'Checkmate', icon = ' ' },
+   ---@see chekmate.Config at `/lua/plugins/theme.lua` for keympas
 })

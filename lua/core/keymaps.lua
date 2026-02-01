@@ -167,7 +167,7 @@ wk.add({
 
 wk.add({
    {
-      '<leader>t',
+      '<leader>T',
       function()
          if _G.todo_win == nil then
             _G.todo_win = Snacks.win.new({

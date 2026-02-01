@@ -208,11 +208,11 @@ return {
          'nvim-tree/nvim-web-devicons',
       },
       ft = 'markdown',
+      cmd = 'Checkmate',
       ---@module 'checkmate'
       ---@type checkmate.Config
       ---@diagnostic disable-next-line: missing-fields
       opts = {
-         -- files = { '*.md' },
          files = {
             'todo',
             'TODO',
@@ -231,6 +231,7 @@ return {
             '*.todos.md',
             '*.TODOS.md',
          },
+         ui = { picker = 'snacks' },
          ---@type table<string,vim.api.keyset.highlight>
          style = {
             CheckmateCancelledMarker = { link = 'Error' },
@@ -264,6 +265,123 @@ return {
                markdown = '/', -- Saved as `- [/]`
                type = 'inactive', -- Ignored in counts
                order = 100,
+            },
+         },
+         metadata = {
+            priority = {
+               style = function(context)
+                  local value = context.value:lower()
+                  if value == 'high' then
+                     return { fg = '#ff5555', bold = true }
+                  elseif value == 'medium' then
+                     return { fg = '#ffb86c' }
+                  elseif value == 'low' then
+                     return { fg = '#8be9fd' }
+                  else -- fallback
+                     return { fg = '#8be9fd' }
+                  end
+               end,
+               get_value = function()
+                  return 'medium' -- Default priority
+               end,
+               choices = function()
+                  return { 'low', 'medium', 'high' }
+               end,
+               key = '<leader>tp',
+               sort_order = 10,
+               jump_to_on_insert = 'value',
+               select_on_insert = true,
+            },
+            started = {
+               aliases = { 'init' },
+               style = { fg = '#9fd6d5' },
+               get_value = function()
+                  return tostring(os.date('%m/%d/%y %H:%M'))
+               end,
+               key = '<leader>ts',
+               sort_order = 20,
+            },
+            done = {
+               aliases = { 'completed', 'finished' },
+               style = { fg = '#96de7a' },
+               get_value = function()
+                  return tostring(os.date('%m/%d/%y %H:%M'))
+               end,
+               key = '<leader>td',
+               on_add = function(todo)
+                  require('checkmate').set_todo_state(todo, 'checked')
+               end,
+               on_remove = function(todo)
+                  require('checkmate').set_todo_state(todo, 'unchecked')
+               end,
+               sort_order = 30,
+            },
+         },
+         keys = {
+            ['<leader>tt'] = {
+               rhs = '<cmd>Checkmate toggle<CR>',
+               desc = 'Toggle todo item',
+               modes = { 'n', 'v' },
+            },
+            ['<leader>tc'] = {
+               rhs = '<cmd>Checkmate check<CR>',
+               desc = 'Set todo item as checked (done)',
+               modes = { 'n', 'v' },
+            },
+            ['<leader>tu'] = {
+               rhs = '<cmd>Checkmate uncheck<CR>',
+               desc = 'Set todo item as unchecked (not done)',
+               modes = { 'n', 'v' },
+            },
+            ['<leader>tk'] = {
+               rhs = '<cmd>Checkmate cycle_next<CR>',
+               desc = 'Cycle todo item(s) to the next state',
+               modes = { 'n', 'v' },
+            },
+            ['<leader>tj'] = {
+               rhs = '<cmd>Checkmate cycle_previous<CR>',
+               desc = 'Cycle todo item(s) to the previous state',
+               modes = { 'n', 'v' },
+            },
+            ['<leader>tn'] = {
+               rhs = '<cmd>Checkmate create<CR>',
+               desc = 'Create todo item',
+               modes = { 'n', 'v' },
+            },
+            ['<leader>tr'] = {
+               rhs = '<cmd>Checkmate remove<CR>',
+               desc = 'Remove todo marker (convert to text)',
+               modes = { 'n', 'v' },
+            },
+            ['<leader>tR'] = {
+               rhs = '<cmd>Checkmate remove_all_metadata<CR>',
+               desc = 'Remove all metadata from a todo item',
+               modes = { 'n', 'v' },
+            },
+            ['<leader>ta'] = {
+               rhs = '<cmd>Checkmate archive<CR>',
+               desc = 'Archive checked/completed todo items (move to bottom section)',
+               modes = { 'n' },
+            },
+            --[[ ['<leader>tF'] = {
+               rhs = '<cmd>Checkmate select_todo<CR>',
+               desc = 'Open a picker to select a todo from the current buffer',
+               modes = { 'n' },
+            }, ]]
+            ['<leader>tv'] = {
+               rhs = '<cmd>Checkmate metadata select_value<CR>',
+               desc = 'Update the value of a metadata tag under the cursor',
+               modes = { 'n' },
+            },
+            ['<leader>t]'] = {
+               rhs = '<cmd>Checkmate metadata jump_next<CR>',
+               desc = 'Move cursor to next metadata tag',
+               modes = { 'n' },
+            },
+            ['<leader>t['] = {
+               rhs = '<cmd>Checkmate metadata jump_previous<CR>',
+               desc = 'Move cursor to previous metadata tag',
+               modes = { 'n' },
             },
          },
       },
