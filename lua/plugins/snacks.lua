@@ -14,95 +14,112 @@ local header_neovide = [[
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██████╔╝███████╗
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═════╝ ╚══════╝]]
 
----@type LazyPluginSpec
+---@type LazyPluginSpec[]
 return {
-   'folke/snacks.nvim',
-   priority = 1000,
-   lazy = false,
-   ---@type snacks.Config
-   opts = {
-      bigfile = { enabled = true },
-      explorer = { replace_netrw = false },
-      gitbrowse = { enabled = true },
-      image = { enabled = true },
-      input = { enabled = true },
-      lazygit = { enabled = true },
-      picker = { enabled = true },
-      statuscolumn = { enabled = true },
-      dashboard = {
-         enabled = true,
-         width = 50,
-         preset = {
-            header = vim.g.neovide and header_neovide or header_neovim,
-            keys = {
-               {
-                  icon = ' ',
-                  key = 'e',
-                  desc = 'New File',
-                  action = ':ene | startinsert',
+   {
+      'folke/snacks.nvim',
+      priority = 1000,
+      lazy = false,
+      ---@type snacks.Config
+      opts = {
+         bigfile = { enabled = true },
+         explorer = { replace_netrw = false },
+         gitbrowse = { enabled = true },
+         image = { enabled = true },
+         input = { enabled = true },
+         lazygit = { enabled = true },
+         picker = { enabled = true },
+         statuscolumn = { enabled = true },
+         dashboard = {
+            enabled = true,
+            width = 50,
+            preset = {
+               header = vim.g.neovide and header_neovide or header_neovim,
+               keys = {
+                  {
+                     icon = ' ',
+                     key = 'e',
+                     desc = 'New File',
+                     action = ':ene | startinsert',
+                  },
+                  {
+                     icon = ' ',
+                     key = 'f',
+                     desc = 'Find File',
+                     action = function()
+                        Snacks.dashboard.pick('files')
+                     end,
+                  },
+                  {
+                     icon = '󰒲 ',
+                     key = 'L',
+                     desc = 'Lazy',
+                     action = ':Lazy',
+                     enabled = package.loaded.lazy ~= nil,
+                  },
+                  {
+                     icon = ' ',
+                     key = 'M',
+                     desc = 'Mason',
+                     action = ':Mason',
+                     ---@param _ snacks.dashboard.Opts
+                     enabled = function(_)
+                        return Snacks.dashboard.have_plugin('mason.nvim')
+                     end,
+                  },
+                  { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
                },
-               {
-                  icon = ' ',
-                  key = 'f',
-                  desc = 'Find File',
-                  action = function()
-                     Snacks.dashboard.pick('files')
-                  end,
-               },
-               {
-                  icon = '󰒲 ',
-                  key = 'L',
-                  desc = 'Lazy',
-                  action = ':Lazy',
-                  enabled = package.loaded.lazy ~= nil,
-               },
-               {
-                  icon = ' ',
-                  key = 'M',
-                  desc = 'Mason',
-                  action = ':Mason',
-                  ---@param _ snacks.dashboard.Opts
-                  enabled = function(_)
-                     return Snacks.dashboard.have_plugin('mason.nvim')
-                  end,
-               },
-               { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+            },
+            formats = {
+               header = { '%s', hl = 'Type', align = 'center' },
+            },
+            sections = {
+               { section = 'header' },
+               { section = 'keys', gap = 1, padding = 1 },
+               { section = 'startup' },
             },
          },
-         formats = {
-            header = { '%s', hl = 'Type', align = 'center' },
-         },
-         sections = {
-            { section = 'header' },
-            { section = 'keys', gap = 1, padding = 1 },
-            { section = 'startup' },
+      },
+      config = function(_, opts)
+         require('snacks').setup(opts)
+         --- Show a notification with a pretty printed dump of the object(s)
+         --- with lua treesitter highlighting and the location of the caller
+         --- ---
+         --- Override print to use snacks for `:=` command
+         _G.dd = function(...)
+            Snacks.debug.inspect(...)
+         end
+         vim.print = _G.dd
+
+         --- Show a notification with a pretty backtrace
+         _G.bt = function()
+            Snacks.debug.backtrace()
+         end
+
+         autocmd('DirChanged', {
+            pattern = '*',
+            group = augroup('dashboard_on_dir_change', { clear = true }),
+            callback = function()
+               if Snacks.dashboard.status.opened then
+                  Snacks.dashboard.update()
+               end
+            end,
+         })
+      end,
+   },
+   {
+      'TKasperczyk/snacks-gallery.nvim',
+      dependencies = { 'folke/snacks.nvim' },
+      cmd = 'Gallery',
+      opts = {},
+      keys = {
+         {
+            '<leader>sy',
+            function()
+               require('snacks-gallery').open()
+            end,
+            desc = 'Gallery',
          },
       },
    },
-   config = function(_, opts)
-      require('snacks').setup(opts)
-      --- Show a notification with a pretty printed dump of the object(s)
-      --- with lua treesitter highlighting and the location of the caller
-      --- ---
-      --- Override print to use snacks for `:=` command
-      _G.dd = function(...)
-         Snacks.debug.inspect(...)
-      end
-      vim.print = _G.dd
-
-      --- Show a notification with a pretty backtrace
-      _G.bt = function()
-         Snacks.debug.backtrace()
-      end
-
-      autocmd('DirChanged', {
-         pattern = '*',
-         group = augroup('dashboard_on_dir_change', { clear = true }),
-         callback = function()
-            if Snacks.dashboard.status.opened then
-               Snacks.dashboard.update()
-            end
-         end,
-      })
-   end,
 }
