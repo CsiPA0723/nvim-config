@@ -24,7 +24,9 @@ return {
          'mason-org/mason.nvim',
          'neovim/nvim-lspconfig',
       },
-      opts = {},
+      ---@module 'mason-lspconfig'
+      ---@type MasonLspconfigSettings
+      opts = { ensure_installed = { 'lua_ls@3.16.4' } },
    },
    {
       'neovim/nvim-lspconfig',
@@ -62,9 +64,10 @@ return {
                settings = {
                   Lua = {
                      -- ISSUE: https://github.com/folke/lazydev.nvim/issues/136
-                     workspace = {
+                     -- Keep lua-language-server at 3.16.4
+                     --[[ workspace = {
                         library = vim.api.nvim_get_runtime_file('', true),
-                     },
+                     }, ]]
                      telemetry = { enable = false },
                      completion = { callSnippet = 'Replace' },
                   },
