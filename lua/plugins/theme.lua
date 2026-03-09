@@ -73,7 +73,6 @@ return {
             render_markdown = true,
             snacks = true,
             treesitter = true,
-            ufo = true,
             which_key = true,
          },
       },
