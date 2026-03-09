@@ -25,6 +25,8 @@ return {
          float = { transparent = true, solid = false },
          show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
          term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
+         default_integrations = true,
+         auto_integrations = true,
          integrations = {
             blink_cmp = true,
             colorful_winsep = {
@@ -52,26 +54,11 @@ return {
             neogit = true,
             noice = true,
             notify = true,
-            native_lsp = {
-               enabled = true,
-               virtual_text = {
-                  errors = { 'italic' },
-                  hints = { 'italic' },
-                  warnings = { 'italic' },
-                  information = { 'italic' },
-               },
-               underlines = {
-                  errors = { 'underline' },
-                  hints = { 'underline' },
-                  warnings = { 'underline' },
-                  information = { 'underline' },
-               },
-               inlay_hints = {
-                  background = true,
-               },
-            },
             render_markdown = true,
-            snacks = true,
+            snacks = {
+               enabled = true,
+               indent_scope_color = 'lavender',
+            },
             treesitter = true,
             which_key = true,
          },

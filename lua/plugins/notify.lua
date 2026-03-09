@@ -7,6 +7,7 @@ return {
       notification = {
          filter = vim.log.levels.INFO,
          override_vim_notify = true,
+         window = { winblend = 0 },
       },
    },
 }
