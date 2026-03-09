@@ -82,6 +82,7 @@ return {
                'snippets',
                'buffer',
                'markdown',
+               'laravel',
             },
             providers = {
                markdown = {
@@ -105,6 +106,18 @@ return {
                      for _, item in ipairs(items) do
                         item.kind_icon = '󰒲'
                         item.kind_name = 'LazyDev'
+                     end
+                     return items
+                  end,
+               },
+               laravel = {
+                  name = 'laravel',
+                  module = 'blink.compat.source',
+                  score_offset = 95, -- show at a higher priority than lsp
+                  transform_items = function(_, items)
+                     for _, item in ipairs(items) do
+                        item.kind_icon = ''
+                        item.kind_name = 'Laravel'
                      end
                      return items
                   end,

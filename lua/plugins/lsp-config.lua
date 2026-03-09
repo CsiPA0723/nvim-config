@@ -18,6 +18,22 @@ return {
       },
    },
    {
+      'adalessa/laravel.nvim',
+      dependencies = {
+         'MunifTanjim/nui.nvim',
+         'nvim-lua/plenary.nvim',
+         'nvim-neotest/nvim-nio',
+      },
+      ft = { 'php', 'blade' },
+      opts = {
+         features = {
+            pickers = {
+               provider = 'snacks', -- "snacks | telescope | fzf-lua | ui-select"
+            },
+         },
+      },
+   },
+   {
       'mason-org/mason-lspconfig.nvim',
       event = 'VeryLazy',
       dependencies = {
