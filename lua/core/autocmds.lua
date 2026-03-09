@@ -66,6 +66,7 @@ autocmd('LspAttach', {
          buffer = event.buf,
       })
 
+      ---@type vim.lsp.Client?
       local client = vim.lsp.get_client_by_id(event.data.client_id)
 
       --[[ INFO: 
@@ -91,15 +92,7 @@ autocmd('LspAttach', {
       if
          client and client:supports_method('textDocument/codeLens', event.buf)
       then
-         autocmd({ 'TextChanged', 'InsertLeave', 'CursorHold', 'LspAttach' }, {
-            buffer = event.buf,
-            callback = function()
-               vim.lsp.codelens.refresh({ bufnr = event.buf })
-            end,
-         })
-
-         -- trigger codelens refresh
-         vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
+         vim.lsp.codelens.enable(true, { bufnr = event.buf })
       end
    end,
 })
