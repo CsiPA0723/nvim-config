@@ -28,8 +28,12 @@ return {
       opts = {
          appearance = { nerd_font_variant = 'normal' },
          enabled = function()
-            return vim.bo.filetype ~= 'neovim-tips-search'
+            return not vim.tbl_contains({
+               'glsl', -- ISSUE: https://github.com/nolanderc/glsl_analyzer/issues/87
+               'neovim-tips-search',
+            }, vim.bo.filetype)
          end,
+         signature = { enabled = true },
          keymap = {
             preset = 'none',
             ['<C-n>'] = { 'select_next', 'fallback' },
