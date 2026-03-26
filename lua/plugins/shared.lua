@@ -1,9 +1,9 @@
 ---@type LazyPluginSpec[]
 return {
-   { 'nvim-treesitter/nvim-treesitter', branch = 'master', optional = true },
+   { 'nvim-treesitter/nvim-treesitter', branch = 'main', optional = true },
    {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      branch = 'master',
+      branch = 'main',
       optional = true,
    },
    { 'nvim-tree/nvim-web-devicons', optional = true },
