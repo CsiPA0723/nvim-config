@@ -7,12 +7,15 @@
 
 ## Needed programs before installing
 
+- git, curl, wget, unzip, gzip, nodejs
+- [ImageMagick](https://imagemagick.org)
 - [playerctl](https://github.com/altdesktop/playerctl)
 - [rigrep](https://github.com/BurntSushi/ripgrep)
+- [fd](https://github.com/sharkdp/fd)
 - [fzf](https://github.com/junegunn/fzf)
+- [SQLite3](https://sqlite.org)
 - LaTeX
 - tree-sitter-binary
-- Todo ...
 
 ## Install Instructions
 
