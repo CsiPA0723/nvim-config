@@ -62,7 +62,7 @@ end, { desc = 'Toggle Numbering Profile' }) ]]
 
 -- Autocommands to trigger refresh
 autocmd({ 'ModeChanged', 'BufEnter', 'BufWinEnter' }, {
-   group = vim.api.nvim_create_augroup('DynamicLineNumbers', { clear = true }),
+   group = augroup('csipa-DynamicLineNumbers', { clear = true }),
    callback = refresh_line_numbers,
 })
 

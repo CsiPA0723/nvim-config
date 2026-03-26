@@ -5,7 +5,7 @@ return {
    dependencies = { 'nvim-tree/nvim-web-devicons' },
    opts = {
       options = {
-         theme = 'catppuccin',
+         theme = 'catppuccin-nvim',
          icons_enabled = true,
          globalstatus = true,
          refresh = { statusline = 10 },
