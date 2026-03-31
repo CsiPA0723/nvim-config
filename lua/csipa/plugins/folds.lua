@@ -4,7 +4,7 @@ return {
    event = 'VeryLazy',
    opts = {
       foldtext = { lineCount = { template = '󰁂 %d ln' } },
-      disableOnFt = { 'snacks_dashboard' },
+      disableOnFt = { 'lua', 'NeogitStatus', 'snacks_dashboard' },
       foldKeymaps = { setup = false },
    },
    init = function()

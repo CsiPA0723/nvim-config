@@ -23,8 +23,8 @@ return {
             { 'filename', separator = { right = '' } },
             { '%=', separator = '' },
             {
-               require('protocols.mpris').lualine,
-               cond = require('protocols.mpris').get_status,
+               require('csipa.protocols.mpris').lualine,
+               cond = require('csipa.protocols.mpris').get_status,
                separator = '',
             },
          },
@@ -44,7 +44,7 @@ return {
       },
    },
    config = function(_, opts)
-      require('protocols.mpris').setup()
+      require('csipa.protocols.mpris').setup()
       require('lualine').setup(opts)
       vim.o.showtabline = 1
    end,

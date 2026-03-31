@@ -19,7 +19,7 @@ vim.opt.diffopt =
    'internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram'
 
 vim.o.ssop =
-   'buffers,curdir,folds,help,globals,tabpages,winpos,winsize,terminal'
+   'buffers,curdir,folds,globals,options,skiprtp,tabpages,winpos,winsize'
 
 vim.opt.wrap = false
 

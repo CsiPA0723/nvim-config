@@ -25,10 +25,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('core.options')
+require('csipa.core.options')
 
 if vim.g.neovide then
-   require('core.neovide')
+   require('csipa.core.neovide')
 end
 
 _G.autocmd = vim.api.nvim_create_autocmd
@@ -37,7 +37,7 @@ _G.augroup = vim.api.nvim_create_augroup
 -------------------------------------------------------------------------------
 -- Lazy Setup
 
-require('lazy').setup('plugins', {
+require('lazy').setup('csipa.plugins', {
    defaults = { lazy = true },
    checker = { enabled = true, notify = false },
    diff = { cmd = 'diffview.nvim' },
@@ -49,6 +49,6 @@ require('lazy').setup('plugins', {
 -------------------------------------------------------------------------------
 -- Configs
 
-require('core.keymaps')
-require('core.autocmds')
-require('core.snippets')
+require('csipa.core.keymaps')
+require('csipa.core.autocmds')
+require('csipa.core.snippets')

@@ -24,9 +24,13 @@ return {
             end,
          })
          autocmd('FileType', {
-            pattern = { '<filetype>' },
-            callback = function()
-               vim.treesitter.start()
+            pattern = { '*' },
+            callback = function(ev)
+               local lang = vim.treesitter.language.get_lang(ev.match)
+               local installed = vim.api.nvim_get_runtime_file('parser/*', true)
+               if lang and vim.tbl_contains(installed, lang) then
+                  vim.treesitter.start()
+               end
             end,
          })
          -- There are additional nvim-treesitter modules that you can use to interact
@@ -39,18 +43,21 @@ return {
             'angular',
             'bash',
             'c',
+            'css',
             'html',
             'http',
             'java',
-            -- 'latex',
+            'javascript',
+            'latex',
             'lua',
             'luadoc',
             'lua_patterns',
             'markdown',
             'markdown_inline',
-            'norg',
             'regex',
             'svelte',
+            'scss',
+            'norg',
             'tsx',
             'typst',
             'vim',
