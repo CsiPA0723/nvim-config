@@ -9,6 +9,7 @@ return {
    { -- Highlight, edit, and navigate code
       'nvim-treesitter/nvim-treesitter',
       build = ':TSUpdate',
+      branch = 'main',
       lazy = false,
       config = function(_, _)
          autocmd('User', {
@@ -28,7 +29,12 @@ return {
             callback = function(ev)
                local lang = vim.treesitter.language.get_lang(ev.match)
                local installed = vim.api.nvim_get_runtime_file('parser/*', true)
-               if lang and vim.tbl_contains(installed, lang) then
+               if
+                  lang
+                  and vim.tbl_contains(installed, function(parser)
+                     return lang == vim.fn.fnamemodify(parser, ':t:r')
+                  end, { predicate = true })
+               then
                   vim.treesitter.start()
                end
             end,
