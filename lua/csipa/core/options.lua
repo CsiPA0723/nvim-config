@@ -76,7 +76,7 @@ vim.diagnostic.config({
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.o.equalalways = false
+vim.o.equalalways = true
 
 vim.opt.fillchars:append({
    eob = '~',

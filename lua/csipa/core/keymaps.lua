@@ -169,8 +169,8 @@ wk.add({
    {
       '<leader>T',
       function()
-         if _G.todo_win == nil then
-            _G.todo_win = Snacks.win.new({
+         if _G.csipa_todo_win == nil then
+            _G.csipa_todo_win = Snacks.win.new({
                file = vim.fn.expand('~/Documents/todos.md'),
                minimal = false,
                backdrop = false,
@@ -184,7 +184,7 @@ wk.add({
                keys = { q = 'close' },
             })
          else
-            _G.todo_win:toggle()
+            _G.csipa_todo_win:toggle()
          end
       end,
       desc = 'Edit TODOs',
@@ -194,18 +194,6 @@ wk.add({
       '<leader>e',
       vim.diagnostic.open_float,
       desc = 'Show diagnostic Error messages',
-   },
-   {
-      '<leader>P',
-      '<cmd>Patterns explain<CR>',
-      desc = 'Explain pattern under cursor',
-      icon = { icon = '', color = 'orange' },
-   },
-   {
-      '<leader>p',
-      '<cmd>Patterns hover<CR>',
-      desc = 'See pattern description',
-      icon = { icon = '', color = 'orange' },
    },
    {
       '<leader>q',
