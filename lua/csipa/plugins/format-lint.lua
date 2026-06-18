@@ -41,6 +41,8 @@ return {
             docker = { 'hadolint' },
             javascript = { 'eslint_d' },
             typescript = { 'eslint_d' },
+            javascriptreact = { 'eslint_d' },
+            typescriptreact = { 'eslint_d' },
          },
       },
       config = function(_, opts)
@@ -70,6 +72,8 @@ return {
             bash = { 'shfmt' },
             javascript = { 'prettierd' },
             typescript = { 'prettierd' },
+            javascriptreact = { 'prettierd' },
+            typescriptreact = { 'prettierd' },
             css = { 'prettierd' },
             scss = { 'prettierd' },
             less = { 'prettierd' },
