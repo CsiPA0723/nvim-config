@@ -79,11 +79,6 @@ return {
             lua_ls = {
                settings = {
                   Lua = {
-                     -- ISSUE: https://github.com/folke/lazydev.nvim/issues/136
-                     -- Keep lua-language-server at 3.16.4
-                     --[[ workspace = {
-                        library = vim.api.nvim_get_runtime_file('', true),
-                     }, ]]
                      telemetry = { enable = false },
                      completion = { callSnippet = 'Replace' },
                   },
