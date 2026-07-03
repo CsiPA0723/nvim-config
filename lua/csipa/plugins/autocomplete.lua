@@ -4,11 +4,10 @@
 return {
    {
       'saghen/blink.cmp',
-      version = '*',
+      version = '1.*',
       event = 'InsertEnter',
-      build = 'cargo build --release',
       dependencies = {
-         { 'saghen/blink.compat', version = '*', config = true },
+         { 'saghen/blink.compat', version = '2.*', config = true },
          { 'xzbdmw/colorful-menu.nvim', config = true },
          {
             'L3MON4D3/LuaSnip',
