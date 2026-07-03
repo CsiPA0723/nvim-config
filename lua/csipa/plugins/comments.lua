@@ -3,8 +3,14 @@ return {
    {
       'numToStr/Comment.nvim',
       event = 'VeryLazy',
+      dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
       config = function()
-         require('Comment').setup()
+         ---@diagnostic disable-next-line: missing-fields
+         require('Comment').setup({
+            pre_hook = require(
+               'ts_context_commentstring.integrations.comment_nvim'
+            ).create_pre_hook(),
+         })
          require('which-key').add({
             { 'gb', group = 'Comment toggle blockwise' },
             { 'gc', group = 'Comment toggle linewise' },
