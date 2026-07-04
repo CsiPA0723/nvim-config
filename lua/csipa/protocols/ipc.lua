@@ -22,7 +22,7 @@ local M = {
 require('fidget.notification').set_config('ipc', {
    icon = ' ',
    name = 'IPC',
-   ttl = 4,
+   ttl = 8,
 }, true)
 
 vim.g.ipc_connected = false
@@ -30,9 +30,11 @@ vim.g.ipc_connected = false
 local schedule_notify = vim.schedule_wrap(vim.notify)
 
 function M.close()
-   M.pipe:close()
-   vim.g.ipc_connected = false
-   vim.notify('Closed', vim.log.levels.INFO, M.notify)
+   if M.pipe ~= nil and not M.pipe:is_closing() then
+      M.pipe:close()
+      vim.g.ipc_connected = false
+      vim.notify('Closed', vim.log.levels.INFO, M.notify)
+   end
 end
 
 autocmd({ 'VimLeavePre' }, {
@@ -116,23 +118,73 @@ function M.request_id()
    return request_id
 end
 
-vim.api.nvim_create_user_command('IPCConnect', function()
-   require('protocols.ipc').connect()
-end, { nargs = 0 })
+function M.spawn_mpv()
+   if vim.g.ipc_connected then
+      return
+   end
 
-vim.api.nvim_create_user_command('IPCVolume', function()
-   require('protocols.ipc').write(
-      { command = { 'get_property', 'volume' } },
+   local obj = vim.system({
+      'kitten',
+      '@',
+      'launch',
+      'mpv',
+      '--input-ipc-server=' .. M.path,
+      '--profile=lrcedit',
+      '--idle',
+   }):wait(5000)
+
+   if obj.code ~= 0 then
+      vim.notify(
+         obj.stderr
+            or 'Error: MPV could not be opened or crashed while launching!',
+         vim.log.levels.ERROR,
+         M.notify
+      )
+      return
+   end
+   vim.defer_fn(M.connect, 1000)
+end
+
+---@param path string
+function M.load_music(path)
+   if not vim.g.ipc_connected then
+      vim.notify('IPC is not connected', vim.log.levels.ERROR, M.notify)
+      return
+   end
+   if type(path) ~= 'string' then
+      vim.notify('Music Path is not a string', vim.log.levels.ERROR, M.notify)
+      return
+   end
+
+   M.write({ command = { 'loadfile', path, 'replace' } }, function(err, data)
+      if err ~= 'success' then
+         vim.notify(err, vim.log.levels.ERROR, M.notify)
+         return
+      end
+      if data then
+         vim.notify('LoadFile' .. data, vim.log.levels.INFO, M.notify)
+      end
+   end)
+end
+
+---@return string?
+function M.get_playback_time()
+   if not vim.g.ipc_connected then
+      vim.notify('IPC is not connected', vim.log.levels.ERROR, M.notify)
+      return nil
+   end
+   M.write(
+      { command = { 'expand-text', '${time-pos/full}' } },
       function(err, data)
          if err ~= 'success' then
             vim.notify(err, vim.log.levels.ERROR, M.notify)
             return
          end
          if data then
-            vim.notify('Volume: ' .. data, vim.log.levels.INFO, M.notify)
+            vim.notify('Playback ' .. data, vim.log.levels.INFO, M.notify)
          end
       end
    )
-end, { nargs = 0 })
+end
 
 return M
