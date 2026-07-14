@@ -45,7 +45,7 @@ require('lazy').setup('plugins', {
    git = { timeot = 60 }, -- 1 min timeout for tasks
    ui = {
       border = vim.o.winborder:lower() or 'bold',
-      icons = {
+      --[[ icons = {
          cmd = 'Φ',
          config = '§',
          debug = '¿',
@@ -70,7 +70,7 @@ require('lazy').setup('plugins', {
             '*',
             '-',
          },
-      },
+      }, ]]
    },
 })
 
