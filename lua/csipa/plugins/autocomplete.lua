@@ -28,8 +28,12 @@ return {
       opts = {
          appearance = { nerd_font_variant = 'normal' },
          enabled = function()
-            return vim.bo.filetype ~= 'neovim-tips-search'
+            return not vim.tbl_contains({
+               'glsl', -- ISSUE: https://github.com/nolanderc/glsl_analyzer/issues/87
+               'neovim-tips-search',
+            }, vim.bo.filetype)
          end,
+         signature = { enabled = true },
          keymap = {
             preset = 'none',
             ['<C-n>'] = { 'select_next', 'fallback' },
@@ -78,6 +82,7 @@ return {
                'snippets',
                'buffer',
                'markdown',
+               'laravel',
             },
             providers = {
                markdown = {
@@ -101,6 +106,18 @@ return {
                      for _, item in ipairs(items) do
                         item.kind_icon = '󰒲'
                         item.kind_name = 'LazyDev'
+                     end
+                     return items
+                  end,
+               },
+               laravel = {
+                  name = 'laravel',
+                  module = 'blink.compat.source',
+                  score_offset = 95, -- show at a higher priority than lsp
+                  transform_items = function(_, items)
+                     for _, item in ipairs(items) do
+                        item.kind_icon = ''
+                        item.kind_name = 'Laravel'
                      end
                      return items
                   end,

@@ -7,12 +7,15 @@
 
 ## Needed programs before installing
 
+- git, curl, wget, unzip, gzip, nodejs
+- [ImageMagick](https://imagemagick.org)
 - [playerctl](https://github.com/altdesktop/playerctl)
 - [rigrep](https://github.com/BurntSushi/ripgrep)
+- [fd](https://github.com/sharkdp/fd)
 - [fzf](https://github.com/junegunn/fzf)
+- [SQLite3](https://sqlite.org)
 - LaTeX
 - tree-sitter-binary
-- Todo ...
 
 ## Install Instructions
 
@@ -54,7 +57,6 @@ NVIM_APPNAME=CsiPA0723/nvim-config/ nvim
 - [IogaMaster/neocord](https://github.com/IogaMaster/neocord)
 - [j-hui/fidget.nvim](https://github.com/j-hui/fidget.nvim)
 - [jay-babu/mason-nvim-dap.nvim](https://github.com/jay-babu/mason-nvim-dap.nvim)
-- [kevinhwang91/nvim-ufo](https://github.com/kevinhwang91/nvim-ufo)
 - [kevinhwang91/promise-async](https://github.com/kevinhwang91/promise-async)
 - [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 - [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)

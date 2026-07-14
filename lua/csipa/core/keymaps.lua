@@ -167,7 +167,7 @@ wk.add({
 
 wk.add({
    {
-      '<leader>t',
+      '<leader>T',
       function()
          if _G.todo_win == nil then
             _G.todo_win = Snacks.win.new({
@@ -249,17 +249,6 @@ wk.add({
       '<ledaer>/',
       Snacks.picker.lines,
       desc = 'Fuzzily search in current buffer',
-   },
-   {
-      '<leader>K',
-      function()
-         local winid = require('ufo').peekFoldedLinesUnderCursor()
-         if not winid then
-            vim.lsp.buf.hover()
-         end
-      end,
-      desc = 'Ufo: Peek Folded Lines Under Cursor',
-      icon = '',
    },
 })
 

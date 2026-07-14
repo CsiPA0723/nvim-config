@@ -66,6 +66,7 @@ autocmd('LspAttach', {
          buffer = event.buf,
       })
 
+      ---@type vim.lsp.Client?
       local client = vim.lsp.get_client_by_id(event.data.client_id)
 
       --[[ INFO: 
@@ -91,15 +92,7 @@ autocmd('LspAttach', {
       if
          client and client:supports_method('textDocument/codeLens', event.buf)
       then
-         autocmd({ 'TextChanged', 'InsertLeave', 'CursorHold', 'LspAttach' }, {
-            buffer = event.buf,
-            callback = function()
-               vim.lsp.codelens.refresh({ bufnr = event.buf })
-            end,
-         })
-
-         -- trigger codelens refresh
-         vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
+         vim.lsp.codelens.enable(true, { bufnr = event.buf })
       end
    end,
 })
@@ -144,15 +137,5 @@ autocmd('TermOpen', {
       vim.opt_local.number = false
       vim.opt_local.relativenumber = false
       vim.opt_local.colorcolumn = ''
-   end,
-})
-
-autocmd('DirChanged', {
-   pattern = '*',
-   group = augroup('dashboard_on_dir_change', { clear = true }),
-   callback = function()
-      if Snacks.dashboard.status.opened then
-         Snacks.dashboard.update()
-      end
    end,
 })

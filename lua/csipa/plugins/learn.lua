@@ -34,6 +34,7 @@ return {
       event = 'VeryLazy',
       dependencies = { 'MunifTanjim/nui.nvim' },
       opts = {
+         enabled = false,
          max_count = 5,
          disable_mouse = false,
          disabled_filetypes = { 'LuaPatterns', 'RegexPatterns' },

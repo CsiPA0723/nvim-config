@@ -5,6 +5,8 @@ vim.o.winborder = 'bold'
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = 'number'
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -17,7 +19,7 @@ vim.opt.diffopt =
    'internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram'
 
 vim.o.ssop =
-   'buffers,curdir,folds,help,globals,tabpages,winpos,winsize,terminal'
+   'buffers,curdir,folds,globals,options,skiprtp,tabpages,winpos,winsize'
 
 vim.opt.wrap = false
 
