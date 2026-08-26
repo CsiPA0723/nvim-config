@@ -126,4 +126,23 @@ return {
       },
       opts_extend = { 'sources.default' },
    },
+   {
+      'KevinNitroG/kubernetes-schema-snippets.nvim',
+      ft = 'yaml',
+      dependencies = 'L3MON4D3/LuaSnip',
+      opts = {
+         ---@module 'kubernetes-schema-snippets'
+         ---@type KubernetesSchemaSnippets.Opts
+         filetypes = {
+            'yaml',
+         },
+         integrations = {
+            kubernetes = true,
+            kustomize = true,
+            crds_catalog = true,
+            argocd = false,
+            flux2 = true,
+         },
+      },
+   },
 }
