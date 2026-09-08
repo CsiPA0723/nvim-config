@@ -18,6 +18,11 @@ return {
       },
    },
    {
+      'qvalentin/helm-ls.nvim',
+      ft = 'helm',
+      config = true,
+   },
+   {
       'adalessa/laravel.nvim',
       dependencies = {
          'MunifTanjim/nui.nvim',
@@ -42,7 +47,7 @@ return {
       },
       ---@module 'mason-lspconfig'
       ---@type MasonLspconfigSettings
-      opts = { ensure_installed = { 'lua_ls@3.16.4' } },
+      opts = { ensure_installed = { 'lua_ls@3.16.4', 'helm_ls', 'yamlls' } },
    },
    {
       'neovim/nvim-lspconfig',
@@ -56,10 +61,15 @@ return {
          },
       },
       config = function()
+         local capabilities = vim.lsp.protocol.make_client_capabilities()
+         capabilities.textDocument.completion.completionItem.snippetSupport =
+            true
+
          ---@type table<string,vim.lsp.Config>
          local lsp_configs = {
             bashls = { settings = { filetypes = { 'sh', 'zsh' } } },
             jsonls = {
+               capabilities = capabilities,
                settings = {
                   json = {
                      schemas = require('schemastore').json.schemas({
@@ -74,6 +84,11 @@ return {
                      }),
                      validate = { enable = true },
                   },
+               },
+            },
+            ['helm-ls'] = {
+               yamlls = {
+                  path = 'yaml-language-server',
                },
             },
             lua_ls = {
